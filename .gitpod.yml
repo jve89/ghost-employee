@@ -9,4 +9,5 @@ tasks:
       pip install -r requirements.txt
   - command: |
       source venv/bin/activate
-      echo "Ready to develop Ghost Employee 🧠"
+      uvicorn interfaces.api.main:app --reload --port 8000
+
