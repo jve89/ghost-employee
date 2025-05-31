@@ -14,4 +14,10 @@ class SampleJob:
 
     def run(self, config: JobConfig):
         print(f"Running job: {config.job_name}")
-        # Placeholder for full logic pipeline (watch → summarise → extract → execute → export)
+        dummy_text = "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
+        summary = self.summariser.summarise(dummy_text, "manual_entry.txt")
+        tasks = self.parser.extract_tasks(summary)
+        for task in tasks:
+            self.executor.execute(task)
+            self.exporter.export(task)
+
