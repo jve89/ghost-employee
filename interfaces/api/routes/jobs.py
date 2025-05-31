@@ -5,6 +5,9 @@ from app.services.job_manager import JobManager
 from config.config_loader import load_job_configs
 from app.core.models import JobConfig
 from infrastructure.logger.memory_logger import logger
+from infrastructure.logger.job_status import job_status
+from infrastructure.logger.export_log import export_log
+from infrastructure.logger.retry_queue import retry_queue
 
 router = APIRouter()
 
@@ -30,3 +33,27 @@ def run_job(job_name: str):
 @router.get("/logs")
 def get_logs():
     return {"logs": logger.get_logs()}
+
+@router.get("/status")
+def job_statuses():
+    return job_status.get_all()
+
+@router.get("/exports")
+def get_export_logs():
+    return [r.model_dump() for r in export_log.get_logs()]
+
+@router.get("/retries")
+def get_retries():
+    return retry_queue.all()
+
+@router.post("/retries/{retry_id}")
+def retry_task(retry_id: str):
+    entry = retry_queue.get(retry_id)
+    if not entry:
+        raise HTTPException(status_code=404, detail="Retry task not found")
+
+    task = Task(**entry["task"])
+    success = SimpleExecutor().execute(task)
+    if success:
+        retry_queue.remove(retry_id)
+    return {"status": "retried", "success": success}

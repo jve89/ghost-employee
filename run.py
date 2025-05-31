@@ -1,4 +1,6 @@
+import time
 from config.config_loader import load_job_configs
+from infrastructure.file_watchers.folder_watcher import start_watchers
 from app.services.job_manager import JobManager
 
 def main():
@@ -7,4 +9,6 @@ def main():
     manager.run_all_jobs()
 
 if __name__ == "__main__":
-    main()
+    start_watchers()
+    while True:
+        time.sleep(1)

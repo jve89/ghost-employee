@@ -7,22 +7,49 @@
     <h1>Ghost Employee Dashboard</h1>
 
     <h2>Jobs</h2>
-    <ul>
-        {% for job in jobs %}
-            <li>
-                {{ job.job_name }} —
-                <button onclick="runJob('{{ job.job_name }}')">Run</button>
-            </li>
-        {% endfor %}
-    </ul>
+    <div id="jobTiles">
+        Loading job data...
+    </div>
 
     <h2>Logs</h2>
     <pre id="logBox">Loading logs...</pre>
 
+    <h2>Exports</h2>
+    <pre id="exportBox">Loading export logs...</pre>
+
     <script>
         async function runJob(jobName) {
             await fetch(`/jobs/run/` + jobName, { method: "POST" });
+            loadJobs();
             loadLogs();
+        }
+
+        async function loadJobs() {
+            const jobsRes = await fetch("/jobs");
+            const statusRes = await fetch("/jobs/status");
+            const jobs = await jobsRes.json();
+            const statuses = await statusRes.json();
+
+            const container = document.getElementById("jobTiles");
+            container.innerHTML = "";
+
+            jobs.forEach(job => {
+                const tile = document.createElement("div");
+                tile.style.border = "1px solid #ccc";
+                tile.style.padding = "10px";
+                tile.style.margin = "5px";
+                tile.style.display = "inline-block";
+
+                const lastRun = statuses[job.job_name] || "never";
+
+                tile.innerHTML = `
+                    <strong>${job.job_name}</strong><br/>
+                    Last run: ${lastRun}<br/>
+                    <button onclick="runJob('${job.job_name}')">Run</button>
+                `;
+
+                container.appendChild(tile);
+            });
         }
 
         async function loadLogs() {
@@ -31,7 +58,20 @@
             document.getElementById("logBox").innerText = data.logs.join("\n");
         }
 
-        window.onload = loadLogs;
+        async function loadExports() {
+            const res = await fetch("/jobs/exports");
+            const data = await res.json();
+            const lines = data.map(e => `${e.timestamp} → ${e.destination}: ${e.task_description}`);
+            document.getElementById("exportBox").innerText = lines.join("\n");
+        }
+
+
+        window.onload = function() {
+            loadJobs();
+            loadLogs();
+            loadExports();
+        };
     </script>
+
 </body>
 </html>
