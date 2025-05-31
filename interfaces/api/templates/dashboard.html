@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ghost Employee Dashboard</title>
+</head>
+<body>
+    <h1>Ghost Employee Dashboard</h1>
+
+    <h2>Jobs</h2>
+    <ul>
+        {% for job in jobs %}
+            <li>
+                {{ job.job_name }} —
+                <button onclick="runJob('{{ job.job_name }}')">Run</button>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Logs</h2>
+    <pre id="logBox">Loading logs...</pre>
+
+    <script>
+        async function runJob(jobName) {
+            await fetch(`/jobs/run/` + jobName, { method: "POST" });
+            loadLogs();
+        }
+
+        async function loadLogs() {
+            const res = await fetch("/jobs/logs");
+            const data = await res.json();
+            document.getElementById("logBox").innerText = data.logs.join("\n");
+        }
+
+        window.onload = loadLogs;
+    </script>
+</body>
+</html>
