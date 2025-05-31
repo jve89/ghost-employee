@@ -1,0 +1,7 @@
+{
+  "job_name": "SampleJob",
+  "watch_dir": "watched/",
+  "export_destinations": ["log"],
+  "gpt_model": "gpt-4",
+  "retry_limit": 3
+}
