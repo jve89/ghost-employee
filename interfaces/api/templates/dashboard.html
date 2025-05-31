@@ -1,21 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ghost Employee Dashboard</title>
+    <title>Ghost Dashboard</title>
+    <script>
+        async function refreshDashboard() {
+            const logsRes = await fetch("/jobs/logs");
+            const statusRes = await fetch("/jobs/status");
+            const retryRes = await fetch("/jobs/retry-queue");
+
+            const logs = await logsRes.json();
+            const statuses = await statusRes.json();
+            const retry = await retryRes.json();
+
+            document.getElementById("logs").innerText = logs.logs.join("\n");
+            document.getElementById("status").innerText = JSON.stringify(statuses, null, 2);
+            const retryBody = document.getElementById("retry-body");
+retryBody.innerHTML = "";
+
+if (retry.retry_queue.length === 0) {
+    retryBody.innerHTML = "<tr><td colspan='3'>No retry tasks.</td></tr>";
+} else {
+    retry.retry_queue.forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${entry.task.description}</td>
+            <td>${entry.timestamp}</td>
+            <td><button onclick="retryTask('${entry.id}')">Retry</button></td>
+        `;
+        retryBody.appendChild(row);
+    });
+}
+        }
+
+        setInterval(refreshDashboard, 10000);
+        window.onload = refreshDashboard;
+    </script>
+    <style>
+    #retry-table th, #retry-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+    }
+    </style>
 </head>
 <body>
     <h1>Ghost Employee Dashboard</h1>
 
-    <h2>Jobs</h2>
-    <div id="jobTiles">
-        Loading job data...
+    <div class="actions">
+        <h2>Actions</h2>
+        <form action="/jobs/retry-failed" method="post" style="margin-bottom: 20px;">
+            <button type="submit">Retry Failed Tasks</button>
+        </form>
     </div>
+    
+    <h2>Status</h2>
+    <pre id="status">Loading...</pre>
+
+    <h2>Retry Queue</h2>
+    <table id="retry-table" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Timestamp</th>
+                <th>Retry</th>
+            </tr>
+        </thead>
+        <tbody id="retry-body">
+            <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
+    </table>
 
     <h2>Logs</h2>
-    <pre id="logBox">Loading logs...</pre>
-
-    <h2>Exports</h2>
-    <pre id="exportBox">Loading export logs...</pre>
+    <pre id="logs">Loading...</pre>
 
     <script>
         async function runJob(jobName) {
@@ -65,13 +120,11 @@
             document.getElementById("exportBox").innerText = lines.join("\n");
         }
 
-
         window.onload = function() {
             loadJobs();
             loadLogs();
             loadExports();
         };
     </script>
-
 </body>
 </html>

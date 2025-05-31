@@ -17,7 +17,7 @@ class SampleJob:
     def run(self, config: JobConfig, override_text: str = None, source: str = "manual_entry.txt"):
         job_status.update(config.job_name)
         logger.log(f"Running job: {config.job_name}")
-        input_text = override_text or "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
+        input_text = override_text or "This is a sample task that should fail."
         summary = self.summariser.summarise(input_text, source)
         tasks = self.parser.extract_tasks(summary)
         for task in tasks:

@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import RedirectResponse
 from fastapi import HTTPException
 from app.jobs.job_registry import job_registry
 from app.services.job_manager import JobManager
@@ -8,6 +9,7 @@ from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.job_status import job_status
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.retry_queue import retry_queue
+from infrastructure.retry import retry_queue_store
 
 router = APIRouter()
 
@@ -48,12 +50,28 @@ def get_retries():
 
 @router.post("/retries/{retry_id}")
 def retry_task(retry_id: str):
-    entry = retry_queue.get(retry_id)
+    entry = next((e for e in retry_queue_store.queue if e.get("id") == retry_id), None)
+
     if not entry:
         raise HTTPException(status_code=404, detail="Retry task not found")
 
     task = Task(**entry["task"])
     success = SimpleExecutor().execute(task)
+
     if success:
-        retry_queue.remove(retry_id)
+        retry_queue_store.queue.remove(entry)
+
     return {"status": "retried", "success": success}
+
+@router.get("/retry-queue")
+def retry_queue():
+    return {"retry_queue": retry_queue_store.get_all()}
+
+@router.post("/retry-failed")
+def retry_failed_tasks():
+    retry_queue_store.retry_all()
+    return RedirectResponse(url="/dashboard", status_code=303)
+
+@router.get("/jobs/retry-queue")
+def get_retry_queue():
+    return {"retry_queue": retry_queue_store.queue}
