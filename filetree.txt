@@ -1,0 +1,55 @@
+.
+├── app
+│   ├── core
+│   │   ├── interfaces.py
+│   │   └── models.py
+│   ├── jobs
+│   │   ├── job_registry.py
+│   │   └── sample_job.py
+│   └── services
+│       ├── job_manager.py
+│       ├── simple_executor.py
+│       └── task_parser.py
+├── config
+│   ├── config_loader.py
+│   ├── job_configs.json
+│   └── job_schemas
+│       └── sample_job.json
+├── filetree.txt
+├── infrastructure
+│   ├── executor
+│   │   └── task_executor.py
+│   ├── exporters
+│   │   └── log_exporter.py
+│   ├── file_watchers
+│   │   └── folder_watcher.py
+│   ├── logger
+│   │   ├── export_log.py
+│   │   ├── job_status.py
+│   │   ├── memory_logger.py
+│   │   └── retry_queue.py
+│   ├── notifications
+│   ├── retry
+│   │   ├── __init__.py
+│   │   └── retry_queue_store.py
+│   ├── summariser
+│   │   └── gpt_summariser.py
+│   └── task_parser
+│       └── gpt_parser.py
+├── interfaces
+│   └── api
+│       ├── main.py
+│       ├── routes
+│       └── templates
+├── project_structure.txt
+├── README.md
+├── requirements.txt
+├── run.py
+├── tests
+└── watched
+    ├── test1.txt
+    ├── test2.txt
+    ├── test3.txt
+    └── test_fail.txt
+
+21 directories, 31 files

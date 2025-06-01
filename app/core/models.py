@@ -1,6 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from typing import Optional, List
 from datetime import datetime
+
+# ✅ Valid export destinations — centralised and enforced
+VALID_DESTINATIONS = ["logs", "notion", "google_sheets", "email"]
 
 class Summary(BaseModel):
     source_file: str
@@ -25,3 +28,10 @@ class JobConfig(BaseModel):
     export_destinations: List[str]
     gpt_model: Optional[str] = "gpt-4"
     retry_limit: int = 3
+
+    # ✅ Validate export destinations at load time
+    @validator("export_destinations", each_item=True)
+    def validate_export_destinations(cls, v):
+        if v not in VALID_DESTINATIONS:
+            raise ValueError(f"Invalid export destination: {v}")
+        return v

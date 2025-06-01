@@ -1,7 +1,7 @@
 {
-  "job_name": "SampleJob",
-  "watch_dir": "watched/",
-  "export_destinations": ["log"],
+  "job_name": "onboarding_job",
+  "watch_dir": "watched",
+  "export_destinations": ["logs", "email"],
   "gpt_model": "gpt-4",
   "retry_limit": 3
 }

@@ -1,0 +1,8 @@
+{
+  "job_name": "sample_job",
+  "description": "Handles intern onboarding tasks from monitored files",
+  "watch_folder": "watched",
+  "include_patterns": ["*.txt"],
+  "exclude_patterns": [],
+  "run_interval_seconds": 10
+}
