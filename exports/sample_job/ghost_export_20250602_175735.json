@@ -1,0 +1,26 @@
+{
+  "summary": "This file instructs to prepare for the onboarding of three new interns who will start on Monday. Tasks include assigning laptops, creating email accounts, and scheduling introductory meetings. These tasks are to be completed by Lisa, with a deadline set for this Friday.",
+  "tasks": [
+    {
+      "description": "Prepare for the onboarding of three new interns",
+      "assignee": "Lisa",
+      "timestamp": "2025-06-02T17:57:35.612725"
+    },
+    {
+      "description": "Assign laptops to the new interns",
+      "assignee": "Lisa",
+      "timestamp": "2025-06-02T17:57:35.612743"
+    },
+    {
+      "description": "Create email accounts for the new interns",
+      "assignee": "Lisa",
+      "timestamp": "2025-06-02T17:57:35.612748"
+    },
+    {
+      "description": "Schedule introductory meetings for the new interns",
+      "assignee": "Lisa",
+      "timestamp": "2025-06-02T17:57:35.612752"
+    }
+  ],
+  "assignee": "Lisa"
+}

@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from interfaces.api.routes.jobs import router as jobs_router
 from interfaces.api.routes.dashboard import router as dashboard_router
+from interfaces.api.routes import dashboard
 from config.config_loader import load_job_configs
 from fastapi.responses import RedirectResponse
 

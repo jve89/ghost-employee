@@ -38,5 +38,25 @@
     "details": {
       "path": "./exports/sample_job/"
     }
+  },
+  {
+    "timestamp": "2025-06-02T17:57:35.613050",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-02T17:57:35.613948",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
   }
 ]

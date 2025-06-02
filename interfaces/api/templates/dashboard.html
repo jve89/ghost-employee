@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Ghost Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         async function refreshDashboard() {
             const logsRes = await fetch("/jobs/logs");
@@ -14,90 +15,39 @@
 
             document.getElementById("logs").innerText = logs.logs.join("\n");
             document.getElementById("status").innerText = JSON.stringify(statuses, null, 2);
-            const retryBody = document.getElementById("retry-body");
-retryBody.innerHTML = "";
 
-if (retry.retry_queue.length === 0) {
-    retryBody.innerHTML = "<tr><td colspan='3'>No retry tasks.</td></tr>";
-} else {
-    retry.retry_queue.forEach(entry => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${entry.task.description}</td>
-            <td>${entry.timestamp}</td>
-            <td><button onclick="retryTask('${entry.id}')">Retry</button></td>
-        `;
-        retryBody.appendChild(row);
-    });
-}
+            const retryBody = document.getElementById("retry-body");
+            retryBody.innerHTML = "";
+
+            if (retry.retry_queue.length === 0) {
+                retryBody.innerHTML = "<tr><td colspan='3' class='py-2 px-4 text-center text-gray-500'>No retry tasks.</td></tr>";
+            } else {
+                retry.retry_queue.forEach(entry => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.task.description}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.timestamp}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">
+                            <button onclick="retryTask('${entry.id}')" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Retry</button>
+                        </td>
+                    `;
+                    retryBody.appendChild(row);
+                });
+            }
         }
 
-        setInterval(refreshDashboard, 10000);
-        window.onload = refreshDashboard;
-    </script>
-    <style>
-    #retry-table th, #retry-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-    }
-    </style>
-</head>
-<body>
-    <h1>Ghost Employee Dashboard</h1>
+        async function retryTask(taskId) {
+            try {
+                const res = await fetch(`/jobs/retry-task/${taskId}`, { method: "POST" });
+                const data = await res.json();
+                alert(`Retry ${data.status}`);
+                refreshDashboard();
+            } catch (err) {
+                console.error("Retry failed", err);
+                alert("Retry failed");
+            }
+        }
 
-    <div class="actions">
-        <h2>Actions</h2>
-        <form action="/jobs/retry-failed" method="post" style="margin-bottom: 20px;">
-            <button type="submit">Retry Failed Tasks</button>
-        </form>
-    </div>
-    
-    <h2>Jobs</h2>
-    <div id="jobTiles">Loading...</div>
-
-    <h2>Retry Queue</h2>
-    <table id="retry-table" style="border-collapse: collapse; width: 100%;">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Timestamp</th>
-                <th>Retry</th>
-            </tr>
-        </thead>
-        <tbody id="retry-body">
-            <tr><td colspan="3">Loading...</td></tr>
-        </tbody>
-    </table>
-
-    <h2>Logs</h2>
-    <pre id="logs">Loading...</pre>
-
-    <h2 class="text-xl font-semibold mt-8">Exports</h2>
-    <table class="min-w-full bg-white border border-gray-200 rounded mt-2 text-sm">
-    <thead>
-        <tr>
-        <th class="py-2 px-4 border-b">Description</th>
-        <th class="py-2 px-4 border-b">Assignee</th>
-        <th class="py-2 px-4 border-b">Destination</th>
-        <th class="py-2 px-4 border-b">Status</th>
-        <th class="py-2 px-4 border-b">Timestamp</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for export in exports %}
-        <tr>
-        <td class="py-2 px-4 border-b">{{ export.task_description }}</td>
-        <td class="py-2 px-4 border-b">{{ export.assignee or "-" }}</td>
-        <td class="py-2 px-4 border-b">{{ export.destination }}</td>
-        <td class="py-2 px-4 border-b">{{ export.status }}</td>
-        <td class="py-2 px-4 border-b">{{ export.timestamp }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    </table>
-
-
-    <script>
         async function runJob(jobName) {
             await fetch(`/jobs/run/` + jobName, { method: "POST" });
             loadJobs();
@@ -115,17 +65,14 @@ if (retry.retry_queue.length === 0) {
 
             jobs.forEach(job => {
                 const tile = document.createElement("div");
-                tile.style.border = "1px solid #ccc";
-                tile.style.padding = "10px";
-                tile.style.margin = "5px";
-                tile.style.display = "inline-block";
+                tile.className = "border border-gray-300 p-4 m-2 rounded shadow bg-white";
 
                 const lastRun = statuses[job.job_name] || "never";
 
                 tile.innerHTML = `
-                    <strong>${job.job_name}</strong><br/>
-                    Last run: ${lastRun}<br/>
-                    <button onclick="runJob('${job.job_name}')">Run</button>
+                    <strong class="text-gray-800">${job.job_name}</strong><br/>
+                    <span class="text-sm text-gray-500">Last run: ${lastRun}</span><br/>
+                    <button onclick="runJob('${job.job_name}')" class="mt-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Run</button>
                 `;
 
                 container.appendChild(tile);
@@ -138,10 +85,87 @@ if (retry.retry_queue.length === 0) {
             document.getElementById("logBox").innerText = data.logs.join("\n");
         }
 
-        window.onload = function() {
+        async function loadExportLogs() {
+            try {
+                const res = await fetch('/dashboard/exports');
+                const data = await res.json();
+                const tableBody = document.querySelector('#export-log-table tbody');
+                tableBody.innerHTML = '';
+
+                data.exports.forEach(entry => {
+                    const row = document.createElement('tr');
+                    const timestamp = new Date(entry.timestamp).toLocaleString();
+                    const status = entry.success ? '✅' : '❌';
+                    const details = JSON.stringify(entry.details, null, 2);
+
+                    row.innerHTML = `
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${timestamp}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.job_name}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.destination}</td>
+                        <td class="py-2 px-4 border-b text-sm text-center">${status}</td>
+                        <td class="py-2 px-4 border-b text-sm"><pre class="whitespace-pre-wrap text-gray-600">${details}</pre></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Failed to load export logs", error);
+            }
+        }
+
+        window.onload = function () {
+            refreshDashboard();
             loadJobs();
             loadLogs();
+            loadExportLogs();
         };
+
+        setInterval(refreshDashboard, 10000);
     </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900">
+    <div class="p-6 max-w-screen-xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Ghost Employee Dashboard</h1>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-2">Actions</h2>
+            <form action="/jobs/retry-failed" method="post">
+                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Retry Failed Tasks</button>
+            </form>
+        </div>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">Jobs</h2>
+        <div id="jobTiles" class="flex flex-wrap"></div>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">Retry Queue</h2>
+        <table class="min-w-full bg-white border border-gray-200 rounded shadow text-sm">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-2 px-4 border-b text-left">Description</th>
+                    <th class="py-2 px-4 border-b text-left">Timestamp</th>
+                    <th class="py-2 px-4 border-b text-left">Retry</th>
+                </tr>
+            </thead>
+            <tbody id="retry-body">
+                <tr><td colspan="3" class="py-2 px-4 text-center text-gray-500">Loading...</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">Logs</h2>
+        <pre id="logBox" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">Recent Export Logs</h2>
+        <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-2 px-4 border-b text-left">Timestamp</th>
+                    <th class="py-2 px-4 border-b text-left">Job</th>
+                    <th class="py-2 px-4 border-b text-left">Destination</th>
+                    <th class="py-2 px-4 border-b text-left">Status</th>
+                    <th class="py-2 px-4 border-b text-left">Details</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 </body>
 </html>

@@ -9,7 +9,7 @@ from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.job_status import job_status
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.retry_queue import retry_queue
-from infrastructure.retry import retry_queue_store
+from infrastructure.retry.retry_queue_store import retry_queue_store
 
 router = APIRouter()
 
@@ -75,3 +75,21 @@ def retry_failed_tasks():
 @router.get("/jobs/retry-queue")
 def get_retry_queue():
     return {"retry_queue": retry_queue_store.queue}
+
+@router.post("/retry-task/{task_id}")
+def retry_single_task(task_id: str):
+    queue = retry_queue_store.get_all()
+    match = next((t for t in queue if t["id"] == task_id), None)
+
+    if not match:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+    task = Task(**match["task"])
+    success = SimpleExecutor().execute(task)
+
+    if success:
+        queue.remove(match)
+        retry_queue_store._save_to_disk()
+        return {"status": "success"}
+    else:
+        return {"status": "failed"}

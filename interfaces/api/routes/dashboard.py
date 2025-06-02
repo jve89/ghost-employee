@@ -1,8 +1,10 @@
+import os
+import json
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from infrastructure.logger.memory_logger import logger
-from infrastructure.retry.retry_queue_store import get_retry_queue
+from infrastructure.retry.retry_queue_store import retry_queue_store
 from infrastructure.logger.job_status import job_status
 from config.config_loader import load_job_configs
 from infrastructure.logger.export_log import export_log
@@ -25,7 +27,7 @@ async def get_status():
 
 @router.get("/jobs/retry-queue")
 async def get_retry_queue_api():
-    return JSONResponse(content={"retry_queue": get_retry_queue()})
+    return {"retry_queue": retry_queue_store.get_all()}
 
 @router.get("/jobs")
 async def get_jobs():
@@ -34,9 +36,23 @@ async def get_jobs():
 
 @router.get("/jobs/exports")
 def get_exports():
-    from infrastructure.logger.export_log import get_export_log
-    return get_export_log()
-
-@router.get("/jobs/exports")
-def get_exports():
     return [r.dict() for r in export_log.get_logs()]
+
+@router.get("/dashboard/exports")
+def get_recent_exports():
+    log_path = "./logs/export_status.json"
+
+    if not os.path.exists(log_path):
+        return JSONResponse(content={"exports": []})
+
+    try:
+        with open(log_path, "r") as f:
+            data = json.load(f)
+        # Return last 10 in reverse (newest first)
+        recent = sorted(data, key=lambda x: x["timestamp"], reverse=True)[:10]
+        return {"exports": recent}
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Failed to read export log: {str(e)}"}
+        )
