@@ -1,5 +1,7 @@
-from app.jobs.sample_job import OnboardingJob
+from app.jobs.sample_job import SampleJob
+from app.jobs.prepare_interns import PrepareInternsJob
 
 job_registry = {
-    "onboarding_job": OnboardingJob()
+    "sample_job": SampleJob(),
+    "prepare_interns": PrepareInternsJob(),
 }

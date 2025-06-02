@@ -27,3 +27,6 @@ class RetryQueueStore:
 
 # ✅ Singleton instance
 retry_queue_store = RetryQueueStore()
+
+def get_retry_queue():
+    return retry_queue

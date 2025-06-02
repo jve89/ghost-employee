@@ -1,0 +1,42 @@
+[
+  {
+    "timestamp": "2025-06-02T17:07:23.660370",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-02T17:07:23.661311",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": false,
+    "details": {
+      "error": "Object of type datetime is not JSON serializable"
+    }
+  },
+  {
+    "timestamp": "2025-06-02T17:08:31.384398",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-02T17:08:31.385174",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  }
+]

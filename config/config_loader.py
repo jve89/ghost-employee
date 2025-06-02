@@ -7,7 +7,17 @@ def load_job_configs() -> list[JobConfig]:
     configs = []
     for file in os.listdir(config_dir):
         if file.endswith(".json"):
-            with open(os.path.join(config_dir, file)) as f:
+            path = os.path.join(config_dir, file)
+            print(f"🔍 Loading: {path}")
+            with open(path) as f:
                 data = json.load(f)
+                print(f"📄 JSON Content: {data}")
                 configs.append(JobConfig(**data))
     return configs
+
+def load_job_config(job_name: str) -> JobConfig:
+    path = f"config/job_schemas/{job_name}.json"
+    print(f"🔍 Loading single job config: {path}")
+    with open(path) as f:
+        data = json.load(f)
+        return JobConfig(**data)

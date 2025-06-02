@@ -13,7 +13,7 @@ from infrastructure.retry import retry_queue_store
 
 router = APIRouter()
 
-@router.get("/", response_model=list[JobConfig])
+@router.get("", response_model=list[JobConfig])  # no trailing slash
 def list_jobs():
     return load_job_configs()
 

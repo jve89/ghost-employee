@@ -1,1 +1,0 @@
-Reminder to clean up outdated database backups.

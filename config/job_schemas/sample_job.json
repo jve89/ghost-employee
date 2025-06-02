@@ -1,7 +1,22 @@
 {
-  "job_name": "onboarding_job",
+  "job_name": "sample_job",
   "watch_dir": "watched",
-  "export_destinations": ["logs", "email"],
   "gpt_model": "gpt-4",
-  "retry_limit": 3
+  "retry_limit": 3,
+  "run_interval_seconds": 10,
+  "export_destinations": [
+    {
+      "type": "email",
+      "config": {
+        "recipients": ["ops@example.com"],
+        "subject": "Ghost Employee Summary - Sample Job"
+      }
+    },
+    {
+      "type": "file",
+      "config": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  ]
 }

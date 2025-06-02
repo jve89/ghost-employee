@@ -1,8 +1,7 @@
 {
-  "job_name": "sample_job",
-  "description": "Handles intern onboarding tasks from monitored files",
-  "watch_folder": "watched",
-  "include_patterns": ["*.txt"],
-  "exclude_patterns": [],
-  "run_interval_seconds": 10
+  "job_name": "prepare_interns",
+  "watch_dir": "intern_files",
+  "export_destinations": ["logs"],
+  "gpt_model": "gpt-4",
+  "retry_limit": 3
 }

@@ -1,6 +1,11 @@
 from app.core.models import Task
 from infrastructure.logger.retry_queue import retry_queue
 from datetime import datetime
+from infrastructure.exporters.log_exporter import LogExporter
+
+EXPORTER_MAP = {
+    "logs": LogExporter
+}
 
 class SimpleExecutor:
     def execute(self, task: Task) -> bool:

@@ -1,6 +1,9 @@
 from app.core.models import Task
 
 class GPTTaskParser:
-    def extract_tasks(self, summary: str) -> list[Task]:
-        print("[GPTTaskParser] Extracting tasks from summary...")
-        return [Task(description="Sample task")]
+    def parse(self, summary: str) -> list[dict]:
+        # Dummy parser logic for testing
+        return [
+            {"description": "Create intern onboarding sheet"},
+            {"description": "Send welcome email to new interns"}
+        ]

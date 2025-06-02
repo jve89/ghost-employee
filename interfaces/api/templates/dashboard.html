@@ -72,6 +72,31 @@ if (retry.retry_queue.length === 0) {
     <h2>Logs</h2>
     <pre id="logs">Loading...</pre>
 
+    <h2 class="text-xl font-semibold mt-8">Exports</h2>
+    <table class="min-w-full bg-white border border-gray-200 rounded mt-2 text-sm">
+    <thead>
+        <tr>
+        <th class="py-2 px-4 border-b">Description</th>
+        <th class="py-2 px-4 border-b">Assignee</th>
+        <th class="py-2 px-4 border-b">Destination</th>
+        <th class="py-2 px-4 border-b">Status</th>
+        <th class="py-2 px-4 border-b">Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for export in exports %}
+        <tr>
+        <td class="py-2 px-4 border-b">{{ export.task_description }}</td>
+        <td class="py-2 px-4 border-b">{{ export.assignee or "-" }}</td>
+        <td class="py-2 px-4 border-b">{{ export.destination }}</td>
+        <td class="py-2 px-4 border-b">{{ export.status }}</td>
+        <td class="py-2 px-4 border-b">{{ export.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+
     <script>
         async function runJob(jobName) {
             await fetch(`/jobs/run/` + jobName, { method: "POST" });
@@ -113,17 +138,9 @@ if (retry.retry_queue.length === 0) {
             document.getElementById("logBox").innerText = data.logs.join("\n");
         }
 
-        async function loadExports() {
-            const res = await fetch("/jobs/exports");
-            const data = await res.json();
-            const lines = data.map(e => `${e.timestamp} → ${e.destination}: ${e.task_description}`);
-            document.getElementById("exportBox").innerText = lines.join("\n");
-        }
-
         window.onload = function() {
             loadJobs();
             loadLogs();
-            loadExports();
         };
     </script>
 </body>

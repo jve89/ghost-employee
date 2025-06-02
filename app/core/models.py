@@ -1,5 +1,5 @@
 from pydantic import BaseModel, validator
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
 from datetime import datetime
 
 # ✅ Valid export destinations — centralised and enforced
@@ -12,26 +12,24 @@ class Summary(BaseModel):
 
 class Task(BaseModel):
     description: str
-    due_date: Optional[datetime] = None
-    assigned_to: Optional[str] = None
-    source_summary: Optional[str] = None  # Optional: link back to summary ID or file
+    assignee: Optional[str] = None
+    timestamp: datetime = datetime.utcnow()
 
 class ExportResult(BaseModel):
     task_description: str
     destination: str
     status: str
     timestamp: datetime
+    assignee: Optional[str] = None
+
+class ExportDestination(BaseModel):
+    type: str
+    config: Dict[str, Any]
 
 class JobConfig(BaseModel):
     job_name: str
     watch_dir: str
-    export_destinations: List[str]
-    gpt_model: Optional[str] = "gpt-4"
-    retry_limit: int = 3
-
-    # ✅ Validate export destinations at load time
-    @validator("export_destinations", each_item=True)
-    def validate_export_destinations(cls, v):
-        if v not in VALID_DESTINATIONS:
-            raise ValueError(f"Invalid export destination: {v}")
-        return v
+    gpt_model: str
+    retry_limit: int
+    run_interval_seconds: int
+    export_destinations: Optional[List[ExportDestination]] = []

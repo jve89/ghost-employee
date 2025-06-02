@@ -1,55 +1,43 @@
-.
-├── app
-│   ├── core
-│   │   ├── interfaces.py
-│   │   └── models.py
-│   ├── jobs
-│   │   ├── job_registry.py
-│   │   └── sample_job.py
-│   └── services
-│       ├── job_manager.py
-│       ├── simple_executor.py
-│       └── task_parser.py
-├── config
-│   ├── config_loader.py
-│   ├── job_configs.json
-│   └── job_schemas
-│       └── sample_job.json
-├── filetree.txt
-├── infrastructure
-│   ├── executor
-│   │   └── task_executor.py
-│   ├── exporters
-│   │   └── log_exporter.py
-│   ├── file_watchers
-│   │   └── folder_watcher.py
-│   ├── logger
-│   │   ├── export_log.py
-│   │   ├── job_status.py
-│   │   ├── memory_logger.py
-│   │   └── retry_queue.py
-│   ├── notifications
-│   ├── retry
-│   │   ├── __init__.py
-│   │   └── retry_queue_store.py
-│   ├── summariser
-│   │   └── gpt_summariser.py
-│   └── task_parser
-│       └── gpt_parser.py
-├── interfaces
-│   └── api
-│       ├── main.py
-│       ├── routes
-│       └── templates
-├── project_structure.txt
-├── README.md
-├── requirements.txt
-├── run.py
-├── tests
-└── watched
-    ├── test1.txt
-    ├── test2.txt
-    ├── test3.txt
-    └── test_fail.txt
-
-21 directories, 31 files
+./.env
+./.env.example
+./README.md
+./app/core/interfaces.py
+./app/core/models.py
+./app/core/registry.py
+./app/core/export_destinations.py
+./app/jobs/job_registry.py
+./app/jobs/sample_job.py
+./app/jobs/prepare_interns.py
+./app/services/job_manager.py
+./app/services/simple_executor.py
+./app/services/task_parser.py
+./app/services/summary_service.py
+./app/services/task_service.py
+./app/services/export_service.py
+./app/services/export_dispatcher.py
+./config/config_loader.py
+./config/job_schemas/prepare_interns.json
+./config/job_schemas/sample_job.json
+./filetree.txt
+./infrastructure/executor/task_executor.py
+./infrastructure/exporters/log_exporter.py
+./infrastructure/exporters/mailgun_exporter.py
+./infrastructure/exporters/file_exporter.py
+./infrastructure/file_watchers/folder_watcher.py
+./infrastructure/logger/export_log.py
+./infrastructure/logger/job_status.py
+./infrastructure/logger/memory_logger.py
+./infrastructure/logger/retry_queue.py
+./infrastructure/logger/export_status_log.py
+./infrastructure/retry/__init__.py
+./infrastructure/retry/retry_queue_store.py
+./infrastructure/summariser/gpt_summariser.py
+./infrastructure/task_parser/gpt_parser.py
+./interfaces/api/main.py
+./interfaces/api/routes/dashboard.py
+./interfaces/api/routes/jobs.py
+./interfaces/api/templates/dashboard.html
+./requirements.txt
+./run.py
+./watched/test_interns.txt
+./makefile

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from app.core.models import Summary, Task, ExportResult
+from app.core.models import Summary, Task, ExportResult, JobConfig
 
 class Summariser(ABC):
     @abstractmethod
@@ -19,4 +19,9 @@ class Executor(ABC):
 class Exporter(ABC):
     @abstractmethod
     def export(self, task: Task) -> ExportResult:
+        pass
+
+class Job(ABC):
+    @abstractmethod
+    def run(self, config: JobConfig):
         pass
