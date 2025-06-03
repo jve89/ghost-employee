@@ -1,0 +1,11 @@
+{
+  "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+  "tasks": [
+    {
+      "description": "Prepare a weekly performance report",
+      "assignee": "Lisa",
+      "timestamp": "2025-06-03T19:26:15.622613"
+    }
+  ],
+  "assignee": "Lisa"
+}

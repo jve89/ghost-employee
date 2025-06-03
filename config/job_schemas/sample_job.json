@@ -8,8 +8,12 @@
     {
       "type": "email",
       "config": {
-        "recipients": ["ops@example.com"],
-        "subject": "Ghost Employee Summary - Sample Job"
+        "recipients": [
+                        "johanvanerkel@gmail.com",
+                        "jovanerkel@gmail.com"
+                      ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\n{{summary}}\n\nTasks:\n{{tasks}}"
       }
     },
     {

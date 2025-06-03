@@ -58,5 +58,186 @@
     "details": {
       "path": "./exports/sample_job/"
     }
+  },
+  {
+    "timestamp": "2025-06-03T19:05:34.245877",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:05:34.246754",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:26:15.917665",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:26:15.918652",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:35:33.285948",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:35:33.286942",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:38:00.482478",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:38:00.483519",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:45:18.899151",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:45:18.900139",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:49:46.064930",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:49:46.065942",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:56:12.747528",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:56:12.748501",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:56:31.941038",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "ops@example.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T19:56:31.942061",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-03T20:01:20.685914",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "johanvanerkel@gmail.com",
+        "jovanerkel@gmail.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-03T20:01:20.687002",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
   }
 ]

@@ -28,7 +28,7 @@ class MailgunExporter(Exporter):
             f"https://api.mailgun.net/v3/{domain}/messages",
             auth=("api", api_key),
             data={
-                "from": f"Ghost Employee <bot@{domain}>",
+                "from": os.getenv("MAILGUN_FROM", f"Ghost Employee <bot@{domain}>"),
                 "to": [to_email],
                 "subject": subject,
                 "text": body
