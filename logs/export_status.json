@@ -239,5 +239,89 @@
     "details": {
       "path": "./exports/sample_job/"
     }
+  },
+  {
+    "timestamp": "2025-06-04T06:52:37.844706",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "johanvanerkel@gmail.com",
+        "jovanerkel@gmail.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-04T06:52:37.846194",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-04T07:00:32.580595",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "johanvanerkel@gmail.com",
+        "jovanerkel@gmail.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-04T07:00:32.582454",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-04T07:03:42.084658",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "johanvanerkel@gmail.com",
+        "jovanerkel@gmail.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-04T07:03:42.086240",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
+  },
+  {
+    "timestamp": "2025-06-04T07:03:58.755301",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "recipients": [
+        "johanvanerkel@gmail.com",
+        "jovanerkel@gmail.com"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-04T07:03:58.756698",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "path": "./exports/sample_job/"
+    }
   }
 ]

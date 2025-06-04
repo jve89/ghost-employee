@@ -13,8 +13,11 @@
             const statuses = await statusRes.json();
             const retry = await retryRes.json();
 
-            document.getElementById("logs").innerText = logs.logs.join("\n");
-            document.getElementById("status").innerText = JSON.stringify(statuses, null, 2);
+            const logsEl = document.getElementById("logs");
+            const statusEl = document.getElementById("status");
+
+            if (logsEl) logsEl.innerText = logs.logs.join("\n");
+            if (statusEl) statusEl.innerText = JSON.stringify(statuses, null, 2);
 
             const retryBody = document.getElementById("retry-body");
             retryBody.innerHTML = "";
@@ -34,6 +37,8 @@
                     retryBody.appendChild(row);
                 });
             }
+
+            loadExportLogs();
         }
 
         async function retryTask(taskId) {
@@ -82,7 +87,8 @@
         async function loadLogs() {
             const res = await fetch("/jobs/logs");
             const data = await res.json();
-            document.getElementById("logBox").innerText = data.logs.join("\n");
+            const logBox = document.getElementById("logBox");
+            if (logBox) logBox.innerText = data.logs.join("\n");
         }
 
         async function loadExportLogs() {
@@ -92,12 +98,17 @@
                 const tableBody = document.querySelector('#export-log-table tbody');
                 tableBody.innerHTML = '';
 
+                if (!data.exports || data.exports.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-500 py-4">No exports found.</td></tr>`;
+                    return;
+                }
+
                 data.exports.forEach(entry => {
-                    const row = document.createElement('tr');
                     const timestamp = new Date(entry.timestamp).toLocaleString();
                     const status = entry.success ? '✅' : '❌';
                     const details = JSON.stringify(entry.details, null, 2);
 
+                    const row = document.createElement('tr');
                     row.innerHTML = `
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${timestamp}</td>
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.job_name}</td>
@@ -108,7 +119,7 @@
                     tableBody.appendChild(row);
                 });
             } catch (error) {
-                console.error("Failed to load export logs", error);
+                console.error("❌ Failed to load export logs:", error);
             }
         }
 
@@ -116,7 +127,6 @@
             refreshDashboard();
             loadJobs();
             loadLogs();
-            loadExportLogs();
         };
 
         setInterval(refreshDashboard, 10000);
@@ -132,6 +142,9 @@
                 <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Retry Failed Tasks</button>
             </form>
         </div>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">System Status</h2>
+        <pre id="status" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-48">Loading...</pre>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">Jobs</h2>
         <div id="jobTiles" class="flex flex-wrap"></div>
@@ -150,8 +163,11 @@
             </tbody>
         </table>
 
-        <h2 class="text-xl font-semibold mt-8 mb-2">Logs</h2>
-        <pre id="logBox" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
+        <h2 class="text-xl font-semibold mt-8 mb-2">System Status</h2>
+        <pre id="status" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">Live Logs</h2>
+        <pre id="logs" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">Recent Export Logs</h2>
         <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">

@@ -21,7 +21,7 @@ class FolderWatcher(Thread):
                 if file.endswith(".txt") and file not in self.seen_files:
                     self.seen_files.add(file)
                     full_path = os.path.join(path, file)
-                    with open(full_path, "r") as f:
+                    with open(full_path, "r", encoding="utf-8", errors="replace") as f:
                         content = f.read()
                     job = job_registry.get(self.config.job_name)
                     if job:

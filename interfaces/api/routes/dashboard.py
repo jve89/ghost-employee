@@ -8,7 +8,7 @@ from infrastructure.retry.retry_queue_store import retry_queue_store
 from infrastructure.logger.job_status import job_status
 from config.config_loader import load_job_configs
 from infrastructure.logger.export_log import export_log
-
+from infrastructure.logger.job_status import get_recent_activity
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -37,6 +37,10 @@ async def get_jobs():
 @router.get("/jobs/exports")
 def get_exports():
     return [r.dict() for r in export_log.get_logs()]
+
+@router.get("/dashboard/activity")
+def get_dashboard_activity():
+    return get_recent_activity()
 
 @router.get("/dashboard/exports")
 def get_recent_exports():
