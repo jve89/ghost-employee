@@ -41,6 +41,23 @@
             loadExportLogs();
         }
 
+        async function loadJobStats() {
+            const res = await fetch("/dashboard/job-stats");
+            const stats = await res.json();
+            const container = document.getElementById("jobStats");
+            container.innerHTML = "";
+            for (const [job, data] of Object.entries(stats)) {
+            container.innerHTML += `
+                <div style="border:1px solid #ccc;padding:1rem;margin-bottom:1rem;border-radius:8px;background:#f9f9f9;">
+                <strong>🛠️ ${job}</strong><br/>
+                <b>Last run:</b> ${new Date(data.last_run).toLocaleString()}<br/>
+                <b>Total tasks:</b> ${data.total_tasks}<br/>
+                <b>Runs:</b> ${data.runs}
+                </div>
+            `;
+            }
+        }
+
         async function retryTask(taskId) {
             try {
                 const res = await fetch(`/jobs/retry-task/${taskId}`, { method: "POST" });
@@ -127,9 +144,46 @@
             refreshDashboard();
             loadJobs();
             loadLogs();
+            loadJobStats();
         };
 
         setInterval(refreshDashboard, 10000);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const jobForm = document.getElementById("jobForm");
+            const message = document.getElementById("jobFormMessage");
+
+            if (jobForm) {
+                jobForm.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    message.innerText = "Submitting...";
+
+                    const formData = new FormData(jobForm);
+                    const payload = Object.fromEntries(formData.entries());
+                    payload.run_interval_seconds = parseInt(payload.run_interval_seconds);
+
+                    try {
+                        const res = await fetch("/dashboard/create-job", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const data = await res.json();
+                        if (res.ok) {
+                            message.innerText = "✅ Job created successfully.";
+                            jobForm.reset();
+                            loadJobs();
+                        } else {
+                            message.innerText = `❌ ${data.error || "Job creation failed."}`;
+                        }
+                    } catch (err) {
+                        console.error("Job creation failed:", err);
+                        message.innerText = "❌ Error submitting form.";
+                    }
+                });
+            }
+        });
     </script>
 </head>
 <body class="bg-gray-50 font-sans text-gray-900">
@@ -149,6 +203,36 @@
         <h2 class="text-xl font-semibold mt-8 mb-2">Jobs</h2>
         <div id="jobTiles" class="flex flex-wrap"></div>
 
+        <h2>👷 Job Activity Summary</h2>
+        <div id="jobStats">Loading job stats...</div>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">Create New Job</h2>
+        <form id="jobForm" class="bg-white p-6 rounded shadow border border-gray-200 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Job Name</label>
+                    <input name="job_name" class="w-full border border-gray-300 rounded px-3 py-2" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Watch Directory</label>
+                    <input name="watch_dir" class="w-full border border-gray-300 rounded px-3 py-2" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">GPT Model</label>
+                    <select name="gpt_model" class="w-full border border-gray-300 rounded px-3 py-2">
+                        <option value="gpt-4">gpt-4</option>
+                        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Run Interval (seconds)</label>
+                    <input name="run_interval_seconds" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="30">
+                </div>
+            </div>
+            <button type="submit" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>
+            <p id="jobFormMessage" class="text-sm mt-2 text-gray-700"></p>
+        </form>
+
         <h2 class="text-xl font-semibold mt-8 mb-2">Retry Queue</h2>
         <table class="min-w-full bg-white border border-gray-200 rounded shadow text-sm">
             <thead class="bg-gray-100">
@@ -162,9 +246,6 @@
                 <tr><td colspan="3" class="py-2 px-4 text-center text-gray-500">Loading...</td></tr>
             </tbody>
         </table>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">System Status</h2>
-        <pre id="status" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">Live Logs</h2>
         <pre id="logs" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>

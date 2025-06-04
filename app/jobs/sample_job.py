@@ -5,8 +5,10 @@ from infrastructure.task_parser.gpt_parser import GPTTaskParser
 from infrastructure.executor.task_executor import SimpleExecutor
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.job_status import job_status
+from infrastructure.logger.job_timesheet import log_job_run
 from config.config_loader import load_job_config
 from app.services.export_dispatcher import dispatch_exports
+from app.services.export_service import ExportService
 
 class SampleJob:
     def __init__(self):
@@ -25,6 +27,13 @@ class SampleJob:
 
         for task in tasks:
             self.executor.execute(task)
+        
+        log_job_run(
+            job_name=config.job_name,
+            summary=summary.content,  # 👈 plain string for logging
+            tasks_executed=len(tasks),
+            status="success"
+        )
 
         output_data = {
             "summary": summary.content,
@@ -32,7 +41,9 @@ class SampleJob:
             "assignee": tasks[0].assignee if tasks else None
         }
 
-        dispatch_exports(output_data, config.export_destinations, config.job_name)
+        service = ExportService(config)
+        for task in tasks:
+            service.export(task)
 
 if __name__ == "__main__":
     job_config = load_job_config("sample_job")

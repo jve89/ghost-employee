@@ -1,0 +1,13 @@
+{
+  "job_name": "test",
+  "watch_dir": "test",
+  "run_interval_seconds": 30,
+  "gpt_model": "gpt-4",
+  "retry_limit": 3,
+  "export_destinations": [
+    {
+      "type": "logs",
+      "config": {}
+    }
+  ]
+}

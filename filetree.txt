@@ -35,7 +35,13 @@
 ./exports/sample_job/ghost_export_20250604_070032.json
 ./exports/sample_job/ghost_export_20250604_070342.json
 ./exports/sample_job/ghost_export_20250604_070358.json
+./exports/sample_job/ghost_export_20250604_121953.json
+./exports/sample_job/ghost_export_20250604_122113.json
+./exports/sample_job/ghost_export_20250604_122311.json
+./exports/sample_job/ghost_export_20250604_123112.json
+./exports/sample_job/ghost_export_20250604_123446.json
 ./filetree.txt
+./infrastructure/email/email_watcher.py
 ./infrastructure/executor/task_executor.py
 ./infrastructure/exporters/file_exporter.py
 ./infrastructure/exporters/log_exporter.py
@@ -50,7 +56,6 @@
 ./infrastructure/retry/retry_queue_store.py
 ./infrastructure/summariser/gpt_summariser.py
 ./infrastructure/task_parser/gpt_parser.py
-./infrastructure/email/email_watcher.py
 ./interfaces/api/main.py
 ./interfaces/api/routes/dashboard.py
 ./interfaces/api/routes/jobs.py
@@ -60,6 +65,6 @@
 ./requirements.txt
 ./run.py
 ./run_sample_job.py
-./watched/test_interns.txt
-./watched/performance_notes.txt
 ./run_watchers.py
+./watched/performance_notes.txt
+./watched/test_interns.txt

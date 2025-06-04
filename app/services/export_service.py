@@ -1,7 +1,5 @@
-from app.core.models import Task, ExportResult, JobConfig
+from app.core.models import Task, JobConfig
 from app.core.registry import get_exporters
-from infrastructure.exporters.log_exporter import LogExporter
-from infrastructure.logger.export_log import export_log
 
 class ExportService:
     def __init__(self, config: JobConfig):
@@ -13,6 +11,15 @@ class ExportService:
             self.export(task)
 
     def export(self, task: Task) -> None:
-        if "logs" in self.destinations:
-            exporter = LogExporter()
-            exporter.export(task)
+        """Export a single task to all configured destinations."""
+        for destination in self.destinations:
+            try:
+                exporters = get_exporters(destination.type)
+                for exporter in exporters:
+                    # Check if export() requires config (MailgunExporter-style)
+                    if destination.type == "email":
+                        exporter.export(task, destination.config)
+                    else:
+                        exporter.export(task)
+            except Exception as e:
+                print(f"[ExportService] Failed exporting to {destination.type}: {e}")

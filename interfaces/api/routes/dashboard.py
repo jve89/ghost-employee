@@ -1,6 +1,8 @@
 import os
 import json
-from fastapi import APIRouter, Request
+import glob
+from pydantic import BaseModel
+from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from infrastructure.logger.memory_logger import logger
@@ -12,6 +14,12 @@ from infrastructure.logger.job_status import get_recent_activity
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
+
+class JobCreateRequest(BaseModel):
+    job_name: str
+    watch_dir: str
+    run_interval_seconds: int
+    gpt_model: str
 
 @router.get("/", response_class=HTMLResponse)
 async def dashboard(request: Request):
@@ -42,6 +50,23 @@ def get_exports():
 def get_dashboard_activity():
     return get_recent_activity()
 
+@router.get("/dashboard/job-stats")
+def job_stats():
+    stats = {}
+    for file in glob.glob("logs/timesheets/*_timesheet.json"):
+        job = os.path.basename(file).replace("_timesheet.json", "")
+        with open(file) as f:
+            entries = json.load(f)
+        if entries:
+            last_run = entries[-1]["timestamp"]
+            count = sum(e["tasks_executed"] for e in entries)
+            stats[job] = {
+                "last_run": last_run,
+                "total_tasks": count,
+                "runs": len(entries)
+            }
+    return JSONResponse(content=stats)
+
 @router.get("/dashboard/exports")
 def get_recent_exports():
     log_path = "./logs/export_status.json"
@@ -60,3 +85,27 @@ def get_recent_exports():
             status_code=500,
             content={"error": f"Failed to read export log: {str(e)}"}
         )
+
+@router.post("/dashboard/create-job")
+async def create_job(data: JobCreateRequest):
+    new_config = {
+        "job_name": data.job_name,
+        "watch_dir": data.watch_dir,
+        "run_interval_seconds": data.run_interval_seconds,
+        "gpt_model": data.gpt_model,
+        "retry_limit": 3,
+        "export_destinations": [
+            {
+                "type": "logs",
+                "config": {}
+            }
+        ]
+    }
+
+    path = f"config/job_schemas/{data.job_name}.json"
+    os.makedirs("config/job_schemas", exist_ok=True)
+
+    with open(path, "w") as f:
+        json.dump(new_config, f, indent=2)
+
+    return {"status": "created", "job": data.job_name}
