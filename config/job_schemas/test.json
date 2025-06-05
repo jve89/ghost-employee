@@ -1,6 +1,9 @@
 {
   "job_name": "test",
-  "watch_dir": "test",
+  "job_id": "test",
+  "active": true,
+  "watch_dir": "watched",
+  "file_pattern": "interns_*.txt",
   "run_interval_seconds": 30,
   "gpt_model": "gpt-4",
   "retry_limit": 3,

@@ -28,8 +28,11 @@ class ExportDestination(BaseModel):
 
 class JobConfig(BaseModel):
     job_name: str
+    job_id: str
     watch_dir: str
     gpt_model: str
     retry_limit: int
     run_interval_seconds: int
+    file_pattern: Optional[str] = "*"
+    active: bool = True
     export_destinations: Optional[List[ExportDestination]] = []

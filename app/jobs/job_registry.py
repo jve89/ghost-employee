@@ -4,4 +4,5 @@ from app.jobs.prepare_interns import PrepareInternsJob
 job_registry = {
     "sample_job": SampleJob(),
     "prepare_interns": PrepareInternsJob(),
+    "test": SampleJob(), 
 }

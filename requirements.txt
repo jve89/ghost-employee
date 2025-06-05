@@ -36,3 +36,4 @@ websockets==15.0.1
 requests
 beautifulsoup4
 python-multipart
+watchdog

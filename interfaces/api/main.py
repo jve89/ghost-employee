@@ -8,6 +8,7 @@ from interfaces.api.routes.dashboard import router as dashboard_router
 from config.config_loader import load_all_job_configs
 from app.jobs.sample_job import SampleJob
 from infrastructure.logger.memory_logger import logger
+from infrastructure.logger.activity_log import activity_log
 import threading
 import time
 
@@ -20,6 +21,10 @@ templates = Jinja2Templates(directory="interfaces/api/templates")
 @app.get("/")
 def root():
     return RedirectResponse(url="/dashboard")
+
+@app.get("/logs/activity")
+def get_activity_log():
+    return activity_log.get_recent(limit=50)
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request):

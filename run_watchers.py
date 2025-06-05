@@ -1,4 +1,4 @@
-from infrastructure.file_watchers.folder_watcher import start_watchers as start_folder_watchers
+from app.services.watch_dir_dispatcher import start_watchers as start_folder_watchers
 from infrastructure.email.email_watcher import EmailWatcher
 import time
 

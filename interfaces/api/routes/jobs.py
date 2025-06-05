@@ -1,3 +1,5 @@
+from pathlib import Path
+import json
 from fastapi import APIRouter
 from fastapi.responses import RedirectResponse
 from fastapi import HTTPException
@@ -93,3 +95,20 @@ def retry_single_task(task_id: str):
         return {"status": "success"}
     else:
         return {"status": "failed"}
+
+@router.post("/toggle/{job_id}")
+def toggle_job(job_id: str):
+    job_path = Path(f"config/job_schemas/{job_id}.json")
+    if not job_path.exists():
+        raise HTTPException(status_code=404, detail="Job config not found")
+
+    with open(job_path, "r") as f:
+        config = json.load(f)
+
+    current_state = config.get("active", True)
+    config["active"] = not current_state
+
+    with open(job_path, "w") as f:
+        json.dump(config, f, indent=2)
+
+    return RedirectResponse(url="/dashboard", status_code=303)

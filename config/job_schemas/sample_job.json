@@ -1,6 +1,9 @@
 {
   "job_name": "sample_job",
+  "job_id": "sample_job",
+  "active": true,
   "watch_dir": "watched",
+  "file_pattern": "interns_*.txt",
   "gpt_model": "gpt-4",
   "retry_limit": 3,
   "run_interval_seconds": 10,
@@ -9,9 +12,9 @@
       "type": "email",
       "config": {
         "recipients": [
-                        "johanvanerkel@gmail.com",
-                        "jovanerkel@gmail.com"
-                      ],
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
         "subject": "Ghost Employee Summary - Sample Job",
         "message": "Here is your daily summary:\n\n{{summary}}\n\nTasks:\n{{tasks}}"
       }

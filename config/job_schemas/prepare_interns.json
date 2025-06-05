@@ -1,6 +1,9 @@
 {
   "job_name": "prepare_interns",
-  "watch_dir": "intern_files",
+  "job_id": "prepare_interns",
+  "active": true,
+  "watch_dir": "watched",
+  "file_pattern": "interns_*.txt",
   "export_destinations": [
     {
       "type": "logs",

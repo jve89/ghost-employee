@@ -53,6 +53,8 @@ def get_dashboard_activity():
 @router.get("/dashboard/job-stats")
 def job_stats():
     stats = {}
+
+    # 📊 Load task run data from timesheets
     for file in glob.glob("logs/timesheets/*_timesheet.json"):
         job = os.path.basename(file).replace("_timesheet.json", "")
         with open(file) as f:
@@ -63,8 +65,26 @@ def job_stats():
             stats[job] = {
                 "last_run": last_run,
                 "total_tasks": count,
-                "runs": len(entries)
+                "runs": len(entries),
+                "export_count": 0,
+                "failed_exports": 0
             }
+
+    # 📦 Enrich with export stats
+    for entry in export_log.get_logs():
+        job = entry["job_name"]
+        if job not in stats:
+            stats[job] = {
+                "last_run": "never",
+                "total_tasks": 0,
+                "runs": 0,
+                "export_count": 0,
+                "failed_exports": 0
+            }
+        stats[job]["export_count"] += 1
+        if not entry["success"]:
+            stats[job]["failed_exports"] += 1
+
     return JSONResponse(content=stats)
 
 @router.get("/dashboard/exports")
@@ -85,6 +105,18 @@ def get_recent_exports():
             status_code=500,
             content={"error": f"Failed to read export log: {str(e)}"}
         )
+
+@router.post("/dashboard/retry-export/{entry_id}")
+def retry_export(entry_id: str):
+    try:
+        from infrastructure.logger.export_log import export_log
+        success = export_log.retry(entry_id)
+        if success:
+            return {"status": "ok", "message": "✅ Export retry queued."}
+        else:
+            return {"status": "error", "message": "❌ Retry failed or not supported."}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
 
 @router.post("/dashboard/create-job")
 async def create_job(data: JobCreateRequest):

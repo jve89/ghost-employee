@@ -49,12 +49,36 @@
             for (const [job, data] of Object.entries(stats)) {
             container.innerHTML += `
                 <div style="border:1px solid #ccc;padding:1rem;margin-bottom:1rem;border-radius:8px;background:#f9f9f9;">
-                <strong>🛠️ ${job}</strong><br/>
-                <b>Last run:</b> ${new Date(data.last_run).toLocaleString()}<br/>
-                <b>Total tasks:</b> ${data.total_tasks}<br/>
-                <b>Runs:</b> ${data.runs}
+                    <strong>🛠️ ${job}</strong><br/>
+                    <b>Last run:</b> ${new Date(data.last_run).toLocaleString()}<br/>
+                    <b>Total tasks:</b> ${data.total_tasks}<br/>
+                    <b>Runs:</b> ${data.runs}<br/>
+                    <b>Exports:</b> ${data.export_count}<br/>
+                    <b>Failed Exports:</b> ${data.failed_exports}
                 </div>
             `;
+            }
+        }
+
+        async function loadActivityLog() {
+            const res = await fetch("/logs/activity");
+            const logs = await res.json();
+            const container = document.getElementById("activityLog");
+            container.innerHTML = logs.map(entry =>
+                `[${entry.timestamp}] (${entry.trigger}) ${entry.job_name} — ${entry.status}`
+                + (entry.file ? ` [${entry.file}]` : "")
+            ).join("<br>");
+        }
+
+        async function retryExport(entryId) {
+            try {
+                const res = await fetch(`/dashboard/retry-export/${entryId}`, { method: "POST" });
+                const data = await res.json();
+                alert(data.message || "Retry triggered.");
+                loadExportLogs();  // Refresh table
+            } catch (err) {
+                console.error("Retry export failed", err);
+                alert("❌ Retry failed.");
             }
         }
 
@@ -76,6 +100,17 @@
             loadLogs();
         }
 
+        async function toggleJob(jobId) {
+            try {
+                const res = await fetch(`/jobs/toggle/${jobId}`, { method: "POST" });
+                if (!res.ok) throw new Error("Failed to toggle");
+                await loadJobs(); // re-render the tiles
+            } catch (err) {
+                alert("Failed to toggle job.");
+                console.error(err);
+            }
+        }
+
         async function loadJobs() {
             const jobsRes = await fetch("/jobs");
             const statusRes = await fetch("/jobs/status");
@@ -94,8 +129,17 @@
                 tile.innerHTML = `
                     <strong class="text-gray-800">${job.job_name}</strong><br/>
                     <span class="text-sm text-gray-500">Last run: ${lastRun}</span><br/>
-                    <button onclick="runJob('${job.job_name}')" class="mt-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Run</button>
+
+                    <button onclick="runJob('${job.job_name}')" class="mt-2 mr-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                        Run
+                    </button>
+
+                    <button onclick="toggleJob('${job.job_id}')" 
+                        class="mt-2 bg-${job.active ? 'yellow' : 'blue'}-600 text-white px-3 py-1 rounded hover:bg-${job.active ? 'yellow' : 'blue'}-700">
+                        ${job.active ? 'Pause' : 'Resume'}
+                    </button>
                 `;
+
 
                 container.appendChild(tile);
             });
@@ -113,17 +157,39 @@
                 const res = await fetch('/dashboard/exports');
                 const data = await res.json();
                 const tableBody = document.querySelector('#export-log-table tbody');
+                const jobFilter = document.getElementById("exportFilterJob").value;
+                const onlyFailed = document.getElementById("exportFilterFailed").checked;
+
                 tableBody.innerHTML = '';
 
                 if (!data.exports || data.exports.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-500 py-4">No exports found.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-gray-500 py-4">No exports found.</td></tr>`;
                     return;
                 }
 
-                data.exports.forEach(entry => {
+                const filtered = data.exports.filter(entry => {
+                    const matchJob = !jobFilter || entry.job_name === jobFilter;
+                    const matchFailure = !onlyFailed || !entry.success;
+                    return matchJob && matchFailure;
+                });
+
+                if (filtered.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-gray-500 py-4">No matching exports.</td></tr>`;
+                    return;
+                }
+
+                filtered.forEach(entry => {
                     const timestamp = new Date(entry.timestamp).toLocaleString();
                     const status = entry.success ? '✅' : '❌';
+                    const retryCount = entry.retry_count ?? 0;
+                    const retryOrigin = entry.retry_origin ?? '-';
                     const details = JSON.stringify(entry.details, null, 2);
+
+                    const retryBtn = !entry.success ? `
+                        <button onclick="retryExport('${entry.id}')" class="mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+                            Retry Export
+                        </button>
+                    ` : '';
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -131,20 +197,48 @@
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.job_name}</td>
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.destination}</td>
                         <td class="py-2 px-4 border-b text-sm text-center">${status}</td>
-                        <td class="py-2 px-4 border-b text-sm"><pre class="whitespace-pre-wrap text-gray-600">${details}</pre></td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${retryCount}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${retryOrigin}</td>
+                        <td class="py-2 px-4 border-b text-sm">
+                            <pre class="whitespace-pre-wrap text-gray-600">${details}</pre>
+                            ${retryBtn}
+                        </td>
                     `;
                     tableBody.appendChild(row);
+                });
+
+                // 🧠 Also populate dropdown with unique jobs
+                const jobs = [...new Set(data.exports.map(e => e.job_name))];
+                const dropdown = document.getElementById("exportFilterJob");
+                dropdown.innerHTML = '<option value="">All Jobs</option>';
+                jobs.forEach(job => {
+                    const opt = document.createElement("option");
+                    opt.value = job;
+                    opt.textContent = job;
+                    dropdown.appendChild(opt);
                 });
             } catch (error) {
                 console.error("❌ Failed to load export logs:", error);
             }
         }
 
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const jobSelect = document.getElementById("exportFilterJob");
+            const failedCheckbox = document.getElementById("exportFilterFailed");
+
+            if (jobSelect && failedCheckbox) {
+                jobSelect.addEventListener("change", loadExportLogs);
+                failedCheckbox.addEventListener("change", loadExportLogs);
+            }
+        });
+
         window.onload = function () {
             refreshDashboard();
             loadJobs();
             loadLogs();
             loadJobStats();
+            loadActivityLog(); 
         };
 
         setInterval(refreshDashboard, 10000);
@@ -247,10 +341,27 @@
             </tbody>
         </table>
 
+        <div class="mt-6">
+            <h2 class="text-xl font-bold mb-2">Recent Activity</h2>
+            <div id="activityLog" class="bg-gray-100 p-3 rounded shadow text-sm font-mono max-h-80 overflow-y-scroll"></div>
+        </div>
+
         <h2 class="text-xl font-semibold mt-8 mb-2">Live Logs</h2>
         <pre id="logs" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">Recent Export Logs</h2>
+        <div class="flex gap-4 mb-4 items-center">
+            <div>
+                <label class="block text-sm font-medium mb-1">Filter by Job:</label>
+                <select id="exportFilterJob" class="border border-gray-300 rounded px-3 py-2">
+                    <option value="">All Jobs</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Only show failed exports:</label>
+                <input type="checkbox" id="exportFilterFailed" class="ml-2">
+            </div>
+        </div>
         <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
             <thead class="bg-gray-100">
                 <tr>
@@ -258,6 +369,8 @@
                     <th class="py-2 px-4 border-b text-left">Job</th>
                     <th class="py-2 px-4 border-b text-left">Destination</th>
                     <th class="py-2 px-4 border-b text-left">Status</th>
+                    <th class="py-2 px-4 border-b text-left">Retry Count</th>
+                    <th class="py-2 px-4 border-b text-left">Retry Origin</th>
                     <th class="py-2 px-4 border-b text-left">Details</th>
                 </tr>
             </thead>
