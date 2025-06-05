@@ -185,11 +185,17 @@
                     const retryOrigin = entry.retry_origin ?? '-';
                     const details = JSON.stringify(entry.details, null, 2);
 
-                    const retryBtn = !entry.success ? `
-                        <button onclick="retryExport('${entry.id}')" class="mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
-                            Retry Export
-                        </button>
-                    ` : '';
+                    let retryBtn = '';
+                    if (!entry.success) {
+                        const disabled = entry.retry_count >= 3;
+                        retryBtn = `
+                            <button onclick="retryExport('${entry.id}')" 
+                                    class="mt-2 ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white px-3 py-1 rounded"
+                                    ${disabled ? 'disabled title="Retry limit reached"' : ''}>
+                                Retry Export
+                            </button>
+                        `;
+                    }
 
                     const row = document.createElement('tr');
                     row.innerHTML = `

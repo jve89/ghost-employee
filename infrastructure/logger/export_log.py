@@ -30,8 +30,13 @@ export_log = ExportLogStore()
 def retry(entry_id: str) -> bool:
     from infrastructure.retry.retry_queue_store import retry_queue_store
     logs = export_log.get_logs()
+
     entry = next((log for log in logs if log["id"] == entry_id), None)
     if not entry or entry.get("success"):
+        return False
+
+    # ✅ Step 2: Reject if retry limit reached
+    if entry.get("retry_count", 0) >= 3:
         return False
 
     retry_queue_store.add({
@@ -39,7 +44,8 @@ def retry(entry_id: str) -> bool:
         "task": entry.get("details", {}).get("task", {}),
         "timestamp": entry["timestamp"],
         "id": entry_id,
-        "origin": "export_log_retry"
+        "origin": "export_log_retry",
+        "retry_count": entry.get("retry_count", 0) + 1
     })
 
     export_log.increment_retry(entry_id, origin="export_log_retry")
