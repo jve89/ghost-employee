@@ -1,3 +1,12 @@
+"""
+🚀 Full Pipeline Demo Job
+This job demonstrates the complete Ghost Employee pipeline:
+- Summarisation via GPT
+- Task extraction via GPT
+- Task execution
+- Exporting results
+"""
+
 from app.core.models import JobConfig
 from app.core.interfaces import Summariser, TaskParser, Executor
 from infrastructure.summariser.gpt_summariser import GPTSummariser
@@ -9,6 +18,8 @@ from infrastructure.logger.job_timesheet import log_job_run
 from config.config_loader import load_job_config
 from app.services.export_dispatcher import dispatch_exports
 from app.services.export_service import ExportService
+from app.core.models import Task, JobConfig
+
 
 class SampleJob:
     def __init__(self):
@@ -16,7 +27,7 @@ class SampleJob:
         self.parser: TaskParser = GPTTaskParser()
         self.executor: Executor = SimpleExecutor()
 
-    def run(self, config: JobConfig, override_text: str = None, source: str = "manual_entry.txt"):
+    def run(self, config: JobConfig, override_text: str | None = None, source: str = "unknown") -> list[Task]:
         job_status.update(config.job_name)
         logger.log(f"Running job: {config.job_name}")
 

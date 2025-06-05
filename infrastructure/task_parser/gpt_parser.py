@@ -34,9 +34,12 @@ class GPTTaskParser(TaskParser):
             tasks = []
             for item in parsed:
                 tasks.append(Task(
-                    description=item.get("description") or item.get("task"),
+                    description=item.get("description") or item.get("task") or "No description",
                     assignee=item.get("assignee") or item.get("assigned_to"),
-                    timestamp=datetime.utcnow()
+                    job_id=summary.job_id,
+                    source=summary.source_file,
+                    summary=summary.content,
+                    created_at=datetime.utcnow().isoformat()
                 ))
             return tasks
 
@@ -46,6 +49,9 @@ class GPTTaskParser(TaskParser):
                 Task(
                     description="Task parsing failed – manual review needed.",
                     assignee=None,
-                    timestamp=datetime.utcnow()
+                    job_id=summary.job_id,
+                    source=summary.source_file,
+                    summary=summary.content,
+                    created_at=datetime.utcnow().isoformat()
                 )
             ]

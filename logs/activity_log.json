@@ -1,0 +1,653 @@
+[
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:37:12.907057"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:37:12.907622"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:37:12.907864"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:37:15.715062"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:37:17.476345"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:46:18.282571"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:46:18.285489"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:46:18.286196"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:46:18.286985"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:46:18.287986"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:46:20.857066"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:46:21.065302"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:48:46.755420"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:48:46.755700"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:48:46.756277"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:48:46.757597"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:48:46.759742"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:48:49.168741"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:48:49.325038"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:50:20.518607"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:50:20.519956"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:50:20.520856"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:50:20.521264"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:50:20.522317"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:50:22.730466"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:50:22.841839"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:51:28.175219"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:51:28.176186"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:51:28.177266"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:51:28.178199"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:51:28.178585"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:51:30.230969"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:51:30.975372"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:52:13.453769"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:52:13.455139"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:52:13.455509"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:52:13.458762"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:52:13.458959"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:52:15.475342"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:52:16.466535"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:56:10.222824"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:56:10.224571"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:56:10.225527"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:56:10.225697"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T18:56:10.226348"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:56:10.227416"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:56:12.712195"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T18:56:13.359221"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:00:23.518436"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:00:23.519237"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:00:23.521546"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:00:23.522830"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:00:23.523251"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:00:26.022222"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:00:26.633724"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:02:41.708492"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:02:41.709766"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:02:41.710152"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:02:41.710861"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:02:41.713942"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:02:41.714571"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:02:44.011913"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:02:44.767505"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:04:25.775964"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:04:25.777376"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:04:25.778637"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:04:25.780067"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:04:25.780893"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:04:25.783915"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:04:28.669810"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:04:28.859790"
+  },
+  {
+    "job_name": "prepare_interns",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:08:45.825839"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:08:45.827631"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:08:45.827744"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:08:45.827806"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:08:45.832771"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:08:48.462805"
+  },
+  {
+    "job_name": "test",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:08:53.130156"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:18:40.025879"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:18:40.027433"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:18:40.029000"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:18:43.075331"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:36:15.701936"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:36:15.703524"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:36:15.705750"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:36:18.796274"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:37:47.496122"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:37:47.496218"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:37:47.499462"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:39:37.487090"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "started",
+    "timestamp": "2025-06-05T19:39:37.488135"
+  },
+  {
+    "job_name": "compliance_analyst",
+    "trigger": "watcher",
+    "file": "weekly_compliance_2025-06-05.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:39:37.490800"
+  },
+  {
+    "job_name": "sample_job",
+    "trigger": "watcher",
+    "file": "interns_list.txt",
+    "status": "completed",
+    "timestamp": "2025-06-05T19:39:39.584893"
+  }
+]

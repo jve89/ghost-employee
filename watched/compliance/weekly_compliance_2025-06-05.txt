@@ -1,0 +1,14 @@
+Subject: Weekly Compliance Memo – June 5, 2025
+
+Dear Compliance Team,
+
+Please take note of the following items that require attention this week:
+
+1. Update the internal AML policy document to reflect the revised threshold of €10,000.
+2. Conduct a quarterly KYC review for the top 20 corporate clients by June 15.
+3. Flag and investigate the transaction made on June 3 by account #872349 as it triggered the fraud detection rule.
+4. Complete the conflict-of-interest declarations for all onboarding employees this month.
+5. Remind all staff to complete their annual compliance training by June 30.
+
+Kind regards,  
+Compliance Manager

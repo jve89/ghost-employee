@@ -3,7 +3,7 @@ from typing import Optional, List, Dict, Any
 from datetime import datetime
 
 # ✅ Valid export destinations — centralised and enforced
-VALID_DESTINATIONS = ["logs", "notion", "google_sheets", "email"]
+VALID_DESTINATIONS = ["logs", "notion", "google_sheets", "email", "file"]
 
 class Summary(BaseModel):
     source_file: str
@@ -11,7 +11,11 @@ class Summary(BaseModel):
     generated_at: datetime
 
 class Task(BaseModel):
+    job_id: str
+    source: str
     description: str
+    summary: str
+    created_at: str  # ISO 8601 timestamp
     assignee: Optional[str] = None
     timestamp: datetime = datetime.utcnow()
 

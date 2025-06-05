@@ -1,8 +1,9 @@
+from app.jobs.demo_job import DemoJob
 from app.jobs.sample_job import SampleJob
-from app.jobs.prepare_interns import PrepareInternsJob
+from app.jobs.compliance_analyst import ComplianceAnalystJob
 
 job_registry = {
     "sample_job": SampleJob(),
-    "prepare_interns": PrepareInternsJob(),
-    "test": SampleJob(), 
+    "demo_job": DemoJob(),
+    "compliance_analyst": ComplianceAnalystJob(),  
 }
