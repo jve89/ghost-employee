@@ -9,5 +9,4 @@ tasks:
       pip install -r requirements.txt
   - command: |
       source venv/bin/activate
-      uvicorn interfaces.api.main:app --reload --port 8000
-
+      python -u run_watchers.py

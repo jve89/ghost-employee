@@ -4,7 +4,6 @@ import uuid
 from typing import List
 from datetime import datetime
 from app.core.models import Task
-from app.services.simple_executor import SimpleExecutor
 
 RETRY_QUEUE_FILE = "data/retry_queue.json"
 
@@ -35,14 +34,6 @@ class RetryQueueStore:
             "timestamp": timestamp
         }
         self.queue.append(task_entry)
-        self._save_to_disk()
-
-    def retry_all(self):
-        for entry in list(self.queue):
-            task = Task(**entry["task"])
-            success = SimpleExecutor().execute(task)
-            if success:
-                self.queue.remove(entry)
         self._save_to_disk()
 
 # ✅ Singleton instance

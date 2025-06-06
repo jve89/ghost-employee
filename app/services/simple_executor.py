@@ -1,5 +1,5 @@
 from app.core.models import Task, JobConfig
-from infrastructure.logger.retry_queue import retry_queue
+from infrastructure.retry.retry_queue_store import retry_queue_store
 from infrastructure.exporters.log_exporter import LogExporter
 from infrastructure.exporters.file_exporter import FileExporter
 from datetime import datetime
@@ -21,7 +21,7 @@ class SimpleExecutor:
 
         if not success:
             print("[SimpleExecutor] ❌ Task failed and will be queued for retry.")
-            retry_queue.add(task, datetime.utcnow().isoformat())
+            retry_queue_store.add(task, datetime.utcnow().isoformat())
             return False
 
         print("[SimpleExecutor] ✅ Task succeeded. Exporting...")

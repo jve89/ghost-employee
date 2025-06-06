@@ -1867,5 +1867,943 @@
     "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
     "tasks_executed": 1,
     "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:09:32.569063",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:09:46.984643",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:23:30.354509",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:23:45.212108",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be prepared and delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 2,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:23:59.347114",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:24:13.459137",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:24:28.129879",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:24:42.473671",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:24:56.179744",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:25:10.304974",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:25:24.683761",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:25:38.860476",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:25:53.148010",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:26:07.319041",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:26:20.625465",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:26:33.690655",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:26:47.205550",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:27:00.983669",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:27:16.365118",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:27:29.646962",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:27:43.102530",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:27:57.507079",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report. The deadline for this task is the coming Friday and it has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:28:10.987246",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:28:24.114346",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:28:37.440189",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:28:51.433616",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:29:05.083020",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:29:18.320473",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:29:32.458923",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:29:45.785298",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:29:58.891269",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:30:14.021729",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:30:28.946005",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:30:42.789791",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:30:56.907377",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:31:12.069552",
+    "job": "sample_job",
+    "summary": "The client has asked for a weekly performance report to be prepared. The deadline for this task is the upcoming Friday. The responsibility for completing this task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:31:26.829412",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:31:38.375118",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be prepared and delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 2,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:31:52.857687",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:32:06.705640",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:32:24.547189",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:42:54.858871",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:43:08.349911",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:43:22.692525",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:43:35.997757",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:43:49.140271",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:44:03.072099",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:44:17.408939",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:44:31.540761",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:44:45.031541",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:44:58.138200",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:45:11.570397",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:45:24.978631",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:45:38.376714",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:45:51.480567",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:46:04.334114",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:46:17.966402",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:46:30.928853",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:46:44.314390",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:46:57.356999",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:47:10.810780",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:47:24.573257",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. This task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:47:38.071786",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:47:51.191835",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:48:04.254406",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:48:17.264497",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:48:31.565216",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:48:45.039386",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:48:59.747714",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, with the deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:49:13.017937",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:49:26.790194",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:49:40.503836",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:49:54.349436",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:50:08.374779",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:50:22.281264",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:50:35.417579",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:50:49.138896",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:51:02.181050",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:51:15.839001",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:51:30.259042",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:51:44.146527",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:51:57.390597",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:52:11.169577",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:52:24.634163",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:52:38.303445",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:52:52.081321",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:53:06.421209",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:53:20.241034",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:53:33.933594",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:53:46.862108",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:54:00.693088",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:54:14.976230",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, with the delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 2,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:54:28.528376",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:54:42.197899",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report. The deadline for this task is the upcoming Friday and it has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:54:55.367332",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:55:08.894789",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:55:22.190471",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:55:35.606402",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:55:48.888222",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:56:02.290320",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:56:16.973141",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:56:30.566796",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:56:38.577521",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:56:52.036584",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:57:05.953587",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:57:19.192497",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:57:32.449466",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:57:45.809420",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:57:58.920052",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:58:12.108205",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:58:25.890330",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:58:39.508455",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:58:53.203703",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:59:07.401113",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:59:20.870742",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:59:34.294208",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T17:59:48.454705",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:00:03.391826",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:00:17.566758",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:00:31.119551",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report. The deadline for this task is the upcoming Friday and the responsibility has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:00:44.771124",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:00:58.156929",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:01:12.457929",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:01:25.647931",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:01:39.448743",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:01:52.796545",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:02:06.267778",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:02:20.042721",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:02:33.596404",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:02:46.391439",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:03:00.340704",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:03:14.144905",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:03:27.389477",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-06T18:03:41.214306",
+    "job": "sample_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
   }
 ]

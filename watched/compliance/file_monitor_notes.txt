@@ -1,0 +1,9 @@
+✅ Now that email_listener saves .pdf, .docx, and .xlsx attachments to /watched,
+you should extend `file_monitor.py` to support them.
+
+Here’s what we’ll add next:
+- PDF: Use PyMuPDF or pdfminer to extract text
+- DOCX: Use python-docx
+- XLSX: Use pandas.read_excel()
+
+Let me know when you want to implement this step-by-step.

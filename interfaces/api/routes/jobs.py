@@ -71,7 +71,8 @@ def retry_queue():
 
 @router.post("/retry-failed")
 def retry_failed_tasks():
-    retry_queue_store.retry_all()
+    from app.services.retry_runner import retry_all_tasks
+    retry_all_tasks()
     return RedirectResponse(url="/dashboard", status_code=303)
 
 @router.get("/jobs/retry-queue")

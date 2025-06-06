@@ -1,0 +1,12 @@
+{
+  "job_id": "sample_job",
+  "timestamp": "2025-06-06_172442",
+  "task_count": 1,
+  "success_count": 0,
+  "failure_count": 1,
+  "exported_files": [
+    "summary.md",
+    "summary.pdf",
+    "export.json"
+  ]
+}

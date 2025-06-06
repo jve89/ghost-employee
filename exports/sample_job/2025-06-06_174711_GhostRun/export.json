@@ -1,0 +1,23 @@
+{
+  "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+  "tasks": [
+    {
+      "job_id": "sample_job",
+      "source": "unknown",
+      "description": "Deliver a weekly performance report by next Friday",
+      "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+      "created_at": "2025-06-06T17:47:10.809547",
+      "assignee": "Lisa",
+      "timestamp": "2025-06-06T17:42:50.335129",
+      "status": "success",
+      "executed_at": "2025-06-06T17:47:10.809620"
+    }
+  ],
+  "results": [
+    {
+      "description": "Deliver a weekly performance report by next Friday",
+      "status": "success"
+    }
+  ],
+  "job_name": "sample_job"
+}
