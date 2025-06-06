@@ -178,3 +178,37 @@ async def create_job(data: JobCreateRequest):
         json.dump(new_config, f, indent=2)
 
     return {"status": "created", "job": data.job_name}
+
+@router.get("/dashboard/latest-compliance-export")
+def latest_compliance_export():
+    from pathlib import Path
+    import json
+    from fastapi.responses import JSONResponse
+
+    export_dir = Path("exports/compliance_analyst")
+    folders = sorted(export_dir.glob("*_GhostRun"), reverse=True)
+
+    if not folders:
+        return JSONResponse({"status": "no_exports"}, status_code=404)
+
+    latest = folders[0]
+    metadata_path = latest / "metadata.json"
+    export_path = latest / "export.json"
+
+    if not metadata_path.exists() or not export_path.exists():
+        return JSONResponse({"status": "incomplete"}, status_code=500)
+
+    try:
+        with metadata_path.open() as f:
+            metadata = json.load(f)
+        with export_path.open() as f:
+            export = json.load(f)
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+    return {
+        "job_name": metadata.get("job_id", "compliance_analyst"),
+        "timestamp": metadata.get("timestamp", latest.name.replace("_GhostRun", "")),
+        "summary": export.get("summary", "-"),
+        "tasks": export.get("tasks", [])
+    }

@@ -9,8 +9,6 @@ from app.core.models import Task, JobConfig
 from app.services.simple_executor import SimpleExecutor
 from app.services.demo_report_generator import generate_demo_report
 
-generate_demo_report(summary=task.summary, tasks=[task.dict()], results=[task.dict()], job_id=config.job_id)
-
 class DemoJob:
     def run(self, config: JobConfig, override_text: str | None = None, source: str = "unknown") -> list[Task]:
         task = Task(
@@ -22,6 +20,15 @@ class DemoJob:
         )
 
         executor = SimpleExecutor()
-        executor.execute(task, config)
+        executor.execute(task)
+
+        results = [{"description": task.description, "status": task.status or "pending"}]
+
+        generate_demo_report(
+            summary=task.summary,
+            tasks=[task.dict()],
+            results=results,
+            job_id=config.job_id
+        )
 
         return [task]

@@ -1,23 +1,12 @@
 {
   "job_name": "compliance_analyst",
   "job_id": "compliance_analyst",
-  "active": true,
   "watch_dir": "watched/compliance",
   "file_pattern": "*.txt",
   "gpt_model": "gpt-4",
   "run_interval_seconds": 60,
   "retry_limit": 3,
   "test_mode": false,
-  "export_destinations": [
-    {
-      "type": "file",
-      "config": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    },
-    {
-      "type": "logs",
-      "config": {}
-    }
-  ]
+  "export_targets": ["file", "email"],
+  "recipients": ["compliance@company.com"]
 }

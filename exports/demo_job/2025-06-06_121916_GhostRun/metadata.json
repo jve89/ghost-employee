@@ -1,0 +1,12 @@
+{
+  "job_id": "compliance_analyst",
+  "timestamp": "2025-06-06_121916",
+  "task_count": 2,
+  "success_count": 2,
+  "failure_count": 0,
+  "exported_files": [
+    "summary.md",
+    "summary.pdf",
+    "export.json"
+  ]
+}

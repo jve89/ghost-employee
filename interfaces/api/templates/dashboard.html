@@ -169,6 +169,27 @@
             }
         }
 
+        async function loadLatestComplianceExport() {
+            try {
+                const res = await fetch("/dashboard/latest-compliance-export");
+                const data = await res.json();
+
+                document.getElementById("compliance-job-id").innerText = data.job_name || "-";
+                document.getElementById("compliance-summary").innerText = data.summary || "-";
+                document.getElementById("compliance-timestamp").innerText = data.timestamp || "-";
+
+                const tasksEl = document.getElementById("compliance-tasks");
+                tasksEl.innerHTML = "";
+                (data.tasks || []).forEach(task => {
+                    const li = document.createElement("li");
+                    li.innerText = `${task.description} → ${task.status}`;
+                    tasksEl.appendChild(li);
+                });
+            } catch (err) {
+                console.error("Failed to load compliance export tile:", err);
+            }
+        }
+
         async function loadExportLogs() {
             try {
                 const res = await fetch('/dashboard/exports');
@@ -263,6 +284,7 @@
             loadJobStats();
             loadActivityLog();
             loadLatestDemoExport(); 
+            loadLatestComplianceExport();
         };
 
         setInterval(refreshDashboard, 10000);
@@ -332,6 +354,14 @@
                 <p><strong>✅ Success:</strong> <span id="success-count">0</span></p>
                 <p><strong>❌ Failed:</strong> <span id="failure-count">0</span></p>
                 <p><a id="pdf-download" href="#" class="text-blue-600 underline" target="_blank">⬇️ Download PDF Report</a></p>
+        </div>
+
+        <div id="compliance-export-tile" class="bg-white p-4 mt-6 rounded shadow border border-gray-200">
+            <h3 class="text-lg font-semibold mb-2">📄 Latest Compliance Report</h3>
+            <p><strong>Job:</strong> <span id="compliance-job-id">-</span></p>
+            <p><strong>Summary:</strong> <span id="compliance-summary">-</span></p>
+            <ul id="compliance-tasks" class="list-disc ml-5 text-sm text-gray-800"></ul>
+            <p class="mt-2 text-xs text-gray-500"><strong>Exported at:</strong> <span id="compliance-timestamp">-</span></p>
         </div>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">Create New Job</h2>

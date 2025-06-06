@@ -57,11 +57,14 @@ class SampleJob:
         for task in tasks:
             service.export(task)
         
+        results = [{"description": task.description, "status": task.status or "pending"} for task in tasks]
+
         generate_demo_report(
-            summary=summary,  # full object, not .content
+            summary=summary.content,
             tasks=[task.dict() for task in tasks],
-            results=[{"description": task.description, "status": "success"} for task in tasks],
-            job_id=config.job_name
+            results=results,
+            job_id=config.job_name,
+            to_pdf=False  # 👈 TEMP: PDF disabled until we install wkhtmltopdf
         )
 
 if __name__ == "__main__":

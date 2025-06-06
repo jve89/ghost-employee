@@ -1,0 +1,38 @@
+{
+  "summary": "The document pertains to an update from the European Union regulator concerning the adjustment of Anti-Money Laundering (AML) reporting thresholds. The new threshold has been set at \u20ac5,000 and is to be implemented with immediate effect. It is the responsibility of the compliance team to align internal policies with this new regulation. Additionally, the finance department should be informed to revise the customer verification procedures accordingly.",
+  "tasks": [
+    {
+      "job_id": "compliance_analyst",
+      "source": "unknown",
+      "description": "Align internal policies with the new Anti-Money Laundering reporting threshold of \u20ac5,000",
+      "summary": "The document pertains to an update from the European Union regulator concerning the adjustment of Anti-Money Laundering (AML) reporting thresholds. The new threshold has been set at \u20ac5,000 and is to be implemented with immediate effect. It is the responsibility of the compliance team to align internal policies with this new regulation. Additionally, the finance department should be informed to revise the customer verification procedures accordingly.",
+      "created_at": "2025-06-06T12:42:33.843724",
+      "assignee": "Compliance Team",
+      "timestamp": "2025-06-06T12:42:25.263324",
+      "status": "success",
+      "executed_at": "2025-06-06T12:42:33.843830"
+    },
+    {
+      "job_id": "compliance_analyst",
+      "source": "unknown",
+      "description": "Revise the customer verification procedures in accordance with the new AML reporting threshold",
+      "summary": "The document pertains to an update from the European Union regulator concerning the adjustment of Anti-Money Laundering (AML) reporting thresholds. The new threshold has been set at \u20ac5,000 and is to be implemented with immediate effect. It is the responsibility of the compliance team to align internal policies with this new regulation. Additionally, the finance department should be informed to revise the customer verification procedures accordingly.",
+      "created_at": "2025-06-06T12:42:33.843751",
+      "assignee": "Finance Department",
+      "timestamp": "2025-06-06T12:42:25.263324",
+      "status": "success",
+      "executed_at": "2025-06-06T12:42:33.843895"
+    }
+  ],
+  "results": [
+    {
+      "description": "Align internal policies with the new Anti-Money Laundering reporting threshold of \u20ac5,000",
+      "status": "success"
+    },
+    {
+      "description": "Revise the customer verification procedures in accordance with the new AML reporting threshold",
+      "status": "success"
+    }
+  ],
+  "job_name": "compliance_analyst"
+}

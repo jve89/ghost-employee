@@ -18,6 +18,8 @@ class Task(BaseModel):
     created_at: str  # ISO 8601 timestamp
     assignee: Optional[str] = None
     timestamp: datetime = datetime.utcnow()
+    status: Optional[str] = "pending"
+    executed_at: Optional[datetime] = None
 
 class ExportResult(BaseModel):
     task_description: str

@@ -7,21 +7,20 @@ import pdfkit
 import json
 from pydantic.json import pydantic_encoder
 
-EXPORT_ROOT = Path("exports/demo_job")
-
 def generate_demo_report(summary: str, tasks: list, results: list, job_id: str = "demo_job", to_pdf: bool = True) -> Path:
     timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-    folder = EXPORT_ROOT / f"{timestamp}_GhostRun"
+    export_root = Path(f"exports/{job_id}")
+    folder = export_root / f"{timestamp}_GhostRun"
     folder.mkdir(parents=True, exist_ok=True)
 
     # --- Create summary.md content ---
     content = f"# Ghost Employee Report\n\n"
     content += f"**Job ID:** {job_id}\n"
     content += f"**Generated:** {datetime.now().isoformat()}\n\n"
-    content += f"## Summary\n\n{summary.content.strip()}\n\n"
+    content += f"## Summary\n\n{summary.strip()}\n\n"
     content += "## Tasks\n"
     for task in tasks:
-        action = task.get("action", "Unknown action")
+        action = task.get("description", "Unknown task")
         status = task.get("status", "pending")
         content += f"- {action} → `{status}`\n"
 
@@ -34,13 +33,17 @@ def generate_demo_report(summary: str, tasks: list, results: list, job_id: str =
     pdf_path = folder / "summary.pdf"
     md_path.write_text(content)
     if to_pdf:
-        pdfkit.from_file(str(md_path), str(pdf_path))
+        try:
+            pdfkit.from_file(str(md_path), str(pdf_path))
+        except OSError as e:
+            print(f"[PDFKit] Skipped PDF generation: {e}")
 
     # --- Save export.json ---
     export_data = {
-        "summary": summary.dict(),
+       "summary": summary,
         "tasks": tasks,
-        "results": results
+        "results": results,
+        "job_name": job_id
     }
     with open(folder / "export.json", "w") as f:
         json.dump(export_data, f, indent=2, default=pydantic_encoder)
