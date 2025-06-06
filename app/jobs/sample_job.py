@@ -19,6 +19,7 @@ from config.config_loader import load_job_config
 from app.services.export_dispatcher import dispatch_exports
 from app.services.export_service import ExportService
 from app.core.models import Task, JobConfig
+from app.services.demo_report_generator import generate_demo_report
 
 
 class SampleJob:
@@ -34,7 +35,7 @@ class SampleJob:
         input_text = override_text or "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
 
         summary = self.summariser.summarise(input_text, source)
-        tasks = self.parser.extract_tasks(summary)
+        tasks = self.parser.extract_tasks(summary, config.job_id)
 
         for task in tasks:
             self.executor.execute(task)
@@ -55,6 +56,13 @@ class SampleJob:
         service = ExportService(config)
         for task in tasks:
             service.export(task)
+        
+        generate_demo_report(
+            summary=summary,  # full object, not .content
+            tasks=[task.dict() for task in tasks],
+            results=[{"description": task.description, "status": "success"} for task in tasks],
+            job_id=config.job_name
+        )
 
 if __name__ == "__main__":
     job_config = load_job_config("sample_job")

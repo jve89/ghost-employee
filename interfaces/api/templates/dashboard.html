@@ -152,6 +152,23 @@
             if (logBox) logBox.innerText = data.logs.join("\n");
         }
 
+        async function loadLatestDemoExport() {
+            try {
+                const res = await fetch("/dashboard/latest-demo-export");
+                const data = await res.json();
+                if (data.status) return;
+
+                document.getElementById("job-id").innerText = data.job_id;
+                document.getElementById("timestamp").innerText = data.timestamp;
+                document.getElementById("task-count").innerText = data.task_count;
+                document.getElementById("success-count").innerText = data.success_count;
+                document.getElementById("failure-count").innerText = data.failure_count;
+                document.getElementById("pdf-download").href = data.pdf_download_url;
+            } catch (err) {
+                console.error("Failed to load latest demo export:", err);
+            }
+        }
+
         async function loadExportLogs() {
             try {
                 const res = await fetch('/dashboard/exports');
@@ -244,7 +261,8 @@
             loadJobs();
             loadLogs();
             loadJobStats();
-            loadActivityLog(); 
+            loadActivityLog();
+            loadLatestDemoExport(); 
         };
 
         setInterval(refreshDashboard, 10000);
@@ -305,6 +323,16 @@
 
         <h2>👷 Job Activity Summary</h2>
         <div id="jobStats">Loading job stats...</div>
+
+        <div id="demo-export-tile" class="bg-white p-4 mt-6 rounded shadow border border-gray-200">
+            <h3 class="text-lg font-semibold mb-2">📄 Latest Demo Report</h3>
+                <p><strong>Job ID:</strong> <span id="job-id">-</span></p>
+                <p><strong>Ran at:</strong> <span id="timestamp">-</span></p>
+                <p><strong>Tasks:</strong> <span id="task-count">0</span></p>
+                <p><strong>✅ Success:</strong> <span id="success-count">0</span></p>
+                <p><strong>❌ Failed:</strong> <span id="failure-count">0</span></p>
+                <p><a id="pdf-download" href="#" class="text-blue-600 underline" target="_blank">⬇️ Download PDF Report</a></p>
+        </div>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">Create New Job</h2>
         <form id="jobForm" class="bg-white p-6 rounded shadow border border-gray-200 mb-6">

@@ -17,9 +17,9 @@ class ExportService:
                 exporters = get_exporters(destination.type)
                 for exporter in exporters:
                     # Check if export() requires config (MailgunExporter-style)
-                    if destination.type == "email":
-                        exporter.export(task, destination.config)
-                    else:
-                        exporter.export(task)
+                   if destination.type == "email":
+                        exporter.export(task.dict(), destination.config)
+                   else:
+                        exporter.export(task)  # Send raw Task object to file, logs, etc.
             except Exception as e:
                 print(f"[ExportService] Failed exporting to {destination.type}: {e}")

@@ -7,6 +7,9 @@ Does NOT use GPT. Ideal for dry-run and export testing.
 from datetime import datetime
 from app.core.models import Task, JobConfig
 from app.services.simple_executor import SimpleExecutor
+from app.services.demo_report_generator import generate_demo_report
+
+generate_demo_report(summary=task.summary, tasks=[task.dict()], results=[task.dict()], job_id=config.job_id)
 
 class DemoJob:
     def run(self, config: JobConfig, override_text: str | None = None, source: str = "unknown") -> list[Task]:

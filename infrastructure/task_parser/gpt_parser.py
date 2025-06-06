@@ -11,7 +11,7 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class GPTTaskParser(TaskParser):
-    def extract_tasks(self, summary: Summary) -> list[Task]:
+    def extract_tasks(self, summary: Summary, job_id: str) -> list[Task]:
         print("[GPTTaskParser] Extracting tasks from GPT...")
 
         try:
@@ -36,7 +36,7 @@ class GPTTaskParser(TaskParser):
                 tasks.append(Task(
                     description=item.get("description") or item.get("task") or "No description",
                     assignee=item.get("assignee") or item.get("assigned_to"),
-                    job_id=summary.job_id,
+                    job_id=job_id,
                     source=summary.source_file,
                     summary=summary.content,
                     created_at=datetime.utcnow().isoformat()
@@ -49,7 +49,7 @@ class GPTTaskParser(TaskParser):
                 Task(
                     description="Task parsing failed – manual review needed.",
                     assignee=None,
-                    job_id=summary.job_id,
+                    job_id=job_id,
                     source=summary.source_file,
                     summary=summary.content,
                     created_at=datetime.utcnow().isoformat()

@@ -118,6 +118,43 @@ def retry_export(entry_id: str):
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
+@router.get("/dashboard/latest-demo-export")
+def get_latest_demo_export():
+    from pathlib import Path
+
+    EXPORTS_DIR = Path("exports/demo_job")
+    folders = sorted(EXPORTS_DIR.glob("*_GhostRun"), reverse=True)
+    if not folders:
+        return JSONResponse(content={"status": "no exports yet"})
+
+    latest = folders[0]
+    metadata_path = latest / "metadata.json"
+    if not metadata_path.exists():
+        return JSONResponse(content={"status": "no metadata"})
+
+    with open(metadata_path) as f:
+        metadata = json.load(f)
+
+    return {
+        "folder": latest.name,
+        "timestamp": metadata["timestamp"],
+        "job_id": metadata["job_id"],
+        "task_count": metadata["task_count"],
+        "success_count": metadata["success_count"],
+        "failure_count": metadata["failure_count"],
+        "pdf_download_url": f"/dashboard/download/{latest.name}/summary.pdf"
+    }
+
+@router.get("/dashboard/download/{folder}/{filename}")
+def download_demo_export_file(folder: str, filename: str):
+    from pathlib import Path
+    from fastapi.responses import FileResponse
+
+    path = Path("exports/demo_job") / folder / filename
+    if not path.exists():
+        return JSONResponse(status_code=404, content={"error": "File not found"})
+    return FileResponse(path)
+
 @router.post("/dashboard/create-job")
 async def create_job(data: JobCreateRequest):
     new_config = {
