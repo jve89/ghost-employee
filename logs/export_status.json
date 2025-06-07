@@ -323,5 +323,77 @@
     "details": {
       "path": "./exports/sample_job/"
     }
+  },
+  {
+    "timestamp": "2025-06-07T12:02:58.697163",
+    "job_name": "Data Entry Specialist",
+    "destination": "log",
+    "success": false,
+    "details": {
+      "error": "Unknown export destination: log"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:02:58.698364",
+    "job_name": "Data Entry Specialist",
+    "destination": "file",
+    "success": false,
+    "details": {
+      "error": "FileExporter.__init__() missing 1 required positional argument: 'job_id'"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:12:41.157773",
+    "job_name": "Data Entry Specialist",
+    "destination": "log",
+    "success": false,
+    "details": {
+      "error": "Unknown export destination: log"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:12:41.158880",
+    "job_name": "Data Entry Specialist",
+    "destination": "file",
+    "success": false,
+    "details": {
+      "error": "Object of type datetime is not JSON serializable"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:16:50.016767",
+    "job_name": "Data Entry Specialist",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:16:50.018138",
+    "job_name": "Data Entry Specialist",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:18:27.453587",
+    "job_name": "Data Entry Specialist",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-07T12:18:27.454948",
+    "job_name": "Data Entry Specialist",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {}
+    }
   }
 ]

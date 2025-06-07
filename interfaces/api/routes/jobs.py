@@ -12,6 +12,7 @@ from infrastructure.logger.job_status import job_status
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.retry_queue import retry_queue
 from infrastructure.retry.retry_queue_store import retry_queue_store
+from infrastructure.logger.activity_log import activity_log
 
 router = APIRouter()
 
@@ -36,7 +37,7 @@ def run_job(job_name: str):
 
 @router.get("/logs")
 def get_logs():
-    return {"logs": logger.get_logs()}
+    return {"logs": activity_log.get_recent(50)}
 
 @router.get("/status")
 def job_statuses():

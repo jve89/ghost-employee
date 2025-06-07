@@ -1,0 +1,11 @@
+{
+  "summary": "The team is requested to update the company records with a new client, Alice Johnson from Acme Corp. Her contact email is alice@acme.com. The team is instructed to add this information to the CRM and ensure her onboarding form is completed. Additionally, Alice should be scheduled for the upcoming Tuesday orientation.",
+  "tasks": [
+    {
+      "job_id": "data_entry_specialist",
+      "source": "unknown",
+      "description": "Update the company records with a new client, Alice Johnson from Acme Corp.",
+      "summary": "The team is requested to update the company records with a new client, Alice Johnson from Acme Corp. Her contact email is alice@acme.com. The team is instructed to add this information to the CRM and ensure her onboarding form is completed. Additionally, Alice should be scheduled for the upcoming Tuesday orientation.",
+      "created_at": "2025-06-07T12:12:41.156840",
+      "assignee": "team",
+      "timestamp": 

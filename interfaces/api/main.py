@@ -24,7 +24,7 @@ def root():
 
 @app.get("/logs/activity")
 def get_activity_log():
-    return activity_log.get_recent(limit=50)
+    return activity_log.recent(50)
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request):
@@ -37,15 +37,15 @@ def start_background_jobs():
     for config in job_configs:
         thread = threading.Thread(target=job_loop, args=(config,), daemon=True)
         thread.start()
-    logger.log(f"✅ Started {len(job_configs)} background job threads.")
+    logger.info(f"✅ Started {len(job_configs)} background job threads.")
 
 def job_loop(config):
     job = SampleJob()
     interval = config.run_interval_seconds or 60
     while True:
         try:
-            logger.log(f"🔄 Auto-running job: {config.job_name}")
+            logger.info(f"🔄 Auto-running job: {config.job_name}")
             job.run(config)
         except Exception as e:
-            logger.log(f"[ERROR] Job '{config.job_name}' failed: {e}")
+            logger.error(f"[ERROR] Job '{config.job_name}' failed: {e}")
         time.sleep(interval)

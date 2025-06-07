@@ -4,29 +4,20 @@ from app.core.interfaces import Exporter
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.export_log import export_log
 
-class LogExporter:
-    def __init__(self, job_id: str):
-        self.job_id = job_id
+class LogExporter(Exporter):
+    def __init__(self, config: dict):
+        self.job_id = config.get("job_id", "unknown_job")
 
-    def export(self, task: Task) -> None:
+    def export(self, output_data: dict, config: dict) -> None:
         try:
-            export_result = ExportResult(
-                task_description=task.description,
-                status="success",
-                destination="logs",
-                timestamp=task.timestamp or datetime.utcnow(),
-                assignee=task.assignee
-            )
+            summary = output_data.get("summary", "No summary provided.")
+            tasks = output_data.get("tasks", [])
+
+            logger.info(f"[LogExporter] 📝 Summary:\n{summary}")
+            for task in tasks:
+                logger.info(f"[LogExporter] Task: {task['description']} → {task.get('assignee', 'Unassigned')}")
         except Exception as e:
-            print(f"[LogExporter] Failed to create ExportResult: {e}")
-            export_result = ExportResult(
-                task_description="Export failed – invalid task structure.",
-                destination="logs",
-                status="error",
-                timestamp=datetime.utcnow(),
-                assignee=None
-            )
-        export_log.add(export_result)
+            print(f"[LogExporter] ❌ Failed to log export: {e}")
 
     def export_all(self, summary: str, tasks: list[Task], execution_results: list[dict]) -> None:
         logger.info(f"[LogExporter] 📝 Summary: {summary}")

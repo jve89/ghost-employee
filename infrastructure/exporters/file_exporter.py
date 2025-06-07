@@ -1,26 +1,24 @@
 import os
+import json
 from datetime import datetime
 from app.core.interfaces import Exporter
 from app.core.models import Task
+from pydantic.json import pydantic_encoder
 
 class FileExporter(Exporter):
-    def __init__(self, job_id: str, base_dir: str = "./exports/"):
-        self.directory = os.path.join(base_dir, job_id)
+    def __init__(self, config: dict):
+        self.directory = config.get("directory", "./exports/unknown_job")
         os.makedirs(self.directory, exist_ok=True)
 
-    def export(self, task: Task) -> None:
+    def export(self, output_data: dict, config: dict) -> None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        job_label = getattr(task, "job_name", "unknown_job")
-        filename = f"{job_label}_{timestamp}.txt"
+        filename = f"summary_{timestamp}.json"
         filepath = os.path.join(self.directory, filename)
 
         with open(filepath, "w", encoding="utf-8") as f:
-            f.write(f"🕒 Created at: {task.created_at}\n")
-            f.write(f"📄 Source: {task.source}\n")
-            f.write(f"📌 Description: {task.description}\n\n")
-            f.write(f"📝 Summary:\n{task.summary}\n")
+            json.dump(output_data, f, indent=2, default=pydantic_encoder)
 
-        print(f"[FileExporter] ✅ Exported task to {filepath}")
+        print(f"[FileExporter] ✅ Exported results to {filepath}")
 
     def export_all(self, summary: str, tasks: list[Task], execution_results: list[dict]) -> None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

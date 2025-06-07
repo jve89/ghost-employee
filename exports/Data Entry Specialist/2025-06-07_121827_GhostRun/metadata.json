@@ -1,0 +1,12 @@
+{
+  "job_id": "Data Entry Specialist",
+  "timestamp": "2025-06-07_121827",
+  "task_count": 4,
+  "success_count": 0,
+  "failure_count": 0,
+  "exported_files": [
+    "summary.md",
+    "summary.pdf",
+    "export.json"
+  ]
+}

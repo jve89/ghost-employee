@@ -1,17 +1,20 @@
 ./.env
 ./.env.example
 ./README.md
+./app/core/email_pipeline.py
+./app/core/email_replier.py
 ./app/core/export_destinations.py
 ./app/core/interfaces.py
+./app/core/job_memory.py
 ./app/core/models.py
 ./app/core/registry.py
-./app/core/email_pipeline.py
-./app/core/job_memory.py
-./app/core/email_replier.py
 ./app/jobs/compliance_analyst.py
 ./app/jobs/demo_job.py
 ./app/jobs/job_registry.py
 ./app/jobs/sample_job.py
+./app/jobs/data_entry_specialist.py
+./app/plugins/__init__.py
+./app/plugins/file_ops.py
 ./app/services/demo_report_generator.py
 ./app/services/email_template_service.py
 ./app/services/export_dispatcher.py
@@ -23,12 +26,13 @@
 ./app/services/task_parser.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
-./app/plugins/__init__.py
-./app/plugins/file_ops.py
+./archive/performance_notes.txt
+./backup/performance_notes.txt
 ./config/config_loader.py
 ./config/job_schemas/compliance_analyst.json
 ./config/job_schemas/demo_job.json
 ./config/job_schemas/sample_job.json
+./config/job_schemas/data_entry_specialist.json
 ./data/retry_queue.json
 ./exports/compliance_analyst/2025-06-06_124233_GhostRun/export.json
 ./filetree.txt
@@ -61,12 +65,15 @@
 ./logs/timesheets/sample_job_timesheet.json
 ./logs/timesheets/test_timesheet.json
 ./makefile
+./memory/compliance_analyst.json
 ./requirements.txt
 ./run.py
 ./run_compliance_job.py
 ./run_job_scheduler.py
 ./run_sample_job.py
 ./run_watchers.py
+./test_email_pipeline.py
+./test_plugin_exec.py
 ./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (1).pdf
 ./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (2).pdf
 ./watched/compliance/file_monitor_notes.txt
@@ -74,9 +81,5 @@
 ./watched/compliance/weekly_compliance_2025-06-05.txt
 ./watched/interns_list.txt
 ./watched/list_interns.txt
-./watched/test_interns.txt
 ./watched/notes_old.txt
-./test_plugin_exec.py
-./archive/performance_notes.txt
-./backup/performance_notes.txt
-./test_email_pipeline.py
+./watched/test_interns.txt
