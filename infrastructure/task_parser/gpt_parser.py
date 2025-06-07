@@ -5,6 +5,7 @@ from app.core.models import Summary, Task
 from app.core.interfaces import TaskParser
 from datetime import datetime
 from dotenv import load_dotenv
+from app.core.job_memory import JobMemory
 
 load_dotenv()
 
@@ -14,13 +15,23 @@ class GPTTaskParser(TaskParser):
     def extract_tasks(self, summary: Summary, job_id: str) -> list[Task]:
         print("[GPTTaskParser] Extracting tasks from GPT...")
 
+        # Load memory for this job
+        memory = JobMemory(job_id)
+        last_summary = memory.get_last_summary() or "None"
+        preferences = memory.get_preferences()
+        tone = preferences.get("tone", "neutral")
+        priorities = preferences.get("priority_keywords", [])
+
         try:
             response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": (
-                        "You are a helpful assistant that extracts structured tasks from summaries. "
-                        "Reply with a JSON array of objects, each with 'description' and 'assignee'."
+                        f"You are a helpful assistant that extracts structured tasks from summaries.\n\n"
+                        f"Tone preference: {tone}\n"
+                        f"Priority keywords: {', '.join(priorities) if priorities else 'None'}\n"
+                        f"Last summary you processed was:\n{last_summary}\n\n"
+                        f"Reply with a JSON array of tasks, each with 'description' and 'assignee'."
                     )},
                     {"role": "user", "content": summary.content}
                 ],
@@ -55,3 +66,35 @@ class GPTTaskParser(TaskParser):
                     created_at=datetime.utcnow().isoformat()
                 )
             ]
+
+def parse_text_to_summary(text: str, job_config: dict) -> Summary:
+    print("[GPTParser] Generating summary with GPT...")
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": (
+                    "You are an assistant summarising the content of an incoming email. "
+                    "Write a concise summary, capturing key points and implied tasks."
+                )},
+                {"role": "user", "content": text}
+            ],
+            temperature=0.5,
+            max_tokens=300
+        )
+
+        content = response.choices[0].message.content.strip()
+        return Summary(
+            content=content,
+            source_file=job_config.get("sender", "email"),
+            generated_at=datetime.utcnow().isoformat()  # ✅ Corrected field
+        )
+
+    except Exception as e:
+        print(f"[GPTParser] ❌ Failed to summarise: {e}")
+        return Summary(
+            content="Summary generation failed.",
+            source_file="email",
+            generated_at=datetime.utcnow().isoformat()  # ✅ Corrected fallback
+        )

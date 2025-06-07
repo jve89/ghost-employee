@@ -5,6 +5,7 @@
   "watch_dir": "watched",
   "file_pattern": "interns_*.txt",
   "gpt_model": "gpt-4",
+  "use_gpt_replies": true,
   "retry_limit": 3,
   "run_interval_seconds": 10,
   "export_destinations": [

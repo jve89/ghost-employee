@@ -1,5 +1,5 @@
-from app.core.models import Task, JobConfig
-from app.services.task_parser import GPTTaskParser
+from app.core.models import Task, JobConfig, Summary
+from infrastructure.task_parser.gpt_parser import GPTTaskParser
 
 class TaskService:
     def __init__(self, config: JobConfig):
@@ -37,3 +37,7 @@ class TaskService:
                 all_tasks.append(Task(description="Summary parsing failed – manual review needed."))
 
         return all_tasks
+
+def extract_tasks(summary: Summary, job_config: dict) -> list[Task]:
+        parser = GPTTaskParser()
+        return parser.extract_tasks(summary, job_config["job_id"])

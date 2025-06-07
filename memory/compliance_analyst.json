@@ -1,0 +1,39 @@
+{
+  "history": [
+    {
+      "timestamp": "2025-06-07T08:05:37.358126",
+      "subject": "Weekly Compliance Report",
+      "summary": "The Compliance Team has sent this week's performance report for archiving and requests a summary to be prepared.",
+      "tasks": [
+        "Archive this week's performance report sent by the Compliance Team",
+        "Prepare a summary of this week's performance report"
+      ],
+      "from": "jovanerkel@gmail.com"
+    },
+    {
+      "timestamp": "2025-06-07T08:09:57.093487",
+      "subject": "Weekly Compliance Report",
+      "summary": "The Compliance Team has sent this week's performance report which needs to be archived and summarized.",
+      "tasks": [
+        "Archive this week's performance report sent by the Compliance Team",
+        "Prepare a summary of the performance report"
+      ],
+      "from": "jovanerkel@gmail.com"
+    },
+    {
+      "timestamp": "2025-06-07T08:12:06.704936",
+      "subject": "Weekly Compliance Report",
+      "summary": "The Compliance Team has sent this week's performance report. They request for it to be archived and a summary prepared.",
+      "tasks": [
+        "Archive this week's performance report",
+        "Prepare a summary of this week's performance report"
+      ],
+      "from": "jovanerkel@gmail.com"
+    }
+  ],
+  "preferences": {
+    "tone": "neutral",
+    "priority_keywords": []
+  },
+  "last_updated": "2025-06-07T08:12:06.704948"
+}

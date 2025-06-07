@@ -11,7 +11,6 @@ EXPORTER_MAP: dict[str, Type] = {
     # Add more exporters here (e.g. email, notion, airtable, etc.)
 }
 
-
 class SimpleExecutor:
     def execute(self, task: Task, config: JobConfig) -> bool:
         print(f"[SimpleExecutor] Executing task: {task.description}")
@@ -46,3 +45,19 @@ class SimpleExecutor:
 
             except Exception as e:
                 print(f"[Exporter] ❌ Failed to export via {destination}: {e}")
+
+def execute_tasks(tasks: list[Task], job_config: dict) -> list[dict]:
+    results = []
+
+    for task in tasks:
+        try:
+            # Simulate execution
+            print(f"[SimpleExecutor] ✅ Executing task: {task.description}")
+            task.status = "success"
+            results.append({"task": task.description, "status": "success"})
+        except Exception as e:
+            print(f"[SimpleExecutor] ❌ Failed to execute task: {e}")
+            task.status = "failed"
+            results.append({"task": task.description, "status": "failed", "error": str(e)})
+
+    return results

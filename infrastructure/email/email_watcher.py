@@ -7,6 +7,7 @@ from threading import Thread
 from email.header import decode_header
 from dotenv import load_dotenv
 from config.config_loader import load_job_configs
+from app.core.email_pipeline import process_email_content
 
 load_dotenv()
 
@@ -112,11 +113,25 @@ class EmailWatcher(Thread):
                 to_email = email.utils.parseaddr(msg.get("To"))[1]
                 subject = clean_subject(msg.get("Subject"))
 
+                # Extract plain text email body
+                body = ""
+                if msg.is_multipart():
+                    for part in msg.walk():
+                        if part.get_content_type() == "text/plain" and part.get_payload(decode=True):
+                            body = part.get_payload(decode=True).decode(errors="ignore")
+                            break
+                else:
+                    body = msg.get_payload(decode=True).decode(errors="ignore")
+
                 if RESTRICT and from_email not in ALLOWED_SENDERS:
                     continue
 
                 job_config = get_job_for_recipient(to_email, configs)
                 if job_config:
-                    process_attachments(msg, job_config)
+                    process_attachments(msg, job_config)  # Optional, keep saving files
+                    process_email_content(subject, body, job_config, from_email)
+                else:
+                    print(f"[EmailWatcher] No matching job for: {to_email} / Subject: {subject}", flush=True)
+        
         finally:
             mail.logout()

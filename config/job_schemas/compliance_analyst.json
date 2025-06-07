@@ -8,5 +8,6 @@
   "retry_limit": 3,
   "test_mode": false,
   "export_targets": ["file", "email"],
-  "recipients": ["compliance@company.com"]
+  "recipients": ["compliance@company.com"],
+  "use_gpt_replies": true
 }

@@ -5,6 +5,9 @@
 ./app/core/interfaces.py
 ./app/core/models.py
 ./app/core/registry.py
+./app/core/email_pipeline.py
+./app/core/job_memory.py
+./app/core/email_replier.py
 ./app/jobs/compliance_analyst.py
 ./app/jobs/demo_job.py
 ./app/jobs/job_registry.py
@@ -14,12 +17,14 @@
 ./app/services/export_dispatcher.py
 ./app/services/export_service.py
 ./app/services/job_manager.py
+./app/services/retry_runner.py
 ./app/services/simple_executor.py
 ./app/services/summary_service.py
 ./app/services/task_parser.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
-./app/services/retry_runner.py
+./app/plugins/__init__.py
+./app/plugins/file_ops.py
 ./config/config_loader.py
 ./config/job_schemas/compliance_analyst.json
 ./config/job_schemas/demo_job.json
@@ -62,12 +67,16 @@
 ./run_job_scheduler.py
 ./run_sample_job.py
 ./run_watchers.py
-./watched/compliance/weekly_compliance_2025-06-05.txt
-./watched/compliance/performance_notes.txt
 ./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (1).pdf
 ./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (2).pdf
 ./watched/compliance/file_monitor_notes.txt
+./watched/compliance/performance_notes.txt
+./watched/compliance/weekly_compliance_2025-06-05.txt
 ./watched/interns_list.txt
 ./watched/list_interns.txt
-./watched/performance_notes.txt
 ./watched/test_interns.txt
+./watched/notes_old.txt
+./test_plugin_exec.py
+./archive/performance_notes.txt
+./backup/performance_notes.txt
+./test_email_pipeline.py

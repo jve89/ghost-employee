@@ -1,20 +1,30 @@
 from datetime import datetime
 from app.core.models import Task
 from app.core.interfaces import Executor
-import random
+from app.plugins.file_ops import FileOpsPlugin
 from infrastructure.logger.retry_queue import retry_queue
 
-class SimpleExecutor(Executor):
+ALL_PLUGINS = [FileOpsPlugin()]
+
+class PluginExecutor(Executor):
     def execute(self, task: Task) -> bool:
-        print(f"[SimpleExecutor] Executing task: {task.description}")
+        print(f"[PluginExecutor] Executing: {task.description}")
+        task.executed_at = datetime.utcnow()
 
-        task.executed_at = datetime.utcnow()  # ✅ New timestamp for realism
+        try:
+            for plugin in ALL_PLUGINS:
+                if plugin.can_handle(task):
+                    result = plugin.handle(task)
+                    task.status = "success" if result else "failed"
+                    print(f"[PluginExecutor] ✅ Plugin handled task. Success: {result}")
+                    return result
 
-        if random.random() < 0.2:
-            task.status = "failed"
-            retry_queue.add(task, reason="Simulated execution failure")
-            print("[SimpleExecutor] Task failed and queued for retry.")
+            task.status = "skipped"
+            print("[PluginExecutor] ❌ No plugin could handle the task.")
             return False
 
-        task.status = "success"
-        return True
+        except Exception as e:
+            task.status = "failed"
+            retry_queue.add(task, reason=str(e))
+            print(f"[PluginExecutor] ❌ Failed: {e}")
+            return False

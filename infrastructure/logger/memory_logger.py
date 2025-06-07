@@ -1,18 +1,10 @@
-from datetime import datetime
+import logging
 
-class MemoryLogger:
-    def __init__(self):
-        self.logs = []
+logger = logging.getLogger("GhostLogger")
+logger.setLevel(logging.INFO)
 
-    def log(self, message: str):
-        timestamp = datetime.utcnow().isoformat()
-        entry = f"{timestamp} | {message}"
-        self.logs.append(entry)
-        # Keep log size under control
-        if len(self.logs) > 1000:
-            self.logs = self.logs[-500:]
-
-    def get_logs(self) -> list[str]:
-        return self.logs
-
-logger = MemoryLogger()
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter("[%(asctime)s] %(levelname)s - %(message)s")
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)

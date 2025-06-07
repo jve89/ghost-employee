@@ -1,7 +1,9 @@
 from typing import List, Dict, Any
-from app.core.models import ExportDestination
+from app.core.models import ExportDestination, Task
 from app.core.registry import get_exporters
 from infrastructure.logger.export_status_log import log_export_status
+from infrastructure.exporters.file_exporter import FileExporter
+from infrastructure.exporters.log_exporter import LogExporter
 
 def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[ExportDestination], job_name: str = "unknown_job") -> None:
     for destination in destination_configs:
@@ -29,3 +31,17 @@ def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[Expo
         except Exception as e:
             print(f"[ERROR] Export to {dest_type} failed: {e}")
             log_export_status(job_name, dest_type, False, {"error": str(e)})
+
+def export_results(job_id: str, summary: str, tasks: list[Task], execution_results: list[dict], job_config: dict):
+    print("[ExportDispatcher] 📤 Exporting results (email pipeline)...")
+
+    exporters = [
+        FileExporter(job_id=job_id),
+        LogExporter(job_id=job_id),
+    ]
+
+    for exporter in exporters:
+        try:
+            exporter.export_all(summary, tasks, execution_results)
+        except Exception as e:
+            print(f"[ExportDispatcher] ❌ Export via {exporter.__class__.__name__} failed: {e}")
