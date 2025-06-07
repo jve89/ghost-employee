@@ -64,7 +64,7 @@ class SampleJob:
         dispatch_exports(
             output_data={
                 "summary": summary.content,
-                "tasks": [task.dict() for task in task_list],
+                "tasks": [task.model_dump() for task in task_list],
             },
             destination_configs=config.export_destinations,
             job_name=config.job_name
@@ -72,7 +72,7 @@ class SampleJob:
 
         generate_demo_report(
             summary=summary.content,
-            tasks=[task.dict() for task in task_list],
+            tasks=[task.model_dump() for task in task_list],
             results=[{"description": task.description, "status": task.status or "pending"} for task in task_list],
             job_id=config.job_name,
             to_pdf=False

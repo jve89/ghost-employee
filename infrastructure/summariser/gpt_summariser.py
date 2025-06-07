@@ -11,12 +11,15 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class GPTSummariser(Summariser):
-    def summarise(self, text: str, source_file: str) -> Summary:
+    def summarise(self, text: str, source_file: str, preferences: dict | None = None) -> Summary:
         print(f"[GPTSummariser] Requesting GPT summary for {source_file}...")
+        tone = preferences.get("tone", "professional and concise") if preferences else "professional and concise"
+        language = preferences.get("language", "English") if preferences else "English"
+        system_prompt = f"Summarise this file in a {tone} tone using {language}."
         response = client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "Summarise this file in clear, professional language."},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": text}
             ],
             temperature=0.3,

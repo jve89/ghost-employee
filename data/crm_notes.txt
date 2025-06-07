@@ -1,0 +1,4 @@
+Alice will be our main contact at Acme Corp going forward.
+Update Alice's role to main liaison at Acme Corp
+Assign Bob as the sales liaison for Globex.
+Add Charlie to the CRM system as our technical representative.

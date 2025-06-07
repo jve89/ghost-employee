@@ -12,15 +12,17 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class GPTTaskParser(TaskParser):
-    def extract_tasks(self, summary: Summary, job_id: str) -> list[Task]:
+    def extract_tasks(self, summary: Summary, job_id: str, preferences: dict | None = None) -> list[Task]:
         print("[GPTTaskParser] Extracting tasks from GPT...")
 
         # Load memory for this job
         memory = JobMemory(job_id)
         last_summary = memory.get_last_summary() or "None"
-        preferences = memory.get_preferences()
+        preferences = preferences or memory.get_preferences()
+
         tone = preferences.get("tone", "neutral")
         priorities = preferences.get("priority_keywords", [])
+        task_hint = preferences.get("task_hint", "")
 
         try:
             response = client.chat.completions.create(
@@ -30,9 +32,15 @@ class GPTTaskParser(TaskParser):
                         f"You are a helpful assistant that extracts structured tasks from summaries.\n\n"
                         f"Tone preference: {tone}\n"
                         f"Priority keywords: {', '.join(priorities) if priorities else 'None'}\n"
+                        f"Task hint: {task_hint}\n"
                         f"Last summary you processed was:\n{last_summary}\n\n"
-                        f"Reply with a JSON array of tasks, each with 'description' and 'assignee'."
+                        f"Return a JSON array of tasks. Each task must include:\n"
+                        f"- 'description': What to do\n"
+                        f"- 'entity': The person involved (e.g. Alice or Bob)\n"
+                        f"- 'company': The organisation involved (e.g. Acme Corp)\n"
+                        f"- 'assignee': Who is responsible (if known)"
                     )},
+
                     {"role": "user", "content": summary.content}
                 ],
                 temperature=0.3,
@@ -44,14 +52,23 @@ class GPTTaskParser(TaskParser):
 
             tasks = []
             for item in parsed:
+                description = item.get("description") or item.get("task") or "No description"
+                assignee = item.get("assignee") or item.get("assigned_to")
+
+                # Prefer 'entity' or 'contact' for person, fallback to 'company'
+                entity = item.get("entity") or item.get("contact") or item.get("company") or "Unknown"
+                company = item.get("company") or None
+
                 tasks.append(Task(
-                    description=item.get("description") or item.get("task") or "No description",
-                    assignee=item.get("assignee") or item.get("assigned_to"),
+                    description=description,
+                    entity=entity,
+                    assignee=assignee,
                     job_id=job_id,
                     source=summary.source_file,
                     summary=summary.content,
                     created_at=datetime.utcnow().isoformat()
                 ))
+
             return tasks
 
         except Exception as e:

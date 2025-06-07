@@ -568,5 +568,317 @@
         "directory": "./exports/sample_job/"
       }
     }
+  },
+  {
+    "timestamp": "2025-06-07T14:39:27.135217",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nThe file instructs to add a new contact named Alice to the Customer Relationship Management (CRM) system. Alice is the new liaison at Acme Corp. Additionally, the file requests an update to the contact details of Bob, specifically a change in his phone number.\n\nTasks:\n- Add a new contact named Alice to the Customer Relationship Management (CRM) system (Due: N/A, Assigned: None)\n- Update the contact details of Bob, specifically a change in his phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:39:27.137108",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:51:49.111743",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nThe file instructs to add Alice as a new contact in the Customer Relationship Management (CRM) system. She is the new liaison at Acme Corp. Additionally, it is necessary to update the contact details of Bob due to a change in his phone number.\n\nTasks:\n- Add Alice as a new contact in the Customer Relationship Management (CRM) system (Due: N/A, Assigned: None)\n- Update the contact details of Bob due to a change in his phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:51:49.113534",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:59:14.722113",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nThe file instructs to add Alice as a new contact in the Customer Relationship Management system, specifying her as the new point of contact at Acme Corp. It also requests an update to Bob's contact information due to a change in his phone number.\n\nTasks:\n- Add Alice as a new contact in the Customer Relationship Management system and specify her as the new point of contact at Acme Corp (Due: N/A, Assigned: None)\n- Update Bob's contact information in the Customer Relationship Management system due to a change in his phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:59:14.725413",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:05:31.583600",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nThe file instructs to add a new contact named Alice to the Customer Relationship Management system, who is the new liaison at Acme Corp. It also directs to update the contact details of Bob due to a change in his phone number.\n\nTasks:\n- Add a new contact named Alice to the Customer Relationship Management system (Due: N/A, Assigned: None)\n- Update the contact details of Bob due to a change in his phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:05:31.586747",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:06:59.297271",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nThe file instructs to add Alice as a new contact in the Customer Relationship Management (CRM) system, noting that she is the new liaison at Acme Corp. It also requests an update to Bob's contact information, specifically a change in his phone number.\n\nTasks:\n- Add Alice as a new contact in the CRM system (Due: N/A, Assigned: None)\n- Note that Alice is the new liaison at Acme Corp (Due: N/A, Assigned: None)\n- Update Bob's contact information in the CRM system (Due: N/A, Assigned: None)\n- Change Bob's phone number in the CRM system (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:06:59.301622",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:12:01.600706",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nThe file instructs to add a new contact, Alice, to the Customer Relationship Management system. Alice is the new liaison at Acme Corp. The file also requests an update to the contact details of Bob, specifically a change in his phone number.\n\nTasks:\n- Add a new contact, Alice, to the Customer Relationship Management system (Due: N/A, Assigned: None)\n- Update the contact details of Bob, specifically a change in his phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:12:01.605817",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:19:47.425610",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nPlease add Alice as a new contact in the CRM, she is now our main liaison at Acme Corp. Additionally, Bob's contact information requires updating due to a change in his phone number.\n\nTasks:\n- Add Alice as a new contact in the CRM, with her role as main liaison at Acme Corp (Due: N/A, Assigned: None)\n- Update Bob's contact information in the CRM due to a change in his phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:19:47.427878",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:31:49.966519",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nPlease add Alice as a new contact in the CRM, representing Acme Corp. Additionally, update Bob's contact information due to a change in his phone number.\n\nTasks:\n- Add Alice as a new contact in the CRM (Due: N/A, Assigned: unknown)\n- Update Bob's contact information due to a change in his phone number (Due: N/A, Assigned: unknown)\n- Assign Alice to represent Acme Corp (Due: N/A, Assigned: unknown)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:31:49.970620",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:35:16.429547",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nPlease add a new contact, Alice, to the CRM. She is now our main liaison at Acme Corp. Additionally, Bob's contact information needs to be updated due to a change in his phone number.\n\nTasks:\n- Add a new contact, Alice, to the CRM (Due: N/A, Assigned: unknown)\n- Update Alice's role to main liaison at Acme Corp (Due: N/A, Assigned: unknown)\n- Update Bob's contact information due to a change in his phone number (Due: N/A, Assigned: unknown)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:35:16.434778",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:39:23.532065",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nPlease add Alice as a new contact in the CRM, representing our new liaison at Acme Corp. Additionally, Bob's contact information needs to be updated due to a change in his phone number.\n\nTasks:\n- Add Alice as a new contact in the CRM (Due: N/A, Assigned: unknown)\n- Update Bob's contact information in the CRM (Due: N/A, Assigned: unknown)\n- Assign Alice as the new liaison for Acme Corp in the CRM (Due: N/A, Assigned: unknown)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:39:23.535050",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:46:53.040352",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nPlease add Alice as a new contact in the CRM, she is now our main liaison at Acme Corp. Additionally, amend Bob's contact details to reflect his new phone number.\n\nTasks:\n- Add Alice as a new contact in the CRM (Due: N/A, Assigned: None)\n- Amend Bob's contact details to reflect his new phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:46:53.044439",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:48:51.913536",
+    "job_name": "crm_ops_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com"
+        ],
+        "subject": "CRM Summary - Ghost Employee",
+        "message": "Daily CRM update:\n\nPlease add Alice as a new contact in the CRM, representing our new liaison at Acme Corp. Additionally, update Bob's contact details to reflect his new phone number.\n\nTasks:\n- Add Alice as a new contact in the CRM (Due: N/A, Assigned: None)\n- Update Bob's contact details to reflect his new phone number (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T15:48:51.918669",
+    "job_name": "crm_ops_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/crm_ops_job/"
+      }
+    }
   }
 ]

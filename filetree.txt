@@ -8,13 +8,16 @@
 ./app/core/job_memory.py
 ./app/core/models.py
 ./app/core/registry.py
+./app/core/crm_memory.py
 ./app/jobs/compliance_analyst.py
 ./app/jobs/demo_job.py
 ./app/jobs/job_registry.py
 ./app/jobs/sample_job.py
 ./app/jobs/data_entry_specialist.py
+./app/jobs/crm_ops_job.py
 ./app/plugins/__init__.py
 ./app/plugins/file_ops.py
+./app/plugins/crm_plugin.py
 ./app/services/demo_report_generator.py
 ./app/services/email_template_service.py
 ./app/services/export_dispatcher.py
@@ -34,6 +37,7 @@
 ./config/job_schemas/demo_job.json
 ./config/job_schemas/sample_job.json
 ./config/job_schemas/data_entry_specialist.json
+./config/job_schemas/crm_ops_job.json
 ./data/retry_queue.json
 ./exports/compliance_analyst/2025-06-06_124233_GhostRun/export.json
 ./filetree.txt
@@ -66,6 +70,8 @@
 ./logs/timesheets/sample_job_timesheet.json
 ./logs/timesheets/test_timesheet.json
 ./logs/timesheets/Data Entry Specialist_timesheet.json
+./logs/timesheets/crm_ops_job_timesheet.json
+./logs/dummy_crm.json
 ./makefile
 ./memory/compliance_analyst.json
 ./requirements.txt

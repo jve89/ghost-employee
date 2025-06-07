@@ -51,7 +51,7 @@ class ComplianceAnalystJob:
 
         generate_demo_report(
             summary=summary.content,
-            tasks=[task.dict() for task, _ in tasks],
+            tasks=[task.model_dump() for task, _ in tasks],
             results=[{"description": task.description, "status": task.status or "pending"} for task, _ in tasks],
             job_id=config.job_name
         )

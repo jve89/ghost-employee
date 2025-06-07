@@ -1,0 +1,29 @@
+{
+  "summary": "The file instructs to add a new contact named Alice to the Customer Relationship Management (CRM) system. Alice is the new liaison at Acme Corp. Additionally, the file requests an update to the contact details of Bob, specifically a change in his phone number.",
+  "tasks": [
+    {
+      "job_id": "crm_001",
+      "source": "crm_notes.txt",
+      "description": "Add a new contact named Alice to the Customer Relationship Management (CRM) system",
+      "summary": "The file instructs to add a new contact named Alice to the Customer Relationship Management (CRM) system. Alice is the new liaison at Acme Corp. Additionally, the file requests an update to the contact details of Bob, specifically a change in his phone number.",
+      "created_at": "2025-06-07T14:39:20.983672",
+      "assignee": null,
+      "timestamp": "2025-06-07T14:39:15.693550",
+      "status": "success",
+      "executed_at": "2025-06-07T14:39:20.983762",
+      "entity": null
+    },
+    {
+      "job_id": "crm_001",
+      "source": "crm_notes.txt",
+      "description": "Update the contact details of Bob, specifically a change in his phone number",
+      "summary": "The file instructs to add a new contact named Alice to the Customer Relationship Management (CRM) system. Alice is the new liaison at Acme Corp. Additionally, the file requests an update to the contact details of Bob, specifically a change in his phone number.",
+      "created_at": "2025-06-07T14:39:20.983709",
+      "assignee": null,
+      "timestamp": "2025-06-07T14:39:15.693550",
+      "status": "success",
+      "executed_at": "2025-06-07T14:39:20.984644",
+      "entity": null
+    }
+  ]
+}

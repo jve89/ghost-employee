@@ -26,7 +26,7 @@ class DemoJob:
 
         generate_demo_report(
             summary=task.summary,
-            tasks=[task.dict()],
+            tasks=[task.model_dump()],
             results=results,
             job_id=config.job_id
         )

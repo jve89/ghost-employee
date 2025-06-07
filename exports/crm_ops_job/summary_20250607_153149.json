@@ -1,0 +1,41 @@
+{
+  "summary": "Please add Alice as a new contact in the CRM, representing Acme Corp. Additionally, update Bob's contact information due to a change in his phone number.",
+  "tasks": [
+    {
+      "job_id": "crm_001",
+      "source": "crm_notes.txt",
+      "description": "Add Alice as a new contact in the CRM",
+      "summary": "Please add Alice as a new contact in the CRM, representing Acme Corp. Additionally, update Bob's contact information due to a change in his phone number.",
+      "created_at": "2025-06-07T15:31:44.313232",
+      "assignee": "unknown",
+      "timestamp": "2025-06-07T15:31:38.930079",
+      "status": "success",
+      "executed_at": "2025-06-07T15:31:44.313318",
+      "entity": "Alice"
+    },
+    {
+      "job_id": "crm_001",
+      "source": "crm_notes.txt",
+      "description": "Update Bob's contact information due to a change in his phone number",
+      "summary": "Please add Alice as a new contact in the CRM, representing Acme Corp. Additionally, update Bob's contact information due to a change in his phone number.",
+      "created_at": "2025-06-07T15:31:44.313264",
+      "assignee": "unknown",
+      "timestamp": "2025-06-07T15:31:38.930079",
+      "status": "success",
+      "executed_at": "2025-06-07T15:31:44.314471",
+      "entity": "Bob"
+    },
+    {
+      "job_id": "crm_001",
+      "source": "crm_notes.txt",
+      "description": "Assign Alice to represent Acme Corp",
+      "summary": "Please add Alice as a new contact in the CRM, representing Acme Corp. Additionally, update Bob's contact information due to a change in his phone number.",
+      "created_at": "2025-06-07T15:31:44.313273",
+      "assignee": "unknown",
+      "timestamp": "2025-06-07T15:31:38.930079",
+      "status": "skipped",
+      "executed_at": "2025-06-07T15:31:44.315072",
+      "entity": "Acme Corp"
+    }
+  ]
+}

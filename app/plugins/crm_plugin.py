@@ -5,6 +5,7 @@ import os
 import re
 from typing import Dict, Any
 from datetime import datetime
+from app.core.crm_memory import CRMMemory
 
 DUMMY_CRM_PATH = "logs/dummy_crm.json"
 
@@ -15,11 +16,15 @@ class CRMPlugin:
 
         # Define simple flexible regex patterns
         patterns = [
-            r"\badd\b.*\bcrm\b",
+            r"\badd\b.*\b(crm|customer relationship management)\b",
             r"\bupdate\b.*\bcontact\b",
-            r"\bcreate\b.*\b(contact|crm)\b",
-            r"\bedit\b.*\bcrm\b",
-            r"\badd.*to.*crm\b"
+            r"\bedit\b.*\bcontact\b",
+            r"\bamend\b.*\bcontact\b",
+            r"\bmodify\b.*\bcontact\b",
+            r"\bchange\b.*\bcontact\b",
+            r"\bassign\b.*\b(contact|representative|liaison|manager)\b",
+            r"\bset\b.*\bas\b.*\b(contact|liaison|rep|representative)\b",
+            r"\bmake\b.*\b(contact|liaison)\b.*\bfor\b.*\b\w+"
         ]
 
         for pattern in patterns:
@@ -35,50 +40,56 @@ class CRMPlugin:
         task_description = task.description or ""
         now = datetime.utcnow().isoformat()
 
-        os.makedirs(os.path.dirname(DUMMY_CRM_PATH), exist_ok=True)
+        # Try to extract role and company (very basic)
+        role_match = re.search(r"\b(as|is|to be|becomes)\b\s+(the\s+)?(?P<role>\w+\s+\w+)", task_description.lower())
+        company_match = re.search(r"\b(at|for|from)\b\s+(?P<company>[A-Z][\w\s&-]+)", task_description)
+
+        role = role_match.group("role").strip() if role_match else None
+        company = company_match.group("company").strip() if company_match else None
 
         try:
-            # Load existing CRM records
-            if os.path.exists(DUMMY_CRM_PATH):
-                with open(DUMMY_CRM_PATH, "r") as f:
-                    crm_data = json.load(f)
-            else:
-                crm_data = []
-
-            # Try to find existing contact by name (case-insensitive)
-            contact_index = next(
-                (i for i, c in enumerate(crm_data) if c.get("name", "").lower() == contact_name.lower()),
-                None
-            )
+            crm_memory = CRMMemory(job_name=task.job_id or "crm_ops_job")
+            existing = crm_memory.get_contact(contact_name)
 
             if "update" in task_description.lower() or "edit" in task_description.lower():
-                if contact_index is not None:
-                    crm_data[contact_index].update({
+                if existing:
+                    update_data = {
                         "updated_at": now,
                         "last_task": task_description
-                    })
-                    status_msg = f"CRM entry for {contact_name} updated"
+                    }
+                    if role:
+                        update_data["role"] = role
+                    if company:
+                        update_data["company"] = company
+                    crm_memory.update_contact(contact_name, update_data)
+                    msg = f"CRM entry for {contact_name} updated"
                 else:
-                    crm_data.append({
+                    contact_data = {
                         "name": contact_name,
                         "added_at": now,
                         "task_description": task_description,
                         "note": "Added via update fallback"
-                    })
-                    status_msg = f"No existing contact found. Added new entry for {contact_name}."
+                    }
+                    if role:
+                        contact_data["role"] = role
+                    if company:
+                        contact_data["company"] = company
+                    crm_memory.add_contact(contact_data)
+                    msg = f"No existing contact found. Added new entry for {contact_name}."
             else:
-                crm_data.append({
+                contact_data = {
                     "name": contact_name,
                     "added_at": now,
                     "task_description": task_description
-                })
-                status_msg = f"CRM entry created for {contact_name}"
+                }
+                if role:
+                    contact_data["role"] = role
+                if company:
+                    contact_data["company"] = company
+                crm_memory.add_contact(contact_data)
+                msg = f"CRM entry created for {contact_name}"
 
-            # Write updated CRM file
-            with open(DUMMY_CRM_PATH, "w") as f:
-                json.dump(crm_data, f, indent=2)
-
-            return {"status": "success", "message": status_msg}
+            return {"status": "success", "message": msg}
 
         except Exception as e:
             return {"status": "error", "message": str(e)}
