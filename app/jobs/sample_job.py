@@ -8,7 +8,7 @@ This job demonstrates the complete Ghost Employee pipeline:
 - Task execution
 - Exporting results
 """
-
+from datetime import datetime
 from app.core.models import JobConfig, Task
 from app.core.interfaces import Summariser, TaskParser
 from infrastructure.summariser.gpt_summariser import GPTSummariser
@@ -32,31 +32,53 @@ class SampleJob:
         logger.info(f"Running job: {config.job_name}")
 
         input_text = override_text or "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
-
         summary = self.summariser.summarise(input_text, source)
-        tasks = self.parser.extract_tasks(summary, config.job_id)
 
-        for task in tasks:
-            execute_task(task)
+        # ✅ Manually define a single task
+        task = Task(
+            description="Update contact Alice",
+            entity="Alice",
+            job_id=config.job_id,
+            source=source,
+            summary=summary.content,
+            created_at=datetime.utcnow().isoformat()
+        )
 
+        # ✅ Execute and collect result
+        execute_task(task)
+
+        # For dispatch and reporting, use just Task list
+        task_list = [task]
+
+        # For custom tuple-based functions like export report
+        task_results = [(task, {"status": task.status})]
+
+        # ✅ Continue pipeline
         log_job_run(
             job_name=config.job_name,
             summary=summary.content,
-            tasks_executed=len(tasks),
+            tasks_executed=len(task_results),
             status="success"
         )
 
-        dispatch_exports(config, summary, tasks)
+        dispatch_exports(
+            output_data={
+                "summary": summary.content,
+                "tasks": [task.dict() for task in task_list],
+            },
+            destination_configs=config.export_destinations,
+            job_name=config.job_name
+        )
 
         generate_demo_report(
             summary=summary.content,
-            tasks=[task.dict() for task, _ in tasks],
-            results=[{"description": task.description, "status": task.status or "pending"} for task, _ in tasks],
+            tasks=[task.dict() for task in task_list],
+            results=[{"description": task.description, "status": task.status or "pending"} for task in task_list],
             job_id=config.job_name,
-            to_pdf=False  # Optional: switch to True if PDF export is working
+            to_pdf=False
         )
 
-        return tasks
+        return task_results
 
 
 if __name__ == "__main__":

@@ -20,6 +20,7 @@ class Task(BaseModel):
     timestamp: datetime = datetime.utcnow()
     status: Optional[str] = "pending"
     executed_at: Optional[datetime] = None
+    entity: Optional[str] = None
 
 class ExportResult(BaseModel):
     task_description: str
@@ -41,4 +42,4 @@ class JobConfig(BaseModel):
     run_interval_seconds: int
     file_pattern: Optional[str] = "*"
     active: bool = True
-    export_destinations: Optional[List[ExportDestination]] = []
+    export_destinations: List[ExportDestination]

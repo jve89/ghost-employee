@@ -7,10 +7,11 @@ from pydantic.json import pydantic_encoder
 
 class FileExporter(Exporter):
     def __init__(self, config: dict):
+        self.config = config
         self.directory = config.get("directory", "./exports/unknown_job")
         os.makedirs(self.directory, exist_ok=True)
 
-    def export(self, output_data: dict, config: dict) -> None:
+    def export(self, output_data: dict) -> None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"summary_{timestamp}.json"
         filepath = os.path.join(self.directory, filename)

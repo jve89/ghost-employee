@@ -1,0 +1,17 @@
+{
+  "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+  "tasks": [
+    {
+      "job_id": "sample_job",
+      "source": "unknown",
+      "description": "Add Alice to CRM",
+      "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+      "created_at": "2025-06-07T14:05:42.074030",
+      "assignee": null,
+      "timestamp": "2025-06-07T14:05:39.447124",
+      "status": "success",
+      "executed_at": "2025-06-07T14:05:42.074089",
+      "entity": "Alice"
+    }
+  ]
+}

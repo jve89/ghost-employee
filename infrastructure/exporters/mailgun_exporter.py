@@ -8,7 +8,11 @@ import json
 load_dotenv()
 
 class MailgunExporter(Exporter):
-    def export(self, output_data: dict, config: dict):
+    def __init__(self, config: dict):
+        self.config = config
+
+    def export(self, output_data: dict):
+        config = self.config
         api_key = os.getenv("MAILGUN_API_KEY")
         domain = os.getenv("MAILGUN_DOMAIN")
         to_emails = config.get("recipients", [os.getenv("MAILGUN_TO_EMAIL", "test@example.com")])

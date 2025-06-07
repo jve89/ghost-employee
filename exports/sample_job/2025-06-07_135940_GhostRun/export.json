@@ -1,0 +1,23 @@
+{
+  "summary": "The client has requested a weekly performance report. The deadline for this task is the upcoming Friday and it has been assigned to Lisa.",
+  "tasks": [
+    {
+      "job_id": "sample_job",
+      "source": "unknown",
+      "description": "Add Alice to CRM",
+      "summary": "The client has requested a weekly performance report. The deadline for this task is the upcoming Friday and it has been assigned to Lisa.",
+      "created_at": "2025-06-07T13:59:35.436932",
+      "assignee": null,
+      "timestamp": "2025-06-07T13:59:33.498240",
+      "status": "skipped",
+      "executed_at": "2025-06-07T13:59:35.436993"
+    }
+  ],
+  "results": [
+    {
+      "description": "Add Alice to CRM",
+      "status": "skipped"
+    }
+  ],
+  "job_name": "sample_job"
+}

@@ -25,7 +25,7 @@ def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[Expo
                     config = config.copy()
                     config["message"] = message_template.replace("{{summary}}", output_data["summary"]).replace("{{tasks}}", tasks_text)
 
-                exporter.export(output_data, config)
+                exporter.export(output_data)
                 log_export_status(job_name, dest_type, True, {"details": config})
 
         except Exception as e:

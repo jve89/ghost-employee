@@ -2,10 +2,15 @@
 
 from app.core.models import Task
 from app.plugins.file_ops import FileOpsPlugin
+from app.plugins.crm_plugin import CRMPlugin
 from infrastructure.logger.retry_queue import retry_queue
 from datetime import datetime
 
-ALL_PLUGINS = [FileOpsPlugin()]
+ALL_PLUGINS = [
+    FileOpsPlugin(),
+    CRMPlugin(),
+]
+
 
 def execute_task(task: Task) -> None:
     print(f"[ExecutorService] Executing: {task.description}")

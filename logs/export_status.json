@@ -395,5 +395,178 @@
     "details": {
       "details": {}
     }
+  },
+  {
+    "timestamp": "2025-06-07T13:53:51.116235",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": false,
+    "details": {
+      "error": "MailgunExporter() takes no arguments"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T13:53:51.118259",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T13:58:26.559906",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": false,
+    "details": {
+      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T13:58:26.564059",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T13:59:40.245606",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report. The deadline for this task is the upcoming Friday and it has been assigned to Lisa.\n\nTasks:\n- Add Alice to CRM (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T13:59:40.248778",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": false,
+    "details": {
+      "error": "FileExporter.export() missing 1 required positional argument: 'config'"
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:01:50.456799",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Add Alice to CRM (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:01:50.460311",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:04:18.165799",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Add Alice to CRM (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:04:18.170078",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:05:49.515502",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Add Alice to CRM (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:05:49.518603",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:08:49.210623",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-07T14:08:49.212164",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
   }
 ]

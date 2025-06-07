@@ -26,6 +26,7 @@
 ./app/services/task_parser.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
+./app/services/executor_service.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
 ./config/config_loader.py
@@ -64,6 +65,7 @@
 ./logs/timesheets/prepare_interns_timesheet.json
 ./logs/timesheets/sample_job_timesheet.json
 ./logs/timesheets/test_timesheet.json
+./logs/timesheets/Data Entry Specialist_timesheet.json
 ./makefile
 ./memory/compliance_analyst.json
 ./requirements.txt
