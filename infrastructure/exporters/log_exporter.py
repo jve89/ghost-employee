@@ -5,8 +5,9 @@ from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.export_log import export_log
 
 class LogExporter(Exporter):
-    def __init__(self, config: dict):
-        self.job_id = config.get("job_id", "unknown_job")
+    def __init__(self, config: dict = None, job_id: str = "unknown_job"):
+        self.config = config or {}
+        self.job_id = job_id
 
     def export(self, output_data: dict, config: dict) -> None:
         try:

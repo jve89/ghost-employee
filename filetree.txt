@@ -1,6 +1,8 @@
 ./.env
 ./.env.example
 ./README.md
+./app/core/crm_memory.py
+./app/core/crm_prefs_memory.py
 ./app/core/email_pipeline.py
 ./app/core/email_replier.py
 ./app/core/export_destinations.py
@@ -8,18 +10,18 @@
 ./app/core/job_memory.py
 ./app/core/models.py
 ./app/core/registry.py
-./app/core/crm_memory.py
 ./app/jobs/compliance_analyst.py
+./app/jobs/crm_ops_job.py
+./app/jobs/data_entry_specialist.py
 ./app/jobs/demo_job.py
 ./app/jobs/job_registry.py
 ./app/jobs/sample_job.py
-./app/jobs/data_entry_specialist.py
-./app/jobs/crm_ops_job.py
 ./app/plugins/__init__.py
-./app/plugins/file_ops.py
 ./app/plugins/crm_plugin.py
+./app/plugins/file_ops.py
 ./app/services/demo_report_generator.py
 ./app/services/email_template_service.py
+./app/services/executor_service.py
 ./app/services/export_dispatcher.py
 ./app/services/export_service.py
 ./app/services/job_manager.py
@@ -29,17 +31,18 @@
 ./app/services/task_parser.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
-./app/services/executor_service.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
 ./config/config_loader.py
 ./config/job_schemas/compliance_analyst.json
+./config/job_schemas/crm_ops_job.json
+./config/job_schemas/data_entry_specialist.json
 ./config/job_schemas/demo_job.json
 ./config/job_schemas/sample_job.json
-./config/job_schemas/data_entry_specialist.json
-./config/job_schemas/crm_ops_job.json
+./config/job_schemas/test_export_job.json
+./data/crm_notes.txt
 ./data/retry_queue.json
-./exports/compliance_analyst/2025-06-06_124233_GhostRun/export.json
+./exports/Data Entry Specialist/2025-06-07_121827_GhostRun/export.json
 ./filetree.txt
 ./infrastructure/email/email_watcher.py
 ./infrastructure/executor/task_executor.py
@@ -61,19 +64,29 @@
 ./interfaces/api/main.py
 ./interfaces/api/routes/dashboard.py
 ./interfaces/api/routes/jobs.py
+./interfaces/api/routes/mailgun_webhook.py
 ./interfaces/api/templates/dashboard.html
 ./logs/activity_log.json
+./logs/dummy_crm.json
 ./logs/export_status.json
+./logs/timesheets/Data Entry Specialist_timesheet.json
 ./logs/timesheets/compliance_analyst_timesheet.json
+./logs/timesheets/crm_ops_job_timesheet.json
 ./logs/timesheets/demo_job_timesheet.json
 ./logs/timesheets/prepare_interns_timesheet.json
 ./logs/timesheets/sample_job_timesheet.json
 ./logs/timesheets/test_timesheet.json
-./logs/timesheets/Data Entry Specialist_timesheet.json
-./logs/timesheets/crm_ops_job_timesheet.json
-./logs/dummy_crm.json
+./logs/timesheets/test_export_job_timesheet.json
 ./makefile
 ./memory/compliance_analyst.json
+./memory/crm_001_contacts.json
+./memory/preferences_crm_ops_job.json
+./memory/compliance_analyst_contacts.json
+./memory/demo_job_contacts.json
+./memory/sample_job_contacts.json
+./memory/data_entry_specialist_contacts.json
+./memory/mailgun_	test_example.com.json
+./memory/test_export_job_contacts.json
 ./requirements.txt
 ./run.py
 ./run_compliance_job.py
@@ -91,3 +104,4 @@
 ./watched/list_interns.txt
 ./watched/notes_old.txt
 ./watched/test_interns.txt
+./watched/test_exports/test_trigger.txt

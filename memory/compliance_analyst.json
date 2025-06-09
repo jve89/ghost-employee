@@ -1,39 +1,54 @@
 {
   "history": [
     {
-      "timestamp": "2025-06-07T08:05:37.358126",
-      "subject": "Weekly Compliance Report",
-      "summary": "The Compliance Team has sent this week's performance report for archiving and requests a summary to be prepared.",
+      "timestamp": "2025-06-09T17:46:34.387572",
+      "subject": "bad experience",
+      "summary": "Summary generation failed.",
       "tasks": [
-        "Archive this week's performance report sent by the Compliance Team",
-        "Prepare a summary of this week's performance report"
+        "Task parsing failed \u2013 manual review needed."
       ],
-      "from": "jovanerkel@gmail.com"
+      "from": "johanvanerkel@gmail.com"
     },
     {
-      "timestamp": "2025-06-07T08:09:57.093487",
-      "subject": "Weekly Compliance Report",
-      "summary": "The Compliance Team has sent this week's performance report which needs to be archived and summarized.",
+      "timestamp": "2025-06-09T17:46:37.807615",
+      "subject": "Bad experience",
+      "summary": "Summary generation failed.",
       "tasks": [
-        "Archive this week's performance report sent by the Compliance Team",
-        "Prepare a summary of the performance report"
+        "Task parsing failed \u2013 manual review needed."
       ],
-      "from": "jovanerkel@gmail.com"
+      "from": "johanvanerkel@gmail.com"
     },
     {
-      "timestamp": "2025-06-07T08:12:06.704936",
-      "subject": "Weekly Compliance Report",
-      "summary": "The Compliance Team has sent this week's performance report. They request for it to be archived and a summary prepared.",
+      "timestamp": "2025-06-09T17:46:41.093180",
+      "subject": "tasks for today",
+      "summary": "Summary generation failed.",
       "tasks": [
-        "Archive this week's performance report",
-        "Prepare a summary of this week's performance report"
+        "Task parsing failed \u2013 manual review needed."
       ],
-      "from": "jovanerkel@gmail.com"
+      "from": "johanvanerkel@gmail.com"
+    },
+    {
+      "timestamp": "2025-06-09T17:46:44.673390",
+      "subject": "Slight issue with yesterday\u2019s figures",
+      "summary": "Summary generation failed.",
+      "tasks": [
+        "Task parsing failed \u2013 manual review needed."
+      ],
+      "from": "johanvanerkel@gmail.com"
+    },
+    {
+      "timestamp": "2025-06-09T17:46:50.436177",
+      "subject": "Slight issue with yesterday\u2019s figures",
+      "summary": "Summary generation failed.",
+      "tasks": [
+        "Task parsing failed \u2013 manual review needed."
+      ],
+      "from": "johanvanerkel@gmail.com"
     }
   ],
   "preferences": {
     "tone": "neutral",
     "priority_keywords": []
   },
-  "last_updated": "2025-06-07T08:12:06.704948"
+  "last_updated": "2025-06-09T17:46:50.436189"
 }

@@ -28,6 +28,8 @@ class JobManager:
             print(f"[WARN] Job '{config.job_name}' not found in registry.")
             return
 
+        print(f"[JobManager] ✅ Registered job: {config.job_id} with exporters: {[d['type'] for d in config.export_destinations]}")
+
         while True:
             print(f"[SCHEDULER] Running job '{config.job_name}'...")
             activity_log.record(job_name=config.job_name, trigger="interval", status="started")

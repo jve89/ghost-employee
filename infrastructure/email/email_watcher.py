@@ -129,7 +129,12 @@ class EmailWatcher(Thread):
                 job_config = get_job_for_recipient(to_email, configs)
                 if job_config:
                     process_attachments(msg, job_config)  # Optional, keep saving files
-                    process_email_content(subject, body, job_config, from_email)
+
+                    job_config = job_config.dict()  # Convert to a plain dict
+                    job_config["sender"] = from_email
+
+                    process_email_content(subject, body, job_config)
+
                 else:
                     print(f"[EmailWatcher] No matching job for: {to_email} / Subject: {subject}", flush=True)
         

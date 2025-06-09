@@ -89,5 +89,138 @@
     "summary": "Please add Alice as a new contact in the CRM, representing our new liaison at Acme Corp. Additionally, update Bob's contact details to reflect his new phone number.",
     "tasks_executed": 2,
     "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T15:28:40.062680",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T15:43:50.607145",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T15:58:13.770297",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:01:30.004486",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:01:39.618915",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:02:03.181730",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:02:28.848816",
+    "job": "crm_ops_job",
+    "summary": "The key points from last week's operations include the successful launch of the Q2 social media campaign by the marketing team, which has resulted in a 12% increase in engagement. There were scheduling conflicts that caused delays in two client onboarding calls; these need to be rescheduled for this week. A recurring bug was identified in the invoice generation tool, with a fix expected by Thursday. Preparations for the new intern batch starting next Monday should be completed by Friday, including access badges, laptops, and training accounts. Sales reported a 7% decrease in conversion rates for leads from paid channels, prompting a strategy meeting scheduled for Wednesday.",
+    "tasks_executed": 4,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:03:54.716412",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:04:39.699976",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:04:46.530625",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:05:00.596756",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:06:52.566341",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:37:00.309125",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T16:54:04.828279",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T17:20:10.108956",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report, with a submission deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T17:25:53.267521",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report, with a submission deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T17:32:07.792700",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T18:51:57.631315",
+    "job": "crm_ops_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-09T18:52:10.165081",
+    "job": "crm_ops_job",
+    "summary": "The file instructs to update the contact information of an individual named Bob in the Customer Relationship Management (CRM) system.",
+    "tasks_executed": 1,
+    "status": "success"
   }
 ]

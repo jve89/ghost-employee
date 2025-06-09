@@ -649,5 +649,26 @@
     "file": "interns_list.txt",
     "status": "completed",
     "timestamp": "2025-06-05T19:39:39.584893"
+  },
+  {
+    "job_name": "crm_ops_job",
+    "trigger": "email",
+    "file": "alice@example.com | Test CRM",
+    "status": "started",
+    "timestamp": "2025-06-09T18:43:31.580667"
+  },
+  {
+    "job_name": "crm_ops_job",
+    "trigger": "email",
+    "file": "alice@example.com | Test CRM",
+    "status": "started",
+    "timestamp": "2025-06-09T18:52:04.002311"
+  },
+  {
+    "job_name": "crm_ops_job",
+    "trigger": "email",
+    "file": "alice@example.com | Test CRM",
+    "status": "completed",
+    "timestamp": "2025-06-09T18:52:17.237525"
   }
 ]

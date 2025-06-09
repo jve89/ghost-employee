@@ -2,10 +2,12 @@ from app.jobs.demo_job import DemoJob
 from app.jobs.sample_job import SampleJob
 from app.jobs.compliance_analyst import ComplianceAnalystJob
 from app.jobs.data_entry_specialist import DataEntrySpecialistJob
+from app.jobs.crm_ops_job import CRMOperationsJob  # ✅ Add this line
 
 job_registry = {
     "sample_job": SampleJob(),
     "demo_job": DemoJob(),
     "compliance_analyst": ComplianceAnalystJob(),
-    "data_entry_specialist": DataEntrySpecialistJob,  
+    "data_entry_specialist": DataEntrySpecialistJob(),  # ✅ Fix this
+    "crm_ops_job": CRMOperationsJob(),  # ✅ Add this
 }

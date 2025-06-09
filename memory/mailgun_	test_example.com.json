@@ -1,0 +1,6 @@
+{
+  "sender": "\ttest@example.com",
+  "subject": "CRM Update",
+  "body-plain": "Please add Jane Doe to CRM.",
+  "attachment-1": "performance_notes.txt"
+}

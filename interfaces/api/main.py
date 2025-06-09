@@ -3,6 +3,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from interfaces.api.routes.mailgun_webhook import router as mailgun_router
 from interfaces.api.routes.jobs import router as jobs_router
 from interfaces.api.routes.dashboard import router as dashboard_router
 from config.config_loader import load_all_job_configs
@@ -13,8 +14,10 @@ import threading
 import time
 
 app = FastAPI()
+
 app.include_router(jobs_router, prefix="/jobs")
 app.include_router(dashboard_router)
+app.include_router(mailgun_router)
 
 templates = Jinja2Templates(directory="interfaces/api/templates")
 

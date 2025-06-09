@@ -6,12 +6,15 @@ from app.core.models import Task
 from pydantic.json import pydantic_encoder
 
 class FileExporter(Exporter):
-    def __init__(self, config: dict):
-        self.config = config
-        self.directory = config.get("directory", "./exports/unknown_job")
+    def __init__(self, config: dict = None, job_id: str = "unknown_job"):
+        self.job_id = job_id
+        self.config = config or {}
+
+        # Use config directory OR default to ./exports/{job_id}
+        self.directory = self.config.get("directory", f"./exports/{self.job_id}")
         os.makedirs(self.directory, exist_ok=True)
 
-    def export(self, output_data: dict) -> None:
+    def export(self, output_data: dict, config: dict) -> None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"summary_{timestamp}.json"
         filepath = os.path.join(self.directory, filename)

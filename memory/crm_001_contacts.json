@@ -21,7 +21,11 @@
   {
     "name": "Alice",
     "added_at": "2025-06-07T15:31:44.313534",
-    "task_description": "Add Alice as a new contact in the CRM"
+    "task_description": "Add Alice as a new contact in the CRM",
+    "phone": {
+      "updated_at": "2025-06-09T18:51:57.629482",
+      "last_task": "Update contact Alice"
+    }
   },
   {
     "name": "Bob",
@@ -29,8 +33,8 @@
     "task_description": "Update Bob's contact information due to a change in his phone number",
     "note": "Added via update fallback",
     "phone": {
-      "updated_at": "2025-06-07T15:48:44.337135",
-      "last_task": "Update Bob's contact details to reflect his new phone number"
+      "updated_at": "2025-06-09T18:52:10.163902",
+      "last_task": "Update the contact information of Bob in the CRM system"
     }
   },
   {

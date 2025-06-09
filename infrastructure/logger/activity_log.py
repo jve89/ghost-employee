@@ -32,7 +32,7 @@ class ActivityLog:
         self.entries.append(entry)
         self._save()
 
-    def recent(self, count: int = 20) -> List[Dict]:
+    def get_recent(self, count: int = 20) -> List[Dict]:
         return self.entries[-count:]
 
 activity_log = ActivityLog()

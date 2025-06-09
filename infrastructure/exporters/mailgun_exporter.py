@@ -1,17 +1,17 @@
 import os
 import requests
+import json
 from dotenv import load_dotenv
 from app.core.interfaces import Exporter
-from openai import OpenAI
-import json
 
 load_dotenv()
 
 class MailgunExporter(Exporter):
-    def __init__(self, config: dict):
-        self.config = config
+    def __init__(self, config: dict = None, job_id: str = "unknown_job"):
+        self.config = config or {}
+        self.job_id = job_id
 
-    def export(self, output_data: dict):
+    def export(self, output_data: dict, config: dict):
         config = self.config
         api_key = os.getenv("MAILGUN_API_KEY")
         domain = os.getenv("MAILGUN_DOMAIN")
@@ -20,10 +20,9 @@ class MailgunExporter(Exporter):
         default_message = config.get("message", "Summary:\n{{summary}}\n\nTasks:\n{{tasks}}")
 
         if not api_key or not domain:
-            print("[MailgunExporter] Missing credentials.")
+            print("[MailgunExporter] ❌ Missing Mailgun credentials.")
             return
 
-        # --- Human-style GPT-generated email body ---
         message = self._generate_message(output_data, default_message)
 
         response = requests.post(
@@ -43,17 +42,16 @@ class MailgunExporter(Exporter):
             print(f"[MailgunExporter] ❌ Failed to send email: {response.status_code} - {response.text}")
 
     def _generate_message(self, output_data: dict, fallback_template: str) -> str:
-        summary = output_data.get("summary")
-        tasks = output_data.get("tasks")
+        summary = output_data.get("summary", "")
+        tasks = output_data.get("tasks", [])
+        task_text = "\n".join(f"- {t.get('description', '')}" for t in tasks)
 
         if not summary or not tasks:
-            return fallback_template.replace("{{summary}}", summary or "").replace("{{tasks}}", json.dumps(tasks, indent=2))
+            return fallback_template.replace("{{summary}}", summary).replace("{{tasks}}", task_text)
 
         try:
             from openai import OpenAI
-
             client = OpenAI()
-            task_text = "\n".join(f"- {t.get('description')}" for t in tasks)
 
             prompt = (
                 "Write a short, professional email summarising a compliance review.\n"

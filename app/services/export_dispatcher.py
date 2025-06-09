@@ -13,7 +13,7 @@ def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[Expo
         try:
             exporters = get_exporters(dest_type)
             for exporter_factory in exporters:
-                exporter = exporter_factory(config)
+                exporter = exporter_factory(config, job_name)
 
                 # 💡 Handle templating (only modifies config["message"])
                 if dest_type == "email" and "summary" in output_data and "tasks" in output_data:
@@ -25,7 +25,7 @@ def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[Expo
                     config = config.copy()
                     config["message"] = message_template.replace("{{summary}}", output_data["summary"]).replace("{{tasks}}", tasks_text)
 
-                exporter.export(output_data)
+                exporter.export(output_data, config)
                 log_export_status(job_name, dest_type, True, {"details": config})
 
         except Exception as e:
@@ -36,7 +36,7 @@ def export_results(job_id: str, summary: str, tasks: list[Task], execution_resul
     print("[ExportDispatcher] 📤 Exporting results (email pipeline)...")
 
     exporters = [
-        FileExporter(job_id=job_id),
+        FileExporter(config={}, job_id=job_id),
         LogExporter(job_id=job_id),
     ]
 

@@ -1,0 +1,17 @@
+{
+  "summary": "The file instructs to update the contact information of an individual named Bob in the Customer Relationship Management (CRM) system.",
+  "tasks": [
+    {
+      "job_id": "crm_001",
+      "source": "crm_notes.txt",
+      "description": "Update the contact information of Bob in the CRM system",
+      "summary": "The file instructs to update the contact information of an individual named Bob in the Customer Relationship Management (CRM) system.",
+      "created_at": "2025-06-09T18:52:10.163745",
+      "assignee": null,
+      "timestamp": "2025-06-09T18:51:53.845966",
+      "status": "success",
+      "executed_at": "2025-06-09T18:52:10.163836",
+      "entity": "Bob"
+    }
+  ]
+}

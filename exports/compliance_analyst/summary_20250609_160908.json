@@ -1,0 +1,17 @@
+{
+  "summary": "The client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+  "tasks": [
+    {
+      "job_id": "compliance_analyst",
+      "source": "unknown",
+      "description": "Update contact Alice",
+      "summary": "The client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+      "created_at": "2025-06-09T16:09:08.792474",
+      "assignee": null,
+      "timestamp": "2025-06-09T16:06:49.964243",
+      "status": "success",
+      "executed_at": "2025-06-09T16:09:08.792545",
+      "entity": "Alice"
+    }
+  ]
+}
