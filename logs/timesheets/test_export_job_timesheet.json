@@ -558,5 +558,54 @@
     "summary": "The client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.",
     "tasks_executed": 1,
     "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T13:58:09.359869",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report, with a delivery deadline set for next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T13:58:41.316705",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report, with a deadline set for next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T13:59:49.024966",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:07:20.244018",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:19:40.746086",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:20:48.832220",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report, with a delivery deadline set for next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:21:57.647538",
+    "job": "test_export_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
   }
 ]

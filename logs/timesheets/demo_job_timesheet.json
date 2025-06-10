@@ -1251,5 +1251,54 @@
     "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
     "tasks_executed": 1,
     "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T13:58:09.339831",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T13:58:41.440080",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T13:59:50.536098",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report, with the delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:07:20.339172",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:19:41.106416",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report, with the deadline set for next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:20:50.774599",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T14:22:00.562487",
+    "job": "demo_job",
+    "summary": "The client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
   }
 ]

@@ -27,7 +27,7 @@ def root():
 
 @app.get("/logs/activity")
 def get_activity_log():
-    return activity_log.recent(50)
+    return activity_log.get_recent(50)
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request):
