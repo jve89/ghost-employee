@@ -190,6 +190,55 @@
             }
         }
 
+        async function loadEmailActivity() {
+            try {
+                const res = await fetch("/dashboard/email-activity");
+                const data = await res.json();
+
+                const container = document.getElementById("emailActivityLog");
+                if (!data.email_activity || data.email_activity.length === 0) {
+                    container.innerHTML = "<i>No recent email-triggered activity.</i>";
+                    return;
+                }
+
+                container.innerHTML = data.email_activity.map(entry =>
+                    `[${new Date(entry.timestamp).toLocaleString()}] ` +
+                    `(${entry.status}) ${entry.job_name} — ${entry.file}`
+                ).join("<br>");
+            } catch (err) {
+                console.error("Failed to load email activity:", err);
+                document.getElementById("emailActivityLog").innerText = "❌ Failed to load.";
+            }
+        }
+
+        async function loadEmailTriggeredJobs() {
+            try {
+                const res = await fetch('/dashboard/email-jobs');
+                const jobs = await res.json();
+
+                const tbody = document.getElementById("email-jobs-list");
+                tbody.innerHTML = '';
+
+                if (jobs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center text-gray-500 py-3">No recent email-triggered jobs.</td></tr>`;
+                return;
+                }
+
+                jobs.forEach(job => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td class="py-2 px-4 border-b text-sm text-gray-700">${new Date(job.timestamp).toLocaleString()}</td>
+                    <td class="py-2 px-4 border-b text-sm text-gray-700">${job.sender}</td>
+                    <td class="py-2 px-4 border-b text-sm text-gray-700">${job.subject}</td>
+                    <td class="py-2 px-4 border-b text-sm text-gray-700">${job.status}</td>
+                `;
+                tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error("Failed to load email jobs:", err);
+            }
+        }
+
         async function loadExportLogs() {
             try {
                 const res = await fetch('/dashboard/exports');
@@ -266,6 +315,31 @@
             }
         }
 
+        function startRefreshLoop(interval = 10000) {
+            async function loop() {
+                try {
+                    await refreshDashboard();
+                } catch (err) {
+                    console.error("❌ refreshDashboard failed:", err);
+                }
+                setTimeout(loop, interval);
+            }
+            loop();
+        }
+       
+        window.onload = function () {
+            refreshDashboard();
+            loadJobs();
+            loadLogs();
+            loadJobStats();
+            loadActivityLog();
+            loadLatestDemoExport(); 
+            loadLatestComplianceExport();
+            loadEmailActivity();
+            startRefreshLoop(10000);
+            loadEmailTriggeredJobs();
+            setInterval(loadEmailTriggeredJobs, 30000);  // Refresh every 30 seconds
+        };
 
         document.addEventListener("DOMContentLoaded", () => {
             const jobSelect = document.getElementById("exportFilterJob");
@@ -276,18 +350,6 @@
                 failedCheckbox.addEventListener("change", loadExportLogs);
             }
         });
-
-        window.onload = function () {
-            refreshDashboard();
-            loadJobs();
-            loadLogs();
-            loadJobStats();
-            loadActivityLog();
-            loadLatestDemoExport(); 
-            loadLatestComplianceExport();
-        };
-
-        setInterval(refreshDashboard, 10000);
 
         document.addEventListener("DOMContentLoaded", () => {
             const jobForm = document.getElementById("jobForm");
@@ -426,6 +488,27 @@
                 <input type="checkbox" id="exportFilterFailed" class="ml-2">
             </div>
         </div>
+
+        <h2 class="text-xl font-semibold mt-8 mb-2">📧 Email-Triggered Jobs</h2>
+        <div id="emailActivityLog" class="bg-gray-100 p-3 rounded shadow text-sm font-mono max-h-80 overflow-y-scroll">Loading...</div>
+
+        <div id="email-jobs-tile" class="mt-8">
+        <h2 class="text-xl font-semibold mb-2">📨 Last 5 Email-Triggered Jobs</h2>
+        <table class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
+            <thead class="bg-gray-100">
+            <tr>
+                <th class="py-2 px-4 border-b text-left">Timestamp</th>
+                <th class="py-2 px-4 border-b text-left">Sender</th>
+                <th class="py-2 px-4 border-b text-left">Subject</th>
+                <th class="py-2 px-4 border-b text-left">Status</th>
+            </tr>
+            </thead>
+            <tbody id="email-jobs-list">
+            <tr><td colspan="4" class="text-center text-gray-500 py-3">Loading...</td></tr>
+            </tbody>
+        </table>
+        </div>
+
         <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
             <thead class="bg-gray-100">
                 <tr>

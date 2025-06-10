@@ -2,6 +2,7 @@ import os
 import json
 import glob
 from pydantic import BaseModel
+from pathlib import Path
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -212,3 +213,42 @@ def latest_compliance_export():
         "summary": export.get("summary", "-"),
         "tasks": export.get("tasks", [])
     }
+
+@router.get("/dashboard/email-activity")
+def get_email_activity():
+    try:
+        from infrastructure.logger.activity_log import activity_log
+        entries = activity_log.get_recent(count=20)
+
+        # Filter for email-triggered jobs only
+        email_entries = [e for e in entries if e.get("trigger") == "email"]
+        recent = sorted(email_entries, key=lambda x: x["timestamp"], reverse=True)[:5]
+
+        return {"email_activity": recent}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@router.get("/dashboard/email-jobs")
+def get_email_triggered_jobs():
+    memory_path = Path("memory")
+    job_files = sorted(memory_path.glob("mailgun_*.json"), reverse=True)
+
+    jobs = []
+    for file in job_files:
+        try:
+            with open(file) as f:
+                data = json.load(f)
+                jobs.append({
+                    "timestamp": data.get("timestamp", "unknown"),
+                    "job_type": data.get("job_type", "unknown"),
+                    "sender": data.get("sender", "unknown"),
+                    "subject": data.get("subject", "unknown"),
+                    "status": data.get("status", "unknown")
+                })
+        except Exception:
+            continue
+        if len(jobs) == 5:
+            break
+
+    return JSONResponse(content=jobs)
+    

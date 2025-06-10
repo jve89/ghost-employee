@@ -1,123 +1,6 @@
 [
   {
-    "timestamp": "2025-06-09T17:25:53.224951",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:25:53.268438",
-    "job_name": "crm_ops_job",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:25:53.268826",
-    "job_name": "crm_ops_job",
-    "destination": "file",
-    "success": false,
-    "details": {
-      "error": "FileExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:25:54.393304",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": false,
-    "details": {
-      "error": "FileExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:25:54.393686",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:04.458190",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:04.458781",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": false,
-    "details": {
-      "error": "FileExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:16.289149",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:16.289765",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": false,
-    "details": {
-      "error": "FileExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:27.962149",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:27.962704",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": false,
-    "details": {
-      "error": "FileExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:39.423706",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": false,
-    "details": {
-      "error": "MailgunExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:26:39.424229",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": false,
-    "details": {
-      "error": "FileExporter.export() takes 2 positional arguments but 3 were given"
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:07.412262",
+    "timestamp": "2025-06-10T08:15:37.553334",
     "job_name": "test_export_job",
     "destination": "file",
     "success": true,
@@ -128,7 +11,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:07.413094",
+    "timestamp": "2025-06-10T08:15:37.557729",
     "job_name": "test_export_job",
     "destination": "log",
     "success": true,
@@ -137,7 +20,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:07.627725",
+    "timestamp": "2025-06-10T08:24:58.939765",
     "job_name": "Data Entry Specialist",
     "destination": "log",
     "success": true,
@@ -146,7 +29,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:07.628729",
+    "timestamp": "2025-06-10T08:24:58.945195",
     "job_name": "Data Entry Specialist",
     "destination": "file",
     "success": true,
@@ -155,7 +38,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:07.879606",
+    "timestamp": "2025-06-10T08:24:58.945701",
     "job_name": "compliance_analyst",
     "destination": "file",
     "success": true,
@@ -166,7 +49,120 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:12.072408",
+    "timestamp": "2025-06-10T08:24:59.121144",
+    "job_name": "test_export_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/test_export_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:24:59.122123",
+    "job_name": "test_export_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:11.321361",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:11.323420",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:12.396699",
+    "job_name": "demo_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Demo Job",
+        "message": "Summary:\n\nThe client has asked for a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:12.397796",
+    "job_name": "demo_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:12.399278",
+    "job_name": "demo_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/demo_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:15.241447",
+    "job_name": "compliance_analyst",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "compliance@company.com"
+        ],
+        "subject": "Compliance Summary",
+        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:15.598303",
+    "job_name": "test_export_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "test@example.com"
+        ],
+        "subject": "Test Summary",
+        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:25:15.650054",
     "job_name": "crm_ops_job",
     "destination": "email",
     "success": true,
@@ -176,12 +172,12 @@
           "johanvanerkel@gmail.com"
         ],
         "subject": "CRM Summary - Ghost Employee",
-        "message": "Daily CRM update:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "message": "Daily CRM update:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:12.074008",
+    "timestamp": "2025-06-10T08:25:15.651783",
     "job_name": "crm_ops_job",
     "destination": "file",
     "success": true,
@@ -192,332 +188,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:32:12.344128",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:12.370911",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be prepared and submitted by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:12.372146",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:12.373446",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:12.917810",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:14.880136",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:14.881448",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:34.050645",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:34.052578",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:52.211871",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:32:52.213533",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:11.353404",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:11.354815",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:13.894995",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:13.896395",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:14.393257",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:19.744177",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be prepared and delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:19.746222",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:19.750196",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:20.103758",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:22.164882",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:30.161699",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:30.163577",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:48.138707",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:33:48.140826",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:05.254344",
+    "timestamp": "2025-06-10T08:25:38.800142",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -533,7 +204,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:34:05.256262",
+    "timestamp": "2025-06-10T08:25:38.801504",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -544,38 +215,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:34:21.351897",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:23.562301",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:23.566301",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:24.043725",
+    "timestamp": "2025-06-10T08:26:06.894539",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -591,7 +231,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:34:24.049498",
+    "timestamp": "2025-06-10T08:26:06.897218",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -602,165 +242,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:34:26.580950",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:26.583408",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:26.585860",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:28.153874",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:30.215297",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:42.103318",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with the deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:34:42.106219",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:01.347243",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:01.350167",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:18.301342",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:18.303403",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:29.640369",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:31.491625",
+    "timestamp": "2025-06-10T08:26:17.733794",
     "job_name": "test_export_job",
     "destination": "file",
     "success": true,
@@ -771,7 +253,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:35:31.494240",
+    "timestamp": "2025-06-10T08:26:17.734737",
     "job_name": "test_export_job",
     "destination": "log",
     "success": true,
@@ -780,181 +262,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:35:34.760682",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:34.762944",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:34.764751",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:36.766370",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:36.769458",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:36.803699",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:38.998279",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:54.250410",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:35:54.253823",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:11.764602",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:11.768012",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:30.308193",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:30.311754",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:38.319312",
+    "timestamp": "2025-06-10T08:26:18.704661",
     "job_name": "compliance_analyst",
     "destination": "file",
     "success": true,
@@ -965,27 +273,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:36:40.579833",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:40.582164",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:44.077998",
+    "timestamp": "2025-06-10T08:26:26.106669",
     "job_name": "demo_job",
     "destination": "email",
     "success": true,
@@ -996,270 +284,32 @@
           "jovanerkel@gmail.com"
         ],
         "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:44.081379",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:44.084435",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:45.632020",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:46.703272",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:47.672104",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:36:47.674977",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:06.776775",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:06.780903",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:08.982367",
-    "job_name": "Data Entry Specialist",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:08.985226",
-    "job_name": "Data Entry Specialist",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:25.829128",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:25.832116",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:46.698850",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:46.703596",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:46.804004",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:46.806907",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:47.874701",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:51.363084",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:51.367468",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:51.371115",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:37:53.070760",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
         "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. This task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T17:38:01.754963",
+    "timestamp": "2025-06-10T08:26:26.108428",
+    "job_name": "demo_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:26:26.110075",
+    "job_name": "demo_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/demo_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:26:30.368259",
     "job_name": "compliance_analyst",
     "destination": "email",
     "success": true,
@@ -1274,7 +324,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:38:06.492073",
+    "timestamp": "2025-06-10T08:26:32.200846",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -1285,12 +335,12 @@
           "jovanerkel@gmail.com"
         ],
         "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T17:38:06.497192",
+    "timestamp": "2025-06-10T08:26:32.202360",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -1301,81 +351,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:38:28.707300",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:38:28.711551",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:38:47.516979",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:38:47.521128",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:38:55.088738",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:38:55.094634",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:38:59.947724",
+    "timestamp": "2025-06-10T08:26:32.760111",
     "job_name": "test_export_job",
     "destination": "email",
     "success": true,
@@ -1385,59 +361,12 @@
           "test@example.com"
         ],
         "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T17:39:00.914029",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:00.917495",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:00.920177",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:03.016789",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:05.748128",
+    "timestamp": "2025-06-10T08:26:56.871011",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -1448,12 +377,12 @@
           "jovanerkel@gmail.com"
         ],
         "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be submitted by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T17:39:05.751557",
+    "timestamp": "2025-06-10T08:26:56.874411",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -1464,49 +393,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:39:09.291844",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:27.230021",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with the deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:27.234849",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:39:46.703592",
+    "timestamp": "2025-06-10T08:27:20.417270",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -1522,7 +409,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:39:46.707412",
+    "timestamp": "2025-06-10T08:27:20.419071",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -1533,54 +420,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:40:03.739244",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:03.742555",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:07.461088",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with the deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:07.465650",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:10.611943",
+    "timestamp": "2025-06-10T08:27:33.639868",
     "job_name": "compliance_analyst",
     "destination": "file",
     "success": true,
@@ -1591,154 +431,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:40:11.027696",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:11.031374",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:11.034570",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:11.540689",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:19.729658",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:23.347549",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:23.351200",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:45.385212",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:40:45.390473",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:03.338087",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:03.343591",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:13.633227",
+    "timestamp": "2025-06-10T08:27:34.840628",
     "job_name": "test_export_job",
     "destination": "file",
     "success": true,
@@ -1749,7 +442,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:41:13.637065",
+    "timestamp": "2025-06-10T08:27:34.841805",
     "job_name": "test_export_job",
     "destination": "log",
     "success": true,
@@ -1758,70 +451,22 @@
     }
   },
   {
-    "timestamp": "2025-06-09T17:41:16.798097",
-    "job_name": "demo_job",
+    "timestamp": "2025-06-10T08:27:43.939045",
+    "job_name": "compliance_analyst",
     "destination": "email",
     "success": true,
     "details": {
       "details": {
         "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
+          "compliance@company.com"
         ],
-        "subject": "Ghost Employee Summary - Demo Job",
+        "subject": "Compliance Summary",
         "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T17:41:16.802352",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:16.806160",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:20.025460",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:20.036216",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:20.454452",
+    "timestamp": "2025-06-10T08:27:44.977181",
     "job_name": "test_export_job",
     "destination": "email",
     "success": true,
@@ -1831,581 +476,39 @@
           "test@example.com"
         ],
         "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:21.230886",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:30.184862",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:39.799755",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:39.803838",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:56.589536",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:41:56.594973",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:10.372517",
-    "job_name": "Data Entry Specialist",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:10.382362",
-    "job_name": "Data Entry Specialist",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:15.239124",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:15.245075",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:22.632548",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:22.638811",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:23.328570",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:23.334473",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:23.339937",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:27.964719",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:31.567172",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:34.160888",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:34.167857",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:36.796361",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:52.005141",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:42:52.010366",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:08.757940",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:08.762597",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:28.051901",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:28.060640",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:29.277327",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:29.281285",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:31.579528",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:31.584025",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:31.588044",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:37.784919",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report. The deadline for this task is the upcoming Friday and it has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:38.292583",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:44.203108",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be prepared and delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:47.488082",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with the deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T17:43:47.492841",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:13.767314",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:13.776939",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:33.159846",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:33.164965",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:33.744807",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:33.785648",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:33.793382",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:50:41.916747",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
         "message": "Summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T18:50:42.623895",
-    "job_name": "test_export_job",
+    "timestamp": "2025-06-10T08:27:45.942326",
+    "job_name": "sample_job",
     "destination": "email",
     "success": true,
     "details": {
       "details": {
         "recipients": [
-          "test@example.com"
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
         ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T18:50:43.259866",
+    "timestamp": "2025-06-10T08:27:45.944313",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:27:47.480125",
     "job_name": "demo_job",
     "destination": "email",
     "success": true,
@@ -2416,12 +519,12 @@
           "jovanerkel@gmail.com"
         ],
         "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T18:50:43.264957",
+    "timestamp": "2025-06-10T08:27:47.482986",
     "job_name": "demo_job",
     "destination": "log",
     "success": true,
@@ -2430,7 +533,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:50:43.271415",
+    "timestamp": "2025-06-10T08:27:47.489782",
     "job_name": "demo_job",
     "destination": "file",
     "success": true,
@@ -2441,7 +544,301 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:50:54.434344",
+    "timestamp": "2025-06-10T08:28:16.286746",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:16.289122",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:39.687767",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:39.689456",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:46.502373",
+    "job_name": "compliance_analyst",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/compliance_analyst/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:46.862602",
+    "job_name": "test_export_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/test_export_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:46.865929",
+    "job_name": "test_export_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:58.563850",
+    "job_name": "test_export_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "test@example.com"
+        ],
+        "subject": "Test Summary",
+        "message": "Summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:58.812093",
+    "job_name": "compliance_analyst",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "compliance@company.com"
+        ],
+        "subject": "Compliance Summary",
+        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:59.544392",
+    "job_name": "demo_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Demo Job",
+        "message": "Summary:\n\nThe client has requested a weekly performance report, with a deadline set for next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:59.546912",
+    "job_name": "demo_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:28:59.549405",
+    "job_name": "demo_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/demo_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:29:07.066643",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:29:07.070614",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:29:34.024326",
+    "job_name": "sample_job",
+    "destination": "email",
+    "success": true,
+    "details": {
+      "details": {
+        "recipients": [
+          "johanvanerkel@gmail.com",
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "Ghost Employee Summary - Sample Job",
+        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:29:34.026553",
+    "job_name": "sample_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/sample_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:30:01.177903",
+    "job_name": "test_export_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/test_export_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:30:01.182595",
+    "job_name": "test_export_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T08:30:02.456022",
+    "job_name": "compliance_analyst",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/compliance_analyst/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:16.703636",
+    "job_name": "Data Entry Specialist",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:16.708603",
+    "job_name": "Data Entry Specialist",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:17.341440",
+    "job_name": "test_fuzzy_job",
+    "destination": "logs",
+    "success": false,
+    "details": {
+      "error": "Unknown export destination: logs"
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:17.354270",
+    "job_name": "compliance_analyst",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/compliance_analyst/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:17.482078",
+    "job_name": "test_export_job",
+    "destination": "file",
+    "success": true,
+    "details": {
+      "details": {
+        "directory": "./exports/test_export_job/"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:17.485466",
+    "job_name": "test_export_job",
+    "destination": "log",
+    "success": true,
+    "details": {
+      "details": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-10T09:31:22.267932",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -2457,7 +854,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:50:54.439174",
+    "timestamp": "2025-06-10T09:31:22.272917",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -2468,125 +865,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:51:14.694310",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:14.699657",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:33.224753",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:33.230378",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:57.275601",
-    "job_name": "Data Entry Specialist",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:57.285224",
-    "job_name": "Data Entry Specialist",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:57.416060",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:57.449510",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:51:57.457342",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:52:03.650134",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been allocated to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:52:04.582637",
+    "timestamp": "2025-06-10T09:31:23.582010",
     "job_name": "compliance_analyst",
     "destination": "email",
     "success": true,
@@ -2601,60 +880,22 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:05.499867",
-    "job_name": "crm_ops_job",
+    "timestamp": "2025-06-10T09:31:24.158939",
+    "job_name": "test_export_job",
     "destination": "email",
     "success": true,
     "details": {
       "details": {
         "recipients": [
-          "johanvanerkel@gmail.com"
+          "test@example.com"
         ],
-        "subject": "CRM Summary - Ghost Employee",
-        "message": "Daily CRM update:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "subject": "Test Summary",
+        "message": "Summary:\n\nThe client has requested a weekly performance report to be delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:05.510082",
-    "job_name": "crm_ops_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/crm_ops_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:52:05.752291",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:52:05.761391",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:52:06.473762",
+    "timestamp": "2025-06-10T09:31:25.497012",
     "job_name": "demo_job",
     "destination": "email",
     "success": true,
@@ -2665,12 +906,12 @@
           "jovanerkel@gmail.com"
         ],
         "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
+        "message": "Summary:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:06.546375",
+    "timestamp": "2025-06-10T09:31:25.499514",
     "job_name": "demo_job",
     "destination": "log",
     "success": true,
@@ -2679,7 +920,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:06.557949",
+    "timestamp": "2025-06-10T09:31:25.502286",
     "job_name": "demo_job",
     "destination": "file",
     "success": true,
@@ -2690,7 +931,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:17.214463",
+    "timestamp": "2025-06-10T09:31:28.927659",
     "job_name": "crm_ops_job",
     "destination": "email",
     "success": true,
@@ -2700,12 +941,12 @@
           "johanvanerkel@gmail.com"
         ],
         "subject": "CRM Summary - Ghost Employee",
-        "message": "Daily CRM update:\n\nThe file instructs to update the contact information of an individual named Bob in the Customer Relationship Management (CRM) system.\n\nTasks:\n- Update the contact information of Bob in the CRM system (Due: N/A, Assigned: None)"
+        "message": "Daily CRM update:\n\nThe client has requested a weekly performance report, with a delivery deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
       }
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:17.225609",
+    "timestamp": "2025-06-10T09:31:28.931932",
     "job_name": "crm_ops_job",
     "destination": "file",
     "success": true,
@@ -2716,7 +957,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:26.371397",
+    "timestamp": "2025-06-10T09:31:42.014976",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -2732,7 +973,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:26.384263",
+    "timestamp": "2025-06-10T09:31:42.017339",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,
@@ -2743,158 +984,16 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:45.458697",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
+    "timestamp": "2025-06-10T09:31:49.650990",
+    "job_name": "test_fuzzy_job",
+    "destination": "logs",
+    "success": false,
     "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report to be prepared and delivered by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
+      "error": "Unknown export destination: logs"
     }
   },
   {
-    "timestamp": "2025-06-09T18:52:45.470728",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:05.584801",
-    "job_name": "test_export_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/test_export_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:05.590216",
-    "job_name": "test_export_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:06.197439",
-    "job_name": "sample_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Sample Job",
-        "message": "Here is your daily summary:\n\nThe client has requested a weekly performance report, with the deadline set for the upcoming Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:06.204507",
-    "job_name": "sample_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/sample_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:06.319310",
-    "job_name": "compliance_analyst",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/compliance_analyst/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:13.185585",
-    "job_name": "test_export_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "test@example.com"
-        ],
-        "subject": "Test Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:13.302806",
-    "job_name": "compliance_analyst",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "compliance@company.com"
-        ],
-        "subject": "Compliance Summary",
-        "message": "Summary:\n\nThe client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:14.833452",
-    "job_name": "demo_job",
-    "destination": "email",
-    "success": true,
-    "details": {
-      "details": {
-        "recipients": [
-          "johanvanerkel@gmail.com",
-          "jovanerkel@gmail.com"
-        ],
-        "subject": "Ghost Employee Summary - Demo Job",
-        "message": "Summary:\n\nThe client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.\n\nTasks:\n- Update contact Alice (Due: N/A, Assigned: None)"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:14.841631",
-    "job_name": "demo_job",
-    "destination": "log",
-    "success": true,
-    "details": {
-      "details": {}
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:14.849216",
-    "job_name": "demo_job",
-    "destination": "file",
-    "success": true,
-    "details": {
-      "details": {
-        "directory": "./exports/demo_job/"
-      }
-    }
-  },
-  {
-    "timestamp": "2025-06-09T18:53:24.144154",
+    "timestamp": "2025-06-10T09:32:05.228093",
     "job_name": "sample_job",
     "destination": "email",
     "success": true,
@@ -2910,7 +1009,7 @@
     }
   },
   {
-    "timestamp": "2025-06-09T18:53:24.154585",
+    "timestamp": "2025-06-10T09:32:05.231694",
     "job_name": "sample_job",
     "destination": "file",
     "success": true,

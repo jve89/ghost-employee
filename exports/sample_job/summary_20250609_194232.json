@@ -1,0 +1,17 @@
+{
+  "summary": "The client has requested a weekly performance report. The task has been assigned to Lisa and the deadline for completion is next Friday.",
+  "tasks": [
+    {
+      "job_id": "sample_job",
+      "source": "unknown",
+      "description": "Update contact Alice",
+      "summary": "The client has requested a weekly performance report. The task has been assigned to Lisa and the deadline for completion is next Friday.",
+      "created_at": "2025-06-09T19:42:24.548927",
+      "assignee": null,
+      "timestamp": "2025-06-09T18:51:53.845966",
+      "status": "success",
+      "executed_at": "2025-06-09T19:42:24.548980",
+      "entity": "Alice"
+    }
+  ]
+}

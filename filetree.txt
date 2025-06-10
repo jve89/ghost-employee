@@ -75,17 +75,17 @@
 ./logs/timesheets/demo_job_timesheet.json
 ./logs/timesheets/prepare_interns_timesheet.json
 ./logs/timesheets/sample_job_timesheet.json
-./logs/timesheets/test_timesheet.json
 ./logs/timesheets/test_export_job_timesheet.json
+./logs/timesheets/test_timesheet.json
 ./makefile
 ./memory/compliance_analyst.json
-./memory/crm_001_contacts.json
-./memory/preferences_crm_ops_job.json
 ./memory/compliance_analyst_contacts.json
-./memory/demo_job_contacts.json
-./memory/sample_job_contacts.json
+./memory/crm_001_contacts.json
 ./memory/data_entry_specialist_contacts.json
+./memory/demo_job_contacts.json
 ./memory/mailgun_	test_example.com.json
+./memory/preferences_crm_ops_job.json
+./memory/sample_job_contacts.json
 ./memory/test_export_job_contacts.json
 ./requirements.txt
 ./run.py
@@ -103,5 +103,8 @@
 ./watched/interns_list.txt
 ./watched/list_interns.txt
 ./watched/notes_old.txt
-./watched/test_interns.txt
 ./watched/test_exports/test_trigger.txt
+./watched/test_interns.txt
+./watched/test_inbox/fuzzy_email_001.txt
+./watched/test_inbox/fuzzy_email_002.txt
+./watched/test_inbox/fuzzy_email_003.txt

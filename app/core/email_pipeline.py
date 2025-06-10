@@ -1,3 +1,7 @@
+import os
+import uuid
+import json
+from datetime import datetime
 from infrastructure.task_parser.gpt_parser import parse_text_to_summary
 from app.services.task_service import extract_tasks
 from app.services.simple_executor import execute_tasks
@@ -35,7 +39,24 @@ def process_email_content(subject: str, body: str, job_config: dict):
         if job_config.get("use_gpt_replies"):
             generate_and_send_reply(subject, body, summary.content, tasks, job_config)
 
+        # ✅ Log to email jobs memory (for dashboard tile)
+        log_email_triggered_job(subject, job_config, status="completed")
+
         print(f"[EmailPipeline] ✅ Email processed and saved to memory.")
 
     except Exception as e:
         print(f"[EmailPipeline] ❌ Failed to process email: {e}")
+        log_email_triggered_job(subject, job_config, status="error")
+
+def log_email_triggered_job(subject, job_config, status="completed"):
+    entry = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "job_type": job_config.get("job_name", "unknown"),
+        "sender": job_config.get("sender", "unknown"),
+        "subject": subject,
+        "status": status
+    }
+
+    os.makedirs("memory", exist_ok=True)
+    with open(f"memory/mailgun_{uuid.uuid4()}.json", "w") as f:
+        json.dump(entry, f, indent=2)

@@ -1,0 +1,16 @@
+[
+  {
+    "timestamp": "2025-06-10T09:31:17.340972",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T09:31:49.650385",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  }
+]
