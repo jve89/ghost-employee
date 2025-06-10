@@ -12,5 +12,61 @@
     "summary": "The client has requested a weekly performance report to be completed by next Friday. The task has been assigned to Lisa.",
     "tasks_executed": 1,
     "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:09:00.553983",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:19:46.660845",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:20:18.585481",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:25:52.924447",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:26:24.814227",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, which is due by next Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:27:03.199129",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T11:27:34.900462",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-10T12:02:55.464774",
+    "job": "test_fuzzy_job",
+    "summary": "The client has requested a weekly performance report, with a deadline set for the upcoming Friday. The task has been assigned to Lisa.",
+    "tasks_executed": 1,
+    "status": "success"
   }
 ]
