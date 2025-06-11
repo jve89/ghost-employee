@@ -1,6 +1,0 @@
-📝 Summary:
-source_file='johanvanerkel@gmail.com' content='The email does not contain any content to summarize. Please provide the content of the email for summarization.' generated_at=datetime.datetime(2025, 6, 9, 17, 35, 53, 236594)
-
-📋 Tasks:
-
-✅ Execution Results:

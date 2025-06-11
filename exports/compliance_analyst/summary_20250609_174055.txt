@@ -1,8 +1,0 @@
-📝 Summary:
-source_file='johanvanerkel@gmail.com' content='The email does not contain any content to summarise. Please provide the content of the email.' generated_at=datetime.datetime(2025, 6, 9, 17, 40, 49, 71102)
-
-📋 Tasks:
-- Task parsing failed – manual review needed. (Assigned: Unassigned)
-
-✅ Execution Results:
-- Task parsing failed – manual review needed.: success

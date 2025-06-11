@@ -1,8 +1,0 @@
-📝 Summary:
-source_file='no-reply@accounts.google.com' content='The email is a security alert from Google about a new app password created for the Ghost Employee App on the account jovanerkel@gmail.com. If this action was not initiated by the user, it suggests that someone else may be using the account. The user is advised to check and secure their account immediately.' generated_at=datetime.datetime(2025, 6, 10, 11, 26, 54, 39049)
-
-📋 Tasks:
-- Check and secure the account immediately (Assigned: User)
-
-✅ Execution Results:
-- Check and secure the account immediately: success

@@ -1,8 +1,0 @@
-📝 Summary:
-source_file='email' content='Summary generation failed.' generated_at=datetime.datetime(2025, 6, 9, 17, 46, 13, 430679)
-
-📋 Tasks:
-- Task parsing failed – manual review needed. (Assigned: Unassigned)
-
-✅ Execution Results:
-- Task parsing failed – manual review needed.: success
