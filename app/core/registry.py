@@ -1,6 +1,7 @@
 from infrastructure.exporters.log_exporter import LogExporter
 from infrastructure.exporters.file_exporter import FileExporter
 from infrastructure.exporters.mailgun_exporter import MailgunExporter
+from infrastructure.exporters.notion_exporter import NotionExporter
 
 def get_exporters(destination_type: str) -> list:
     """
@@ -12,5 +13,7 @@ def get_exporters(destination_type: str) -> list:
         return [lambda config, job_id: FileExporter(config=config, job_id=job_id)]
     elif destination_type == "email":
         return [lambda config, job_id: MailgunExporter(config=config, job_id=job_id)]
+    elif destination_type == "notion":
+        return [lambda config, job_id: NotionExporter(config=config, job_id=job_id)]
     else:
         raise ValueError(f"Unknown export destination: {destination_type}")

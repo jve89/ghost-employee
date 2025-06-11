@@ -1,12 +1,13 @@
 import asyncio
 import signal
-from app.jobs.sample_job import SampleJob
 from config.config_loader import load_all_job_configs
+from app.jobs.job_registry import get_job_class
 
 running_tasks = []
 
 async def run_job_periodically(config):
-    job = SampleJob()
+    job_class = get_job_class(config.job_id)
+    job = job_class()
     while True:
         print(f"[Scheduler] Running job: {config.job_name}")
         job.run(config)
@@ -24,8 +25,9 @@ async def main():
 
     # Schedule all jobs
     for config in job_configs:
-        task = asyncio.create_task(run_job_periodically(config))
-        running_tasks.append(task)
+        if getattr(config, "active", False):
+            task = asyncio.create_task(run_job_periodically(config))
+            running_tasks.append(task)
 
     # Setup signal handlers
     loop = asyncio.get_running_loop()

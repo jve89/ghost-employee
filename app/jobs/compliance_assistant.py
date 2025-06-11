@@ -1,7 +1,7 @@
-# app/jobs/compliance_analyst.py
+# app/jobs/compliance_assistant.py
 
 """
-✅ Compliance Analyst Job
+✅ Compliance Assistant Job
 This job mimics a compliance officer reviewing regulatory communications
 and extracting actionable compliance items for tracking and reporting.
 """
@@ -19,7 +19,7 @@ from app.services.demo_report_generator import generate_demo_report
 from config.config_loader import load_job_config
 
 
-class ComplianceAnalystJob:
+class ComplianceAssistantJob:
     def __init__(self):
         self.summariser: Summariser = GPTSummariser()
         self.parser: TaskParser = GPTTaskParser()
@@ -47,12 +47,20 @@ class ComplianceAnalystJob:
             status="success"
         )
 
-        dispatch_exports(config, summary, tasks)
+        dispatch_exports(
+            output_data={
+                "summary": summary,
+                "tasks": [task.model_dump() for task in tasks],
+                "job_id": config.job_id
+            },
+            destination_configs=config.export_destinations,
+            job_name=config.job_name
+        )
 
         generate_demo_report(
             summary=summary.content,
-            tasks=[task.model_dump() for task, _ in tasks],
-            results=[{"description": task.description, "status": task.status or "pending"} for task, _ in tasks],
+            tasks=[task.model_dump() for task in tasks],
+            results=[{"description": task.description, "status": task.status or "pending"} for task in tasks],
             job_id=config.job_name
         )
 
@@ -60,5 +68,5 @@ class ComplianceAnalystJob:
 
 
 if __name__ == "__main__":
-    config = load_job_config("compliance_analyst")
-    ComplianceAnalystJob().run(config)
+    config = load_job_config("compliance_assistant")
+    ComplianceAssistantJob().run(config)

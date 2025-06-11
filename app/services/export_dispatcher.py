@@ -1,4 +1,5 @@
 from typing import List, Dict, Any
+from pydantic import BaseModel
 from app.core.models import ExportDestination, Task
 from app.core.registry import get_exporters
 from infrastructure.logger.export_status_log import log_export_status
@@ -6,9 +7,21 @@ from infrastructure.exporters.file_exporter import FileExporter
 from infrastructure.exporters.log_exporter import LogExporter
 
 def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[ExportDestination], job_name: str = "unknown_job") -> None:
+    if isinstance(output_data.get("summary"), BaseModel):
+        output_data["summary"] = output_data["summary"].model_dump()
+
+    if "tasks" in output_data:
+        output_data["tasks"] = [
+            t.model_dump() if isinstance(t, BaseModel) else t for t in output_data["tasks"]
+        ]
+        
     for destination in destination_configs:
-        dest_type = destination.type
-        config = destination.config
+        if isinstance(destination, tuple):
+            # Legacy fallback: tuple format
+            dest_type, config = destination
+        else:
+            dest_type = destination.type
+            config = destination.config
 
         try:
             exporters = get_exporters(dest_type)
@@ -23,14 +36,14 @@ def dispatch_exports(output_data: Dict[str, Any], destination_configs: List[Expo
                         for t in output_data["tasks"]
                     )
                     config = config.copy()
-                    config["message"] = message_template.replace("{{summary}}", output_data["summary"]).replace("{{tasks}}", tasks_text)
+                    config["message"] = message_template.replace("{{summary}}", str(output_data["summary"])).replace("{{tasks}}", tasks_text)
 
                 exporter.export(output_data, config)
                 log_export_status(job_name, dest_type, True, {"details": config})
 
         except Exception as e:
             print(f"[ERROR] Export to {dest_type} failed: {e}")
-            log_export_status(job_name, dest_type, False, {"error": str(e)})
+            log_export_status(job_name, dest_type, False, {"error": repr(e)})
 
 def export_results(job_id: str, summary: str, tasks: list[Task], execution_results: list[dict], job_config: dict):
     print("[ExportDispatcher] 📤 Exporting results (email pipeline)...")

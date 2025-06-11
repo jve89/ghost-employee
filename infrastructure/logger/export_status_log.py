@@ -30,6 +30,6 @@ def log_export_status(job_name: str, destination_type: str, success: bool, detai
     data.append(log_entry)
 
     with open(EXPORT_LOG_PATH, "w") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, default=str)
 
     print(f"[EXPORT LOG] {destination_type.upper()} export {'succeeded' if success else 'failed'}")
