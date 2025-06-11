@@ -199,3 +199,4 @@ exports/
 memory/
 logs/timesheets/
 watched/test_exports/
+logs/export_status.json
