@@ -14,17 +14,28 @@ class CRMPlugin:
     def can_handle(self, task: Any) -> bool:
         description = (task.description or "").lower()
 
-        # Define simple flexible regex patterns
+        # Expanded regex patterns to match more real-world CRM/admin task phrases
         patterns = [
+            # CRM contacts
             r"\badd\b.*\b(crm|customer relationship management)\b",
-            r"\bupdate\b.*\bcontact\b",
-            r"\bedit\b.*\bcontact\b",
-            r"\bamend\b.*\bcontact\b",
-            r"\bmodify\b.*\bcontact\b",
-            r"\bchange\b.*\bcontact\b",
+            r"\b(update|edit|amend|modify|change)\b.*\b(contact|entry|record)\b",
             r"\bassign\b.*\b(contact|representative|liaison|manager)\b",
-            r"\bset\b.*\bas\b.*\b(contact|liaison|rep|representative)\b",
-            r"\bmake\b.*\b(contact|liaison)\b.*\bfor\b.*\b\w+"
+            r"\b(set|mark)\b.*\bas\b.*\b(contact|liaison|rep|representative)\b",
+            r"\bmake\b.*\b(contact|liaison)\b.*\bfor\b.*\b\w+",
+
+            # Onboarding / HR admin
+            r"\bcomplete\b.*\bonboarding form\b",
+            r"\bsend\b.*\bonboarding documents\b",
+            r"\bschedule\b.*\borientation\b",
+            r"\bbook\b.*\bintro call\b",
+            r"\binitiate\b.*\b(employee|staff)? onboarding\b",
+
+            # CRM task follow-up
+            r"\bcheck in\b.*\b(client|lead)\b",
+            r"\bfollow up\b.*\b(client|lead|prospect)\b",
+            r"\bsend\b.*\bwelcome (email|message)\b",
+            r"\bassign\b.*\blead\b",
+            r"\bcreate\b.*\b(new )?(client|lead) profile\b"
         ]
 
         for pattern in patterns:
