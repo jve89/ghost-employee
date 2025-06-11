@@ -21,7 +21,7 @@
     {
       "type": "email",
       "config": {
-        "recipients": ["test@example.com"],
+        "recipients": ["jovanerkel@gmail.com"],
         "subject": "Test Summary",
         "message": "Summary:\n\n{{summary}}\n\nTasks:\n{{tasks}}"
       }

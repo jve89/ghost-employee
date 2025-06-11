@@ -24,20 +24,25 @@ class MailgunExporter(Exporter):
             return
 
         message = self._generate_message(output_data, default_message)
+        html_message = self._generate_html_message(output_data)
+
+        print(f"[MailgunExporter] 📬 Sending email to {to_emails} via {domain}")
 
         response = requests.post(
-            f"https://api.mailgun.net/v3/{domain}/messages",
+            f"https://api.eu.mailgun.net/v3/{domain}/messages",
             auth=("api", api_key),
             data={
                 "from": os.getenv("MAILGUN_FROM", f"Ghost Employee <bot@{domain}>"),
                 "to": to_emails,
                 "subject": subject,
-                "text": message
+                "text": message,
+                "html": html_message
             }
         )
 
         if response.status_code == 200:
             print("[MailgunExporter] ✅ Email sent successfully.")
+            print(f"[MailgunExporter] 📧 Response ID: {response.json().get('id')}")
         else:
             print(f"[MailgunExporter] ❌ Failed to send email: {response.status_code} - {response.text}")
 
@@ -71,3 +76,13 @@ class MailgunExporter(Exporter):
         except Exception as e:
             print(f"[MailgunExporter] ⚠️ GPT message generation failed: {e}")
             return fallback_template.replace("{{summary}}", summary).replace("{{tasks}}", task_text)
+
+    def _generate_html_message(self, output_data: dict) -> str:
+        summary = output_data.get("summary", "")
+        tasks = output_data.get("tasks", [])
+        task_items = "".join(f"<li>{t.get('description', '')}</li>" for t in tasks)
+
+        return (
+            f"<p><strong>Summary:</strong></p><p>{summary}</p>"
+            f"<p><strong>Tasks:</strong></p><ul>{task_items}</ul>"
+        )
