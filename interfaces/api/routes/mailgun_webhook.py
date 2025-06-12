@@ -1,6 +1,10 @@
 # interfaces/api/routes/mailgun_webhook.py
 
-from fastapi import APIRouter, Request, HTTPException
+from datetime import datetime
+from pathlib import Path
+import shutil
+
+from fastapi import APIRouter, Request, HTTPException, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 from starlette.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
@@ -63,3 +67,38 @@ def derive_job_id_from_recipient(recipient: str) -> str | None:
         if len(parts) == 2:
             return parts[1].strip()
     return None
+
+@router.post("/mailgun/incoming")
+async def receive_generic_email(
+    sender: str = Form(...),
+    subject: str = Form(...),
+    attachment_1: UploadFile = File(None)
+):
+    try:
+        timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H-%M-%S")
+        base_name = f"mailgun_{timestamp}"
+        save_dir = Path("watched/test_inbox")
+        save_dir.mkdir(parents=True, exist_ok=True)
+
+        # 📝 Save attachment if it's a .txt
+        if attachment_1 and attachment_1.filename.endswith(".txt"):
+            save_path = save_dir / f"{base_name}__{attachment_1.filename}"
+            with open(save_path, "wb") as f:
+                shutil.copyfileobj(attachment_1.file, f)
+
+        # 🧠 Save email metadata
+        memory_file = Path("memory") / f"{base_name}.json"
+        metadata = {
+            "timestamp": timestamp,
+            "sender": sender,
+            "subject": subject,
+            "status": "saved",
+            "job_type": "email_task"
+        }
+        with open(memory_file, "w") as f:
+            f.write(json.dumps(metadata, indent=2))
+
+        return JSONResponse(content={"status": "ok", "message": "✅ Email saved."})
+
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})

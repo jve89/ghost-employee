@@ -78,6 +78,17 @@
 ./logs/timesheets/test_timesheet.json
 ./makefile
 ./memory/compliance_analyst.json
+./memory/compliance_analyst_contacts.json
+./memory/compliance_assistant_contacts.json
+./memory/crm_001_contacts.json
+./memory/data_entry_specialist_contacts.json
+./memory/demo_job_contacts.json
+./memory/mailgun_	test_example.com.json
+./memory/mailgun_03f092fd-1186-4cf8-8355-a5fb7d251903.json
+./memory/sample_job_contacts.json
+./memory/test_export_job_contacts.json
+./memory/test_fuzzy_job_01_contacts.json
+./notion_list_users.py
 ./requirements.txt
 ./run.py
 ./run_compliance_job.py
@@ -86,6 +97,8 @@
 ./run_watchers.py
 ./test_email_pipeline.py
 ./test_mailgun.py
+./test_notion_export_multiple.py
+./test_plugin_crm_patterns.py
 ./test_plugin_exec.py
 ./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (1).pdf
 ./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (2).pdf

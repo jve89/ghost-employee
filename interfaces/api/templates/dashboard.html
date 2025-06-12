@@ -239,6 +239,39 @@
             }
         }
 
+        async function loadRetryStats() {
+            try {
+                const res = await fetch("/dashboard/retry-stats");
+                const data = await res.json();
+                document.getElementById("retryStatsBox").innerHTML = `
+                    <b>Total retry tasks:</b> ${data.total_tasks}<br/>
+                    <b>Last retry attempt:</b> ${data.last_retry_attempt}
+                `;
+            } catch (err) {
+                console.error("Failed to load retry stats:", err);
+                document.getElementById("retryStatsBox").innerText = "❌ Failed to load retry stats.";
+            }
+        }
+
+        async function fetchEmailActivity() {
+            const res = await fetch("/dashboard/email-jobs");
+            const data = await res.json();
+
+            const list = document.getElementById("email-activity-list");
+            list.innerHTML = "";
+
+            if (data.length === 0) {
+                list.innerHTML = "<li class='text-gray-400'>No recent email jobs</li>";
+                return;
+            }
+
+            data.forEach(entry => {
+                const item = document.createElement("li");
+                item.textContent = `${entry.timestamp} — ${entry.subject}`;
+                list.appendChild(item);
+            });
+        }
+
         async function loadExportLogs() {
             try {
                 const res = await fetch('/dashboard/exports');
@@ -329,6 +362,7 @@
        
         window.onload = function () {
             refreshDashboard();
+            loadRetryStats();
             loadJobs();
             loadLogs();
             loadJobStats();
@@ -339,6 +373,8 @@
             startRefreshLoop(10000);
             loadEmailTriggeredJobs();
             setInterval(loadEmailTriggeredJobs, 30000);  // Refresh every 30 seconds
+            fetchEmailActivity();
+            setInterval(fetchEmailActivity, 10000); // refresh every 10 sec
         };
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -467,6 +503,18 @@
             </tbody>
         </table>
 
+        <div class="mt-4 p-4 bg-white border border-gray-200 rounded shadow text-sm text-gray-800">
+            <h3 class="font-semibold mb-2">📊 Retry Queue Stats</h3>
+            <div id="retryStatsBox">Loading retry stats...</div>
+        </div>
+
+        <div class="rounded-2xl shadow p-4 border w-full max-w-md">
+            <h2 class="text-lg font-semibold mb-2">📬 Recent Email Triggers</h2>
+                <ul id="email-activity-list" class="text-sm text-gray-700 space-y-1">
+                    <li>Loading...</li>
+                </ul>
+        </div>
+
         <div class="mt-6">
             <h2 class="text-xl font-bold mb-2">Recent Activity</h2>
             <div id="activityLog" class="bg-gray-100 p-3 rounded shadow text-sm font-mono max-h-80 overflow-y-scroll"></div>
@@ -488,6 +536,10 @@
                 <input type="checkbox" id="exportFilterFailed" class="ml-2">
             </div>
         </div>
+
+        <form method="post" action="/dashboard/retry-failed" style="margin-top: 20px;">
+            <button type="submit">🔁 Retry Failed Tasks</button>
+        </form>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">📧 Email-Triggered Jobs</h2>
         <div id="emailActivityLog" class="bg-gray-100 p-3 rounded shadow text-sm font-mono max-h-80 overflow-y-scroll">Loading...</div>

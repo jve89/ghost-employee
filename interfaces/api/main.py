@@ -3,37 +3,50 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.sessions import SessionMiddleware
+
+from interfaces.api.routes.auth import router as auth_router
 from interfaces.api.routes.mailgun_webhook import router as mailgun_router
 from interfaces.api.routes.jobs import router as jobs_router
 from interfaces.api.routes.dashboard import router as dashboard_router
+
 from config.config_loader import load_all_job_configs
 from app.jobs.sample_job import SampleJob
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.activity_log import activity_log
+
 import threading
 import time
 
+# --- Init FastAPI app ---
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key="supersecretkey123")
 
+# --- Register routers ---
+app.include_router(auth_router)
 app.include_router(jobs_router, prefix="/jobs")
 app.include_router(dashboard_router)
 app.include_router(mailgun_router)
 
 templates = Jinja2Templates(directory="interfaces/api/templates")
 
+# --- Root Redirect ---
 @app.get("/")
 def root():
     return RedirectResponse(url="/dashboard")
 
+# --- Activity log endpoint ---
 @app.get("/logs/activity")
 def get_activity_log():
     return activity_log.get_recent(50)
 
+# --- (Unused) Dashboard fallback (can be deleted later) ---
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request):
     job_configs = load_all_job_configs()
     return templates.TemplateResponse("dashboard.html", {"request": request, "jobs": job_configs})
 
+# --- Background job threads ---
 @app.on_event("startup")
 def start_background_jobs():
     job_configs = load_all_job_configs()

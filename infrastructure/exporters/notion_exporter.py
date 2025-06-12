@@ -3,6 +3,8 @@ import requests
 from datetime import datetime
 from typing import Dict, Any
 from dotenv import load_dotenv  
+from infrastructure.retry.retry_queue_store import retry_queue_store
+from app.core.models import Task  # Make sure this matches your task model
 
 load_dotenv()                   
 
@@ -46,6 +48,7 @@ class NotionExporter:
             title = f"{self.job_id} – Task {i+1} – {datetime.now().strftime('%Y-%m-%d %H:%M')}"
             due_date = task.get("due_date")
             assignee = task.get("assignee", "Unassigned")
+            priority = task.get("priority", "Normal")  # ← NEW: use priority if present
 
             payload = {
                 "parent": {"database_id": self.database_id},
@@ -63,7 +66,7 @@ class NotionExporter:
                         "people": [{"id": NOTION_USER_MAP[assignee]}] if assignee in NOTION_USER_MAP else []
                     },
                     "Priority": {
-                        "select": {"name": "Normal"}  # Make sure "Normal" exists in Notion
+                        "select": {"name": priority}  # ← NEW: use task priority dynamically
                     },
                     "Source File": {
                         "select": {"name": source_file} if source_file else None
@@ -84,3 +87,11 @@ class NotionExporter:
                 print(f"[NotionExporter] ✅ Task {i+1} exported to Notion.")
             else:
                 print(f"[NotionExporter] ❌ Task {i+1} failed: {response.status_code} – {response.text}")
+                
+                # Log this task to persistent retry queue
+                try:
+                    task_obj = Task(**task)
+                    retry_queue_store.add(task_obj, timestamp=datetime.utcnow().isoformat())
+                    print(f"[NotionExporter] 🔁 Task {i+1} added to retry queue.")
+                except Exception as e:
+                    print(f"[NotionExporter] ⚠️ Failed to add task to retry queue: {e}")

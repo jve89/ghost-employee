@@ -1,10 +1,11 @@
 import os
 import json
 import glob
+from datetime import datetime
 from pydantic import BaseModel
 from pathlib import Path
 from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from infrastructure.logger.memory_logger import logger
 from infrastructure.retry.retry_queue_store import retry_queue_store
@@ -24,6 +25,8 @@ class JobCreateRequest(BaseModel):
 
 @router.get("/", response_class=HTMLResponse)
 async def dashboard(request: Request):
+    if not request.session.get("logged_in"):
+        return RedirectResponse(url="/login", status_code=303)
     return templates.TemplateResponse("dashboard.html", {"request": request})
 
 @router.get("/jobs/logs")
@@ -107,6 +110,27 @@ def get_recent_exports():
             content={"error": f"Failed to read export log: {str(e)}"}
         )
 
+@router.get("/dashboard/retry-stats")
+def get_retry_stats():
+    try:
+        queue = retry_queue_store.get_all()
+        total_tasks = len(queue)
+        last_retry = None
+
+        if total_tasks > 0:
+            timestamps = [entry.get("timestamp") for entry in queue if "timestamp" in entry]
+            parsed = [datetime.fromisoformat(t) for t in timestamps if t]
+            if parsed:
+                last_retry = max(parsed).isoformat()
+
+        return {
+            "total_tasks": total_tasks,
+            "last_retry_attempt": last_retry or "n/a"
+        }
+
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
 @router.post("/dashboard/retry-export/{entry_id}")
 def retry_export(entry_id: str):
     try:
@@ -180,6 +204,15 @@ async def create_job(data: JobCreateRequest):
 
     return {"status": "created", "job": data.job_name}
 
+@router.post("/dashboard/retry-failed")
+def retry_failed_tasks():
+    try:
+        from app.services.retry_runner import retry_all_tasks
+        retry_all_tasks()
+        return RedirectResponse(url="/dashboard", status_code=303)
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
 @router.get("/dashboard/latest-compliance-export")
 def latest_compliance_export():
     from pathlib import Path
@@ -251,4 +284,12 @@ def get_email_triggered_jobs():
             break
 
     return JSONResponse(content=jobs)
-    
+
+@router.post("/dashboard/retry-task/{task_id}")
+def retry_single_task(task_id: str):
+    try:
+        from app.services.retry_runner import retry_task_by_id
+        result = retry_task_by_id(task_id)
+        return {"status": "ok", "message": result}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
