@@ -18,6 +18,7 @@ from infrastructure.logger.job_timesheet import log_job_run
 from app.services.export_dispatcher import dispatch_exports
 from config.config_loader import load_job_config
 
+
 class CRMOperationsJob:
     def __init__(self):
         self.summariser: Summariser = GPTSummariser()
@@ -37,14 +38,16 @@ class CRMOperationsJob:
             Also update Bob's contact details — his phone number changed.
         """
 
-        summary_obj = self.summariser.summarise(
+        summary = self.summariser.summarise(
             text=input_text,
             source_file=source,
             preferences=prefs
         )
 
+        summary_text = summary.content  # ✅ Ensure plain text
+
         tasks = self.parser.extract_tasks(
-            summary=summary_obj,
+            summary=summary,
             job_id=config.job_id,
             preferences=prefs
         )
@@ -57,18 +60,23 @@ class CRMOperationsJob:
 
         log_job_run(
             job_name=config.job_name,
-            summary=summary_obj.content,
+            summary=summary_text,
             tasks_executed=len(task_results),
             status="success"
         )
 
         dispatch_exports(
             output_data={
-                "summary": summary_obj.content,
+                "summary": summary_text,
                 "tasks": [task.model_dump() for task in tasks],
+                "job_id": config.job_id
             },
             destination_configs=config.export_destinations,
-            job_name=config.job_name
+            job_name=config.job_name,
+            metadata={
+                "sender": "noreply@company.com",
+                "subject": f"{config.job_name} Triggered Export"
+            }
         )
 
         return task_results

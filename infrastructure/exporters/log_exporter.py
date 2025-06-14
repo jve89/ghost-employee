@@ -1,8 +1,7 @@
 from datetime import datetime
-from app.core.models import Task, ExportResult
+from app.core.models import Task
 from app.core.interfaces import Exporter
 from infrastructure.logger.memory_logger import logger
-from infrastructure.logger.export_log import export_log
 
 class LogExporter(Exporter):
     def __init__(self, config: dict = None, job_id: str = "unknown_job"):
@@ -13,7 +12,6 @@ class LogExporter(Exporter):
         try:
             summary = output_data.get("summary", "No summary provided.")
             tasks = output_data.get("tasks", [])
-
             logger.info(f"[LogExporter] 📝 Summary:\n{summary}")
             for task in tasks:
                 logger.info(f"[LogExporter] Task: {task['description']} → {task.get('assignee', 'Unassigned')}")
@@ -25,4 +23,6 @@ class LogExporter(Exporter):
         for task in tasks:
             logger.info(f"[LogExporter] Task: {task.description} → {task.assignee or 'Unassigned'}")
         for result in execution_results:
-            logger.info(f"[LogExporter] ✅ {result['task']}: {result.get('status', 'unknown')}")
+            task_desc = result.get("task", "Unknown Task")
+            status = result.get("status", "unknown")
+            logger.info(f"[LogExporter] ✅ {task_desc}: {status}")

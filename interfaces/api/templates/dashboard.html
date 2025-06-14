@@ -304,12 +304,16 @@
                     const retryCount = entry.retry_count ?? 0;
                     const retryOrigin = entry.retry_origin ?? '-';
                     const details = JSON.stringify(entry.details, null, 2);
+                    const senderRaw = entry.sender || entry.details?.sender || "-";
+                    const subjectRaw = entry.subject || entry.details?.subject || "-";
+                    const sender = senderRaw.slice(0, 80);
+                    const subject = subjectRaw.slice(0, 80);
 
                     let retryBtn = '';
                     if (!entry.success) {
                         const disabled = entry.retry_count >= 3;
                         retryBtn = `
-                            <button onclick="retryExport('${entry.id}')" 
+                            <button onclick="retryExport('${entry.id}')"
                                     class="mt-2 ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white px-3 py-1 rounded"
                                     ${disabled ? 'disabled title="Retry limit reached"' : ''}>
                                 Retry Export
@@ -326,6 +330,8 @@
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${retryCount}</td>
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${retryOrigin}</td>
                         <td class="py-2 px-4 border-b text-sm">
+                            <div class="mb-1" title="${senderRaw}"><strong>Sender:</strong> ${sender}</div>
+                            <div class="mb-1" title="${subjectRaw}"><strong>Subject:</strong> ${subject}</div>
                             <pre class="whitespace-pre-wrap text-gray-600">${details}</pre>
                             ${retryBtn}
                         </td>
@@ -333,7 +339,7 @@
                     tableBody.appendChild(row);
                 });
 
-                // 🧠 Also populate dropdown with unique jobs
+                // 🧠 Populate dropdown with unique jobs
                 const jobs = [...new Set(data.exports.map(e => e.job_name))];
                 const dropdown = document.getElementById("exportFilterJob");
                 dropdown.innerHTML = '<option value="">All Jobs</option>';
@@ -345,6 +351,84 @@
                 });
             } catch (error) {
                 console.error("❌ Failed to load export logs:", error);
+            }
+        }
+
+        async function loadRecentEmailJobs() {
+            try {
+                const res = await fetch('/dashboard/exports');
+                const data = await res.json();
+                const container = document.getElementById("recent-email-jobs");
+                container.innerHTML = "";
+
+                const emailExports = data.exports
+                    .filter(e => e.destination === "email")
+                    .slice(-10)  // show last 10
+                    .reverse();
+
+                if (emailExports.length === 0) {
+                    container.innerHTML = `<div class="text-gray-500">No recent email jobs found.</div>`;
+                    return;
+                }
+
+                emailExports.forEach(entry => {
+                    const timestamp = new Date(entry.timestamp).toLocaleString();
+                    const sender = (entry.sender || entry.details?.sender || "-").slice(0, 80);
+                    const subject = (entry.subject || entry.details?.subject || "-").slice(0, 80);
+                    const success = entry.success ? "✅" : "❌";
+
+                    const item = document.createElement("div");
+                    item.className = "border p-2 rounded bg-gray-50 text-sm shadow-sm";
+                    item.innerHTML = `
+                        <div><strong>${success}</strong> <span class="text-gray-700">${timestamp}</span></div>
+                        <div><strong>From:</strong> <span title="${entry.sender}">${sender}</span></div>
+                        <div><strong>Subject:</strong> <span title="${entry.subject}">${subject}</span></div>
+                    `;
+                    container.appendChild(item);
+                });
+            } catch (error) {
+                console.error("❌ Failed to load recent email jobs:", error);
+                document.getElementById("recent-email-jobs").innerHTML = `<div class="text-red-600">Error loading email jobs.</div>`;
+            }
+        }
+
+        async function loadExportSummaries() {
+            try {
+                const res = await fetch("/dashboard/exports");
+                const data = await res.json();
+                const container = document.getElementById("export-summaries-list");
+                container.innerHTML = "";
+
+                const exportsWithSummary = data.exports.filter(e =>
+                    e.summary || (e.details && typeof e.details.summary === "string")
+                );
+
+                if (exportsWithSummary.length === 0) {
+                    container.innerHTML = `<div class="text-gray-500">No export summaries available.</div>`;
+                    return;
+                }
+
+                exportsWithSummary.forEach(entry => {
+                    const timestamp = new Date(entry.timestamp).toLocaleString();
+                    const summaryText = entry.summary || entry.details?.summary || "-";
+                    const summary = summaryText.length > 160
+                        ? summaryText.slice(0, 160) + "…"
+                        : summaryText;
+                    const job = entry.job_name;
+                    const status = entry.success ? "✅" : "❌";
+
+                    const item = document.createElement("div");
+                    item.className = "border p-2 rounded bg-gray-50 shadow-sm";
+                    item.innerHTML = `
+                        <div class="mb-1"><strong>${status} ${job}</strong> <span class="text-gray-600 text-xs">(${timestamp})</span></div>
+                        <div class="text-gray-700">${summary}</div>
+                    `;
+                    container.appendChild(item);
+                });
+            } catch (err) {
+                console.error("❌ Failed to load export summaries:", err);
+                document.getElementById("export-summaries-list").innerHTML =
+                    `<div class="text-red-600">Failed to load export summaries.</div>`;
             }
         }
 
@@ -375,6 +459,8 @@
             setInterval(loadEmailTriggeredJobs, 30000);  // Refresh every 30 seconds
             fetchEmailActivity();
             setInterval(fetchEmailActivity, 10000); // refresh every 10 sec
+            loadRecentEmailJobs();
+            loadExportSummaries();
         };
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -508,6 +594,14 @@
             <div id="retryStatsBox">Loading retry stats...</div>
         </div>
 
+        <!-- Recent Email Jobs Tile -->
+        <div class="bg-white rounded shadow p-4 mt-6">
+            <h2 class="text-lg font-semibold mb-2">📬 Recent Email Jobs</h2>
+                <div id="recent-email-jobs" class="space-y-2">
+                    <div class="text-gray-500">Loading recent email jobs...</div>
+                </div>
+        </div>
+
         <div class="rounded-2xl shadow p-4 border w-full max-w-md">
             <h2 class="text-lg font-semibold mb-2">📬 Recent Email Triggers</h2>
                 <ul id="email-activity-list" class="text-sm text-gray-700 space-y-1">
@@ -559,6 +653,14 @@
             <tr><td colspan="4" class="text-center text-gray-500 py-3">Loading...</td></tr>
             </tbody>
         </table>
+        </div>
+
+        <!-- 🧠 Export Summaries Tile -->
+        <div class="bg-white rounded shadow p-4 mt-6">
+            <h2 class="text-lg font-semibold mb-2">🧠 Export Summaries</h2>
+            <div id="export-summaries-list" class="space-y-2 text-sm text-gray-800">
+                <div class="text-gray-500">Loading summaries...</div>
+            </div>
         </div>
 
         <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">

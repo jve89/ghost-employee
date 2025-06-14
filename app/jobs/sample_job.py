@@ -1,5 +1,3 @@
-# app/jobs/sample_job.py
-
 """
 🚀 Full Pipeline Demo Job
 This job demonstrates the complete Ghost Employee pipeline:
@@ -32,11 +30,14 @@ class SampleJob:
         logger.info(f"Running job: {config.job_name}")
 
         input_text = override_text or "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
+
         summary = self.summariser.summarise(
             text=input_text,
             source_file=source,
-            preferences={"sender": "unknown", "subject": "N/A"}  # can hardcode now
+            preferences={"sender": "unknown", "subject": "N/A"}
         )
+
+        summary_text = summary.content
 
         # ✅ Manually define a single task
         task = Task(
@@ -44,38 +45,40 @@ class SampleJob:
             entity="Alice",
             job_id=config.job_id,
             source=source,
-            summary=summary.content,
+            summary=summary_text,
             created_at=datetime.utcnow().isoformat()
         )
 
         # ✅ Execute and collect result
         execute_task(task)
 
-        # For dispatch and reporting, use just Task list
         task_list = [task]
-
-        # For custom tuple-based functions like export report
         task_results = [(task, {"status": task.status})]
 
         # ✅ Continue pipeline
         log_job_run(
             job_name=config.job_name,
-            summary=summary.content,
+            summary=summary_text,
             tasks_executed=len(task_results),
             status="success"
         )
 
         dispatch_exports(
             output_data={
-                "summary": summary.content,
+                "summary": summary_text,
                 "tasks": [task.model_dump() for task in task_list],
+                "job_id": config.job_id
             },
             destination_configs=config.export_destinations,
-            job_name=config.job_name
+            job_name=config.job_name,
+            metadata={
+                "sender": "noreply@company.com",
+                "subject": f"{config.job_name} Triggered Export"
+            }
         )
 
         generate_demo_report(
-            summary=summary.content,
+            summary=summary_text,
             tasks=[task.model_dump() for task in task_list],
             results=[{"description": task.description, "status": task.status or "pending"} for task in task_list],
             job_id=config.job_name,

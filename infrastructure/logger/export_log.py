@@ -50,3 +50,16 @@ def retry(entry_id: str) -> bool:
 
     export_log.increment_retry(entry_id, origin="export_log_retry")
     return True
+
+def log_export(job_name, destination, success, details, retry_origin=None, retry_count=0, sender=None, subject=None):
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "job_name": job_name,
+        "destination": destination,
+        "success": success,
+        "details": details,
+        "retry_origin": retry_origin,
+        "retry_count": retry_count,
+        "sender": sender,
+        "subject": subject,
+    }

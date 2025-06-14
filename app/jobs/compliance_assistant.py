@@ -37,8 +37,10 @@ class ComplianceAssistantJob:
         summary = self.summariser.summarise(
             text=input_text,
             source_file=source,
-            preferences={"sender": "unknown", "subject": "N/A"}  # or actual values if you have them
+            preferences={"sender": "unknown", "subject": "N/A"}
         )
+
+        summary_text = summary.content  # ✅ Safely extract summary string
 
         tasks = self.parser.extract_tasks(summary, config.job_id)
 
@@ -47,23 +49,27 @@ class ComplianceAssistantJob:
 
         log_job_run(
             job_name=config.job_name,
-            summary=summary.content,
+            summary=summary_text,
             tasks_executed=len(tasks),
             status="success"
         )
 
         dispatch_exports(
             output_data={
-                "summary": summary,
+                "summary": summary_text,  # ✅ Pass as string
                 "tasks": [task.model_dump() for task in tasks],
                 "job_id": config.job_id
             },
             destination_configs=config.export_destinations,
-            job_name=config.job_name
+            job_name=config.job_name,
+            metadata={
+                "sender": "compliance@company.com",
+                "subject": "Regulatory Update: AML Thresholds"
+            }
         )
 
         generate_demo_report(
-            summary=summary.content,
+            summary=summary_text,  # ✅ Use same string
             tasks=[task.model_dump() for task in tasks],
             results=[{"description": task.description, "status": task.status or "pending"} for task in tasks],
             job_id=config.job_name

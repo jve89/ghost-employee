@@ -9,8 +9,6 @@ class FileExporter(Exporter):
     def __init__(self, config: dict = None, job_id: str = "unknown_job"):
         self.job_id = job_id
         self.config = config or {}
-
-        # Use config directory OR default to ./exports/{job_id}
         self.directory = self.config.get("directory", f"./exports/{self.job_id}")
         os.makedirs(self.directory, exist_ok=True)
 
@@ -37,6 +35,7 @@ class FileExporter(Exporter):
             f.write("\n✅ Execution Results:\n")
             for result in execution_results:
                 status = result.get("status", "unknown")
-                f.write(f"- {result['task']}: {status}\n")
+                task_desc = result.get("task", "Unknown Task")
+                f.write(f"- {task_desc}: {status}\n")
 
         print(f"[FileExporter] 📄 Full export saved to {filepath}")

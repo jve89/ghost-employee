@@ -25,13 +25,13 @@
 ./app/services/export_dispatcher.py
 ./app/services/export_service.py
 ./app/services/job_manager.py
+./app/services/job_runner.py
 ./app/services/retry_runner.py
 ./app/services/simple_executor.py
 ./app/services/summary_service.py
 ./app/services/task_parser.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
-./app/services/job_runner.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
 ./config/config_loader.py
@@ -122,6 +122,6 @@
 ./watched/test_inbox/fuzzy_email_002.txt
 ./watched/test_inbox/fuzzy_email_003.txt
 ./watched/test_inbox/mailgun_2025-06-12T15-47-19__test_email.txt
-./watched/test_inbox/test_email.txt
 ./watched/test_inbox/mailgun_test__crm_ops_job.txt
+./watched/test_inbox/test_email.txt
 ./watched/test_interns.txt

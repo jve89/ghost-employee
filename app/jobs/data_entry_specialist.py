@@ -1,5 +1,3 @@
-# app/jobs/data_entry_specialist.py
-
 """
 💼 Data Entry Specialist Job
 This job simulates a junior assistant who updates spreadsheets, CRM tools,
@@ -27,8 +25,6 @@ class DataEntrySpecialistJob:
     def run(self, config: JobConfig, override_text: str | None = None, source: str = "unknown") -> list[Task]:
         job_status.update(config.job_name)
         logger.info(f"Running job: {config.job_name}")
-        print("✅ Parsed export_destinations =", config.export_destinations)
-        print("✅ Type of first item =", type(config.export_destinations[0]) if config.export_destinations else "None")
 
         input_text = override_text or (
             "Hi team, please update our records. We have a new client: Alice Johnson, Company: Acme Corp, Email: alice@acme.com. "
@@ -38,8 +34,10 @@ class DataEntrySpecialistJob:
         summary = self.summariser.summarise(
             text=input_text,
             source_file=source,
-            preferences={"sender": "unknown", "subject": "N/A"}  # add real values later
+            preferences={"sender": "unknown", "subject": "N/A"}
         )
+
+        summary_text = summary.content
 
         tasks = self.parser.extract_tasks(summary, config.job_id)
 
@@ -48,22 +46,27 @@ class DataEntrySpecialistJob:
 
         log_job_run(
             job_name=config.job_name,
-            summary=summary.content,
+            summary=summary_text,
             tasks_executed=len(tasks),
             status="success"
         )
 
         dispatch_exports(
             output_data={
-                "summary": summary.content,
+                "summary": summary_text,
                 "tasks": [task.model_dump() for task in tasks],
+                "job_id": config.job_id
             },
             destination_configs=config.export_destinations,
-            job_name=config.job_name
+            job_name=config.job_name,
+            metadata={
+                "sender": "noreply@company.com",
+                "subject": f"{config.job_name} Triggered Export"
+            }
         )
 
         generate_demo_report(
-            summary=summary.content,
+            summary=summary_text,
             tasks=[task.model_dump() for task in tasks],
             results=[{"description": task.description, "status": task.status or "pending"} for task in tasks],
             job_id=config.job_name
