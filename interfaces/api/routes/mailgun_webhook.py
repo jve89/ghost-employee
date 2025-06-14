@@ -11,6 +11,7 @@ from starlette.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from app.jobs.job_registry import job_registry
 from config.config_loader import load_job_config
 from infrastructure.logger.activity_log import activity_log
+from app.services.job_runner import run_job
 
 import os
 import json
@@ -49,7 +50,7 @@ async def mailgun_webhook(request: Request):
         config = load_job_config(job_id)
         job = job_registry[job_id]
         activity_log.record(job_name=job_id, trigger="email", file=f"{sender} | {subject}", status="started")
-        job.run(config=config, override_text=text_input)
+        run_job(job=job, config=config, override_text=text_input, metadata={"sender": sender, "subject": subject})
         activity_log.record(job_name=job_id, trigger="email", file=f"{sender} | {subject}", status="completed")
 
         return JSONResponse(content={"status": "success"}, status_code=HTTP_200_OK)

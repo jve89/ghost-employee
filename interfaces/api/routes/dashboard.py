@@ -52,16 +52,17 @@ async def get_jobs():
 
 @router.get("/jobs/exports")
 @require_login_json
-def get_exports():
+async def get_exports(request: Request):
     return [r.dict() for r in export_log.get_logs()]
 
 @router.get("/dashboard/activity")
-def get_dashboard_activity():
+@require_login_json
+async def get_dashboard_activity(request: Request):
     return get_recent_activity()
 
 @router.get("/dashboard/job-stats")
 @require_login_json
-def job_stats():
+async def job_stats(request: Request):
     stats = {}
 
     # 📊 Load task run data from timesheets
@@ -99,7 +100,7 @@ def job_stats():
 
 @router.get("/dashboard/exports")
 @require_login_json
-def get_recent_exports():
+async def get_recent_exports(request: Request):
     log_path = "./logs/export_status.json"
 
     if not os.path.exists(log_path):
@@ -119,7 +120,7 @@ def get_recent_exports():
 
 @router.get("/dashboard/retry-stats")
 @require_login_json
-def get_retry_stats():
+async def get_retry_stats(request: Request):
     try:
         queue = retry_queue_store.get_all()
         total_tasks = len(queue)
@@ -141,7 +142,7 @@ def get_retry_stats():
 
 @router.post("/dashboard/retry-export/{entry_id}")
 @require_login_json
-def retry_export(entry_id: str):
+async def retry_export(request: Request, entry_id: str):
     try:
         from infrastructure.logger.export_log import export_log
         success = export_log.retry(entry_id)
@@ -154,7 +155,7 @@ def retry_export(entry_id: str):
 
 @router.get("/dashboard/latest-demo-export")
 @require_login_json
-def get_latest_demo_export():
+async def get_latest_demo_export(request: Request):
     from pathlib import Path
 
     EXPORTS_DIR = Path("exports/demo_job")
@@ -191,7 +192,8 @@ def download_demo_export_file(folder: str, filename: str):
     return FileResponse(path)
 
 @router.post("/dashboard/create-job")
-async def create_job(data: JobCreateRequest):
+@require_login_json
+async def create_job(request: Request, data: JobCreateRequest):
     new_config = {
         "job_name": data.job_name,
         "watch_dir": data.watch_dir,
@@ -225,7 +227,7 @@ def retry_failed_tasks():
 
 @router.get("/dashboard/latest-compliance-export")
 @require_login_json
-def latest_compliance_export():
+async def latest_compliance_export(request: Request):
     from pathlib import Path
     import json
     from fastapi.responses import JSONResponse
@@ -260,7 +262,7 @@ def latest_compliance_export():
 
 @router.get("/dashboard/email-activity")
 @require_login_json
-def get_email_activity():
+async def get_email_activity(request: Request):
     try:
         from infrastructure.logger.activity_log import activity_log
         entries = activity_log.get_recent(count=20)
@@ -275,7 +277,7 @@ def get_email_activity():
 
 @router.get("/dashboard/email-jobs")
 @require_login_json
-def get_email_triggered_jobs():
+async def get_email_triggered_jobs(request: Request):
     memory_path = Path("memory")
     job_files = sorted(memory_path.glob("mailgun_*.json"), reverse=True)
 
@@ -299,7 +301,8 @@ def get_email_triggered_jobs():
     return JSONResponse(content=jobs)
 
 @router.post("/dashboard/retry-task/{task_id}")
-def retry_single_task(task_id: str):
+@require_login_json
+async def retry_single_task(request: Request, task_id: str):
     try:
         from app.services.retry_runner import retry_task_by_id
         result = retry_task_by_id(task_id)

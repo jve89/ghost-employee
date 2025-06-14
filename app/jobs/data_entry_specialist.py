@@ -35,7 +35,12 @@ class DataEntrySpecialistJob:
             "Add this info to the CRM and make sure her onboarding form is filled out. Set her up for the Tuesday orientation."
         )
 
-        summary = self.summariser.summarise(input_text, source)
+        summary = self.summariser.summarise(
+            text=input_text,
+            source_file=source,
+            preferences={"sender": "unknown", "subject": "N/A"}  # add real values later
+        )
+
         tasks = self.parser.extract_tasks(summary, config.job_id)
 
         for task in tasks:

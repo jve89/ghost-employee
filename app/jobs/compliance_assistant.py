@@ -34,7 +34,12 @@ class ComplianceAssistantJob:
             "and notify the finance department to update customer verification procedures."
         )
 
-        summary = self.summariser.summarise(input_text, source)
+        summary = self.summariser.summarise(
+            text=input_text,
+            source_file=source,
+            preferences={"sender": "unknown", "subject": "N/A"}  # or actual values if you have them
+        )
+
         tasks = self.parser.extract_tasks(summary, config.job_id)
 
         for task in tasks:

@@ -32,7 +32,11 @@ class SampleJob:
         logger.info(f"Running job: {config.job_name}")
 
         input_text = override_text or "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
-        summary = self.summariser.summarise(input_text, source)
+        summary = self.summariser.summarise(
+            text=input_text,
+            source_file=source,
+            preferences={"sender": "unknown", "subject": "N/A"}  # can hardcode now
+        )
 
         # ✅ Manually define a single task
         task = Task(

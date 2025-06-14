@@ -9,6 +9,8 @@ class Summary(BaseModel):
     source_file: str
     content: str
     generated_at: datetime
+    sender: Optional[str] = None         # ✅ New
+    subject: Optional[str] = None        # ✅ New
 
 class Task(BaseModel):
     job_id: str

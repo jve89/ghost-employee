@@ -31,6 +31,7 @@
 ./app/services/task_parser.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
+./app/services/job_runner.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
 ./config/config_loader.py
@@ -40,6 +41,7 @@
 ./data/retry_queue.json
 ./exports/Compliance Assistant/2025-06-11_132213_GhostRun/export.json
 ./filetree.txt
+./infrastructure/auth/decorators.py
 ./infrastructure/email/email_watcher.py
 ./infrastructure/executor/task_executor.py
 ./infrastructure/exporters/file_exporter.py
@@ -59,10 +61,12 @@
 ./infrastructure/summariser/gpt_summariser.py
 ./infrastructure/task_parser/gpt_parser.py
 ./interfaces/api/main.py
+./interfaces/api/routes/auth.py
 ./interfaces/api/routes/dashboard.py
 ./interfaces/api/routes/jobs.py
 ./interfaces/api/routes/mailgun_webhook.py
 ./interfaces/api/templates/dashboard.html
+./interfaces/api/templates/login.html
 ./logs/activity_log.json
 ./logs/dummy_crm.json
 ./logs/export_status.json
@@ -90,6 +94,7 @@
 ./memory/test_fuzzy_job_01_contacts.json
 ./notion_list_users.py
 ./requirements.txt
+./retry_failed_tasks.py
 ./run.py
 ./run_compliance_job.py
 ./run_job_scheduler.py
@@ -116,4 +121,7 @@
 ./watched/test_inbox/fuzzy_email_001.txt
 ./watched/test_inbox/fuzzy_email_002.txt
 ./watched/test_inbox/fuzzy_email_003.txt
+./watched/test_inbox/mailgun_2025-06-12T15-47-19__test_email.txt
+./watched/test_inbox/test_email.txt
+./watched/test_inbox/mailgun_test__crm_ops_job.txt
 ./watched/test_interns.txt
