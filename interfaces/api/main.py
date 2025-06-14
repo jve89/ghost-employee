@@ -43,6 +43,10 @@ def get_activity_log():
 # --- (Unused) Dashboard fallback (can be deleted later) ---
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request):
+    session = request.session
+    if not session.get("logged_in"):
+        return RedirectResponse("/login", status_code=303)
+
     job_configs = load_all_job_configs()
     return templates.TemplateResponse("dashboard.html", {"request": request, "jobs": job_configs})
 
@@ -65,3 +69,53 @@ def job_loop(config):
         except Exception as e:
             logger.error(f"[ERROR] Job '{config.job_name}' failed: {e}")
         time.sleep(interval)
+
+def email_watcher_loop():
+    inbox_path = Path("watched/test_inbox")
+    processed_path = Path("watched/processed")
+    inbox_path.mkdir(parents=True, exist_ok=True)
+    processed_path.mkdir(parents=True, exist_ok=True)
+
+    while True:
+        for file in inbox_path.glob("*.txt"):
+            try:
+                # 📄 Filename format: mailgun_<timestamp>__<job_id>.txt
+                parts = file.stem.split("__")
+                if len(parts) != 2:
+                    logger.warning(f"⚠️ Skipping file with invalid format: {file.name}")
+                    continue
+
+                job_id = parts[1]
+                if job_id not in job_registry:
+                    logger.warning(f"❌ No matching job found for: {job_id}")
+                    continue
+
+                with open(file, "r", encoding="utf-8", errors="ignore") as f:
+                    text_input = f.read()
+
+                if not text_input.strip():
+                    logger.warning(f"⚠️ Empty file skipped: {file.name}")
+                    continue
+
+                # ✅ Run the job
+                config = load_job_config(job_id)
+                job = job_registry[job_id]
+                logger.info(f"📥 Email-triggered run for job: {job_id}")
+                job.run(config=config, override_text=text_input)
+
+                # Move to processed
+                dest = processed_path / file.name
+                file.rename(dest)
+                logger.info(f"📦 Moved to processed: {file.name}")
+
+            except Exception as e:
+                logger.error(f"💥 Error processing email file {file.name}: {e}")
+
+        time.sleep(10)  # Check every 10 seconds
+
+# --- Launch email watcher on startup ---
+@app.on_event("startup")
+def start_email_watcher():
+    thread = threading.Thread(target=email_watcher_loop, daemon=True)
+    thread.start()
+    logger.info("📨 Email watcher started.")

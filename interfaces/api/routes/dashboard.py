@@ -13,6 +13,7 @@ from infrastructure.logger.job_status import job_status
 from config.config_loader import load_job_configs
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.job_status import get_recent_activity
+from infrastructure.auth.decorators import require_login_json
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -30,14 +31,17 @@ async def dashboard(request: Request):
     return templates.TemplateResponse("dashboard.html", {"request": request})
 
 @router.get("/jobs/logs")
+@require_login_json
 async def get_logs():
     return JSONResponse(content={"logs": logger.get_logs()})
 
 @router.get("/jobs/status")
+@require_login_json
 async def get_status():
     return JSONResponse(content=job_status.get_all())
 
 @router.get("/jobs/retry-queue")
+@require_login_json
 async def get_retry_queue_api():
     return {"retry_queue": retry_queue_store.get_all()}
 
@@ -47,6 +51,7 @@ async def get_jobs():
     return JSONResponse(content=jobs)
 
 @router.get("/jobs/exports")
+@require_login_json
 def get_exports():
     return [r.dict() for r in export_log.get_logs()]
 
@@ -55,6 +60,7 @@ def get_dashboard_activity():
     return get_recent_activity()
 
 @router.get("/dashboard/job-stats")
+@require_login_json
 def job_stats():
     stats = {}
 
@@ -92,6 +98,7 @@ def job_stats():
     return JSONResponse(content=stats)
 
 @router.get("/dashboard/exports")
+@require_login_json
 def get_recent_exports():
     log_path = "./logs/export_status.json"
 
@@ -111,6 +118,7 @@ def get_recent_exports():
         )
 
 @router.get("/dashboard/retry-stats")
+@require_login_json
 def get_retry_stats():
     try:
         queue = retry_queue_store.get_all()
@@ -132,6 +140,7 @@ def get_retry_stats():
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 @router.post("/dashboard/retry-export/{entry_id}")
+@require_login_json
 def retry_export(entry_id: str):
     try:
         from infrastructure.logger.export_log import export_log
@@ -144,6 +153,7 @@ def retry_export(entry_id: str):
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 @router.get("/dashboard/latest-demo-export")
+@require_login_json
 def get_latest_demo_export():
     from pathlib import Path
 
@@ -214,6 +224,7 @@ def retry_failed_tasks():
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 @router.get("/dashboard/latest-compliance-export")
+@require_login_json
 def latest_compliance_export():
     from pathlib import Path
     import json
@@ -248,6 +259,7 @@ def latest_compliance_export():
     }
 
 @router.get("/dashboard/email-activity")
+@require_login_json
 def get_email_activity():
     try:
         from infrastructure.logger.activity_log import activity_log
@@ -262,6 +274,7 @@ def get_email_activity():
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 @router.get("/dashboard/email-jobs")
+@require_login_json
 def get_email_triggered_jobs():
     memory_path = Path("memory")
     job_files = sorted(memory_path.glob("mailgun_*.json"), reverse=True)
