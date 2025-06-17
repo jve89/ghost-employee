@@ -1,6 +1,7 @@
 # infrastructure/logger/export_log.py
 
 from app.core.models import ExportResult
+from datetime import datetime
 
 class ExportLogStore:
     def __init__(self):

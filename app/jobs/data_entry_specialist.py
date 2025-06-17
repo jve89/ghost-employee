@@ -4,6 +4,7 @@ This job simulates a junior assistant who updates spreadsheets, CRM tools,
 or internal records based on instructions received via email or chat.
 """
 
+import time
 from app.core.models import JobConfig, Task
 from app.core.interfaces import Summariser, TaskParser
 from infrastructure.summariser.gpt_summariser import GPTSummariser
@@ -41,14 +42,19 @@ class DataEntrySpecialistJob:
 
         tasks = self.parser.extract_tasks(summary, config.job_id)
 
+        start = time.time()
+
         for task in tasks:
             execute_task(task)
-
+        duration = round(time.time() - start, 2)
+        
         log_job_run(
             job_name=config.job_name,
             summary=summary_text,
             tasks_executed=len(tasks),
-            status="success"
+            status="success",
+            duration=duration,
+            tasks=[task.model_dump() for task in tasks]
         )
 
         dispatch_exports(

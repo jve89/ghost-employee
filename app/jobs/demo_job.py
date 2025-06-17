@@ -4,6 +4,7 @@ Safe testbed for execution and export logic.
 Does NOT use GPT. Ideal for dry-run and export testing.
 """
 
+import time
 from datetime import datetime
 from app.core.models import Task, JobConfig
 from app.services.simple_executor import SimpleExecutor
@@ -27,11 +28,22 @@ class DemoJob:
         )
 
         executor = SimpleExecutor()
+        
+        start = time.time()  # ✅ Start before execution
         executor.execute(task)
+        duration = round(time.time() - start, 2)
+
+        log_job_run(
+            job_name=config.job_name,
+            summary=task.summary,
+            tasks_executed=1,
+            status="success",
+            duration=duration,
+            tasks=[task.model_dump()]
+        )
 
         results = [{"description": task.description, "status": task.status or "pending"}]
 
-        # ✅ Export like all other jobs
         dispatch_exports(
             output_data={
                 "summary": task.summary,
@@ -46,7 +58,6 @@ class DemoJob:
             }
         )
 
-        # ✅ Report generation
         generate_demo_report(
             summary=task.summary,
             tasks=[task.model_dump()],

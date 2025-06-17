@@ -14,6 +14,8 @@ from config.config_loader import load_job_configs
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.job_status import get_recent_activity
 from infrastructure.auth.decorators import require_login_json
+from collections import defaultdict
+from infrastructure.logger.job_timesheet import get_timesheet_data
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -123,19 +125,26 @@ async def get_recent_exports(request: Request):
 async def get_retry_stats(request: Request):
     try:
         queue = retry_queue_store.get_all()
-        total_tasks = len(queue)
-        last_retry = None
+        stats_by_job = defaultdict(lambda: {"total_tasks": 0, "last_retry_attempt": None})
 
-        if total_tasks > 0:
-            timestamps = [entry.get("timestamp") for entry in queue if "timestamp" in entry]
-            parsed = [datetime.fromisoformat(t) for t in timestamps if t]
-            if parsed:
-                last_retry = max(parsed).isoformat()
+        for entry in queue:
+            job = entry.get("job_name", "unknown")
+            stats_by_job[job]["total_tasks"] += 1
 
-        return {
-            "total_tasks": total_tasks,
-            "last_retry_attempt": last_retry or "n/a"
-        }
+            ts = entry.get("timestamp")
+            if ts:
+                parsed = datetime.fromisoformat(ts)
+                last = stats_by_job[job]["last_retry_attempt"]
+                if not last or parsed > last:
+                    stats_by_job[job]["last_retry_attempt"] = parsed
+
+        for job, stats in stats_by_job.items():
+            if stats["last_retry_attempt"]:
+                stats["last_retry_attempt"] = stats["last_retry_attempt"].isoformat()
+            else:
+                stats["last_retry_attempt"] = "n/a"
+
+        return stats_by_job
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
@@ -309,3 +318,52 @@ async def retry_single_task(request: Request, task_id: str):
         return {"status": "ok", "message": result}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+@router.get("/dashboard/latest-tasks")
+@require_login_json
+async def get_latest_tasks(request: Request):
+    from infrastructure.logger.job_timesheet import get_recent_tasks
+    return get_recent_tasks(limit=20)
+
+@router.get("/dashboard/recent-failures")
+@require_login_json
+async def get_recent_failures(request: Request):
+    try:
+        failures = []
+
+        # Load export log failures
+        for entry in reversed(export_log.get_logs()):
+            if not entry.get("success"):
+                failures.append({
+                    "type": "Export Failure",
+                    "timestamp": entry.get("timestamp", "unknown"),
+                    "job": entry.get("job_name", "unknown"),
+                    "destination": entry.get("destination", "unknown"),
+                    "details": entry.get("details", {}),
+                    "retry_count": entry.get("retry_count", 0)
+                })
+                if len(failures) == 5:
+                    break
+
+        return {"failures": failures}
+
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@router.get("/api/dashboard/job-durations")
+async def get_job_durations():
+    logs = get_timesheet_data()
+    durations_by_job = defaultdict(list)
+
+    for entry in logs:
+        job = entry.get("job")
+        duration = entry.get("duration")
+        if job and isinstance(duration, (int, float)):
+            durations_by_job[job].append(duration)
+
+    avg_durations = {
+        job: round(sum(times) / len(times), 2)
+        for job, times in durations_by_job.items() if times
+    }
+
+    return JSONResponse(avg_durations)

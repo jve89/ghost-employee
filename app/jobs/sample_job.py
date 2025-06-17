@@ -6,6 +6,8 @@ This job demonstrates the complete Ghost Employee pipeline:
 - Task execution
 - Exporting results
 """
+
+import time
 from datetime import datetime
 from app.core.models import JobConfig, Task
 from app.core.interfaces import Summariser, TaskParser
@@ -49,19 +51,25 @@ class SampleJob:
             created_at=datetime.utcnow().isoformat()
         )
 
-        # ✅ Execute and collect result
+        start = time.time()
+
         execute_task(task)
 
         task_list = [task]
         task_results = [(task, {"status": task.status})]
 
-        # ✅ Continue pipeline
+        # (task execution)
+
+        duration = round(time.time() - start, 2)
         log_job_run(
             job_name=config.job_name,
             summary=summary_text,
             tasks_executed=len(task_results),
-            status="success"
+            status="success",
+            duration=duration,
+            tasks=[task.model_dump() for task in task_list]
         )
+
 
         dispatch_exports(
             output_data={

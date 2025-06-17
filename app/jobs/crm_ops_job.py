@@ -5,6 +5,7 @@
 Simulates a virtual assistant handling CRM updates from notes/emails.
 """
 
+import time
 from datetime import datetime
 from app.core.models import JobConfig, Task
 from app.core.interfaces import Summariser, TaskParser
@@ -54,15 +55,20 @@ class CRMOperationsJob:
 
         task_results = []
 
+        start = time.time()
+
         for task in tasks:
             execute_task(task)
             task_results.append((task, {"status": task.status}))
-
+        duration = round(time.time() - start, 2)
+        
         log_job_run(
             job_name=config.job_name,
             summary=summary_text,
             tasks_executed=len(task_results),
-            status="success"
+            status="success",
+            duration=duration,
+            tasks=[task.model_dump() for task, _ in task_results]
         )
 
         dispatch_exports(

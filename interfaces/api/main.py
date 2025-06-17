@@ -10,13 +10,16 @@ from interfaces.api.routes.mailgun_webhook import router as mailgun_router
 from interfaces.api.routes.jobs import router as jobs_router
 from interfaces.api.routes.dashboard import router as dashboard_router
 
-from config.config_loader import load_all_job_configs
+from app.jobs.job_registry import job_registry
 from app.jobs.sample_job import SampleJob
+from config.config_loader import load_job_config
+from config.config_loader import load_all_job_configs
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.activity_log import activity_log
 
 import threading
 import time
+from pathlib import Path
 
 # --- Init FastAPI app ---
 app = FastAPI()

@@ -41,22 +41,90 @@
             loadExportLogs();
         }
 
+        async function populateGhostSelector() {
+            const dropdown = document.getElementById("ghostSelector");
+
+            try {
+                const res = await fetch("/jobs");
+                const data = await res.json();
+
+                const selected = localStorage.getItem("selectedGhost") || "all";
+
+                // Dropdown
+                if (dropdown) {
+                    dropdown.innerHTML = "";
+                    const allOpt = document.createElement("option");
+                    allOpt.value = "all";
+                    allOpt.text = "All Ghosts";
+                    dropdown.appendChild(allOpt);
+
+                    data.forEach(job => {
+                        const option = document.createElement("option");
+                        option.value = job.job_name;
+                        option.text = job.job_name;
+                        dropdown.appendChild(option);
+                    });
+
+                    dropdown.value = selected;
+
+                    dropdown.addEventListener("change", () => {
+                        localStorage.setItem("selectedGhost", dropdown.value);
+                        location.reload();
+                    });
+                }
+
+                // Tiles
+                if (tileContainer) {
+                    tileContainer.innerHTML = "";
+
+                    const ghosts = [
+                        { name: "All Ghosts", value: "all" },
+                        ...data.map(job => ({ name: job.job_name, value: job.job_name }))
+                    ];
+
+                    ghosts.forEach(g => {
+                        const tile = document.createElement("button");
+                        tile.textContent = `👻 ${g.name}`;
+                        tile.className = `py-2 px-4 rounded font-semibold text-white shadow 
+                            ${selected === g.value ? "bg-blue-600" : "bg-gray-700"}
+                            hover:bg-blue-500`;
+
+                        tile.onclick = () => {
+                            localStorage.setItem("selectedGhost", g.value);
+                            location.reload();
+                        };
+
+                        tileContainer.appendChild(tile);
+                    });
+                }
+
+            } catch (e) {
+                console.error("❌ Failed to populate ghost selector:", e);
+            }
+        }
+
         async function loadJobStats() {
             const res = await fetch("/dashboard/job-stats");
             const stats = await res.json();
             const container = document.getElementById("jobStats");
             container.innerHTML = "";
+
+            const selectedGhost = localStorage.getItem("selectedGhost");
+
             for (const [job, data] of Object.entries(stats)) {
-            container.innerHTML += `
-                <div style="border:1px solid #ccc;padding:1rem;margin-bottom:1rem;border-radius:8px;background:#f9f9f9;">
-                    <strong>🛠️ ${job}</strong><br/>
-                    <b>Last run:</b> ${new Date(data.last_run).toLocaleString()}<br/>
-                    <b>Total tasks:</b> ${data.total_tasks}<br/>
-                    <b>Runs:</b> ${data.runs}<br/>
-                    <b>Exports:</b> ${data.export_count}<br/>
-                    <b>Failed Exports:</b> ${data.failed_exports}
-                </div>
-            `;
+                // 🧠 Apply filter early in loop
+                if (selectedGhost && selectedGhost !== "all" && job !== selectedGhost) continue;
+
+                container.innerHTML += `
+                    <div style="border:1px solid #ccc;padding:1rem;margin-bottom:1rem;border-radius:8px;background:#f9f9f9;">
+                        <strong>🛠️ ${job}</strong><br/>
+                        <b>Last run:</b> ${new Date(data.last_run).toLocaleString()}<br/>
+                        <b>Total tasks:</b> ${data.total_tasks}<br/>
+                        <b>Runs:</b> ${data.runs}<br/>
+                        <b>Exports:</b> ${data.export_count}<br/>
+                        <b>Failed Exports:</b> ${data.failed_exports}
+                    </div>
+                `;
             }
         }
 
@@ -114,32 +182,51 @@
         async function loadJobs() {
             const jobsRes = await fetch("/jobs");
             const statusRes = await fetch("/jobs/status");
+            const exportsRes = await fetch("/dashboard/exports");
+
             const jobs = await jobsRes.json();
             const statuses = await statusRes.json();
+            const exports = (await exportsRes.json()).exports;
 
             const container = document.getElementById("jobTiles");
             container.innerHTML = "";
 
             jobs.forEach(job => {
                 const tile = document.createElement("div");
-                tile.className = "border border-gray-300 p-4 m-2 rounded shadow bg-white";
+                tile.className = "border border-gray-300 p-4 m-2 rounded shadow bg-white w-full max-w-xl";
 
                 const lastRun = statuses[job.job_name] || "never";
 
+                // Filter recent exports for this job
+                const recentExports = exports
+                    .filter(e => e.job_name === job.job_name)
+                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+                    .slice(0, 5);
+
+                const historyHTML = recentExports.map(e => {
+                    const date = new Date(e.timestamp).toLocaleString();
+                    const result = e.success ? "✅" : "❌";
+                    return `<div class="text-sm text-gray-700 ml-2">• ${date} — ${result} ${e.destination}</div>`;
+                }).join("");
+
                 tile.innerHTML = `
-                    <strong class="text-gray-800">${job.job_name}</strong><br/>
-                    <span class="text-sm text-gray-500">Last run: ${lastRun}</span><br/>
-
-                    <button onclick="runJob('${job.job_name}')" class="mt-2 mr-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
-                        Run
-                    </button>
-
-                    <button onclick="toggleJob('${job.job_id}')" 
-                        class="mt-2 bg-${job.active ? 'yellow' : 'blue'}-600 text-white px-3 py-1 rounded hover:bg-${job.active ? 'yellow' : 'blue'}-700">
-                        ${job.active ? 'Pause' : 'Resume'}
-                    </button>
+                    <div class="flex justify-between items-center mb-2">
+                        <div>
+                            <strong class="text-gray-800">${job.job_name}</strong><br/>
+                            <span class="text-sm text-gray-500">Last run: ${lastRun}</span>
+                        </div>
+                        <div>
+                            <button onclick="runJob('${job.job_name}')" class="mr-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Run</button>
+                            <button onclick="toggleJob('${job.job_id}')" class="bg-${job.active ? 'yellow' : 'blue'}-600 text-white px-3 py-1 rounded hover:bg-${job.active ? 'yellow' : 'blue'}-700">
+                                ${job.active ? 'Pause' : 'Resume'}
+                            </button>
+                        </div>
+                    </div>
+                    <details class="mt-2">
+                        <summary class="cursor-pointer text-sm text-blue-700 hover:underline">Show Last 5 Runs</summary>
+                        ${historyHTML || '<div class="ml-2 text-sm text-gray-400">No recent runs.</div>'}
+                    </details>
                 `;
-
 
                 container.appendChild(tile);
             });
@@ -170,23 +257,31 @@
         }
 
         async function loadLatestComplianceExport() {
+            const tile = document.getElementById("latest-compliance-export");
+            if (!tile) return;
+
             try {
-                const res = await fetch("/dashboard/latest-compliance-export");
-                const data = await res.json();
+                const response = await fetch("/dashboard/latest-compliance-export");
+                const data = await response.json();
 
-                document.getElementById("compliance-job-id").innerText = data.job_name || "-";
-                document.getElementById("compliance-summary").innerText = data.summary || "-";
-                document.getElementById("compliance-timestamp").innerText = data.timestamp || "-";
+                if (data.status === "no_exports") {
+                    tile.innerHTML = "<p class='text-sm'>No exports yet.</p>";
+                    return;
+                }
 
-                const tasksEl = document.getElementById("compliance-tasks");
-                tasksEl.innerHTML = "";
-                (data.tasks || []).forEach(task => {
-                    const li = document.createElement("li");
-                    li.innerText = `${task.description} → ${task.status}`;
-                    tasksEl.appendChild(li);
-                });
-            } catch (err) {
-                console.error("Failed to load compliance export tile:", err);
+                if (data.status === "incomplete") {
+                    tile.innerHTML = "<p class='text-sm text-red-500'>Export incomplete or corrupted.</p>";
+                    return;
+                }
+
+                tile.innerHTML = `
+                    <p class="text-xs mb-1 text-gray-400">${data.timestamp}</p>
+                    <p class="font-semibold text-sm">${data.job_name}</p>
+                    <p class="text-xs text-gray-300 mt-1">Tasks: ${data.tasks.length}</p>
+                    <p class="text-xs text-gray-300 mt-1 truncate">Summary: ${data.summary}</p>
+                `;
+            } catch (e) {
+                tile.innerHTML = `<p class="text-sm text-red-500">❌ Failed to load export.</p>`;
             }
         }
 
@@ -219,20 +314,26 @@
                 const tbody = document.getElementById("email-jobs-list");
                 tbody.innerHTML = '';
 
-                if (jobs.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center text-gray-500 py-3">No recent email-triggered jobs.</td></tr>`;
-                return;
+                const selectedGhost = localStorage.getItem("selectedGhost");
+
+                const filteredJobs = jobs.filter(job => {
+                    return !selectedGhost || selectedGhost === "all" || job.job_name === selectedGhost;
+                });
+
+                if (filteredJobs.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center text-gray-500 py-3">No recent email-triggered jobs.</td></tr>`;
+                    return;
                 }
 
-                jobs.forEach(job => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td class="py-2 px-4 border-b text-sm text-gray-700">${new Date(job.timestamp).toLocaleString()}</td>
-                    <td class="py-2 px-4 border-b text-sm text-gray-700">${job.sender}</td>
-                    <td class="py-2 px-4 border-b text-sm text-gray-700">${job.subject}</td>
-                    <td class="py-2 px-4 border-b text-sm text-gray-700">${job.status}</td>
-                `;
-                tbody.appendChild(row);
+                filteredJobs.forEach(job => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${new Date(job.timestamp).toLocaleString()}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${job.sender}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${job.subject}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${job.status}</td>
+                    `;
+                    tbody.appendChild(row);
                 });
             } catch (err) {
                 console.error("Failed to load email jobs:", err);
@@ -241,11 +342,22 @@
 
         async function loadRetryStats() {
             try {
+                const selectedGhost = localStorage.getItem("selectedGhost");
                 const res = await fetch("/dashboard/retry-stats");
                 const data = await res.json();
-                document.getElementById("retryStatsBox").innerHTML = `
-                    <b>Total retry tasks:</b> ${data.total_tasks}<br/>
-                    <b>Last retry attempt:</b> ${data.last_retry_attempt}
+
+                const job = selectedGhost || "all";
+                const stats = data[job];
+
+                const container = document.getElementById("retryStatsBox");
+                if (!stats) {
+                    container.innerHTML = `<div class="text-gray-500">No retry stats for ${job}.</div>`;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <b>Total retry tasks:</b> ${stats.total_tasks}<br/>
+                    <b>Last retry attempt:</b> ${stats.last_retry_attempt}
                 `;
             } catch (err) {
                 console.error("Failed to load retry stats:", err);
@@ -270,6 +382,50 @@
                 item.textContent = `${entry.timestamp} — ${entry.subject}`;
                 list.appendChild(item);
             });
+        }
+
+        async function loadFailureAlerts() {
+            try {
+                const res = await fetch("/dashboard/exports");
+                const data = await res.json();
+                const container = document.getElementById("failure-alerts-box");
+                container.innerHTML = "";
+
+                const now = new Date();
+                const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+                const failedRecent = data.exports.filter(e =>
+                    !e.success && new Date(e.timestamp) >= oneDayAgo
+                );
+
+                const failCounts = {};
+                failedRecent.forEach(e => {
+                    const job = e.job_name || "Unknown Job";
+                    failCounts[job] = (failCounts[job] || 0) + 1;
+                });
+
+                const flaggedJobs = Object.entries(failCounts)
+                    .filter(([_, count]) => count >= 3)
+                    .sort((a, b) => b[1] - a[1]);
+
+                if (flaggedJobs.length === 0) {
+                    container.innerHTML = `<div class="text-green-700">✅ No jobs with 3+ failures in the past 24 hours.</div>`;
+                    return;
+                }
+
+                flaggedJobs.forEach(([job, count]) => {
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center bg-red-100 p-2 rounded mb-1 border border-red-300">
+                            <span><strong>${job}</strong></span>
+                            <span class="font-bold text-red-700">${count} failures</span>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                console.error("Failed to load failure alerts", err);
+                document.getElementById("failure-alerts-box").innerHTML =
+                    `<div class="text-red-600">❌ Error loading failure alerts.</div>`;
+            }
         }
 
         async function loadExportLogs() {
@@ -392,6 +548,74 @@
             }
         }
 
+        async function populateSummaryFilter() {
+            try {
+                const res = await fetch("/dashboard/exports");
+                const data = await res.json();
+                const jobFilter = document.getElementById("summaryJobFilter");
+                const jobs = [...new Set(data.exports.map(e => e.job_name))];
+
+                jobFilter.innerHTML = `<option value="">All Jobs</option>`;
+                jobs.forEach(job => {
+                    const opt = document.createElement("option");
+                    opt.value = job;
+                    opt.textContent = job;
+                    jobFilter.appendChild(opt);
+                });
+
+                jobFilter.addEventListener("change", loadExportSummaries);
+            } catch (err) {
+                console.error("Failed to populate summary filter", err);
+            }
+        }
+
+        async function loadExportVolume() {
+            try {
+                const res = await fetch("/dashboard/exports");
+                const data = await res.json();
+                const container = document.getElementById("export-volume-box");
+                container.innerHTML = "";
+
+                const now = new Date();
+                const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+                const recent = data.exports.filter(e => new Date(e.timestamp) >= sevenDaysAgo);
+
+                const selectedGhost = localStorage.getItem("selectedGhost");
+                const counts = {};
+
+                recent.forEach(e => {
+                    const job = e.job_name || "unknown";
+
+                    // 👻 Skip if ghost is selected and doesn't match
+                    if (selectedGhost && selectedGhost !== "all" && job !== selectedGhost) return;
+
+                    const type = e.destination || "unknown";
+                    counts[type] = (counts[type] || 0) + 1;
+                });
+
+                if (Object.keys(counts).length === 0) {
+                    container.innerHTML = `<div class="text-gray-500">No exports in the last 7 days.</div>`;
+                    return;
+                }
+
+                Object.entries(counts).forEach(([type, count]) => {
+                    const bar = `<div class="h-2 bg-blue-500 rounded" style="width:${Math.min(100, count * 10)}%"></div>`;
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center">
+                            <span>${type}</span>
+                            <span class="ml-auto font-semibold">${count}</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded mb-2">${bar}</div>
+                    `;
+                });
+            } catch (err) {
+                console.error("Failed to load export volume", err);
+                document.getElementById("export-volume-box").innerHTML =
+                    `<div class="text-red-600">Error loading volume data.</div>`;
+            }
+        }
+
         async function loadExportSummaries() {
             try {
                 const res = await fetch("/dashboard/exports");
@@ -399,9 +623,27 @@
                 const container = document.getElementById("export-summaries-list");
                 container.innerHTML = "";
 
-                const exportsWithSummary = data.exports.filter(e =>
+                let exportsWithSummary = data.exports.filter(e =>
                     e.summary || (e.details && typeof e.details.summary === "string")
                 );
+
+                // Sort by timestamp descending
+                exportsWithSummary.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                // 🌐 Dropdown filter (manual)
+                const selectedJob = document.getElementById("summaryJobFilter")?.value;
+                if (selectedJob) {
+                    exportsWithSummary = exportsWithSummary.filter(e => e.job_name === selectedJob);
+                }
+
+                // 👻 Apply selectedGhost filter
+                const selectedGhost = localStorage.getItem("selectedGhost");
+                if (selectedGhost && selectedGhost !== "all") {
+                    exportsWithSummary = exportsWithSummary.filter(e => e.job_name === selectedGhost);
+                }
+
+                // Limit to latest 5
+                exportsWithSummary = exportsWithSummary.slice(0, 5);
 
                 if (exportsWithSummary.length === 0) {
                     container.innerHTML = `<div class="text-gray-500">No export summaries available.</div>`;
@@ -411,18 +653,35 @@
                 exportsWithSummary.forEach(entry => {
                     const timestamp = new Date(entry.timestamp).toLocaleString();
                     const summaryText = entry.summary || entry.details?.summary || "-";
-                    const summary = summaryText.length > 160
+                    const shortSummary = summaryText.length > 160
                         ? summaryText.slice(0, 160) + "…"
                         : summaryText;
                     const job = entry.job_name;
-                    const status = entry.success ? "✅" : "❌";
+                    const destination = entry.destination || "-";
+                    const badgeColor = {
+                        file: 'bg-blue-100 text-blue-800',
+                        log: 'bg-green-100 text-green-800',
+                        email: 'bg-yellow-100 text-yellow-800'
+                    }[destination] || 'bg-gray-100 text-gray-800';
 
                     const item = document.createElement("div");
-                    item.className = "border p-2 rounded bg-gray-50 shadow-sm";
+                    item.className = "border p-3 rounded bg-gray-50 shadow-sm";
+
                     item.innerHTML = `
-                        <div class="mb-1"><strong>${status} ${job}</strong> <span class="text-gray-600 text-xs">(${timestamp})</span></div>
-                        <div class="text-gray-700">${summary}</div>
+                        <div class="flex justify-between items-center mb-1">
+                            <div>
+                                <strong>${job}</strong>
+                                <span class="text-gray-600 text-xs ml-2">(${timestamp})</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-full ${badgeColor}">${destination}</span>
+                        </div>
+                        <div class="summary-text text-gray-700 cursor-pointer">${shortSummary}</div>
                     `;
+
+                    item.querySelector(".summary-text").addEventListener("click", function () {
+                        this.innerText = this.innerText.endsWith("…") ? summaryText : shortSummary;
+                    });
+
                     container.appendChild(item);
                 });
             } catch (err) {
@@ -430,6 +689,146 @@
                 document.getElementById("export-summaries-list").innerHTML =
                     `<div class="text-red-600">Failed to load export summaries.</div>`;
             }
+        }
+
+        async function loadLatestTasks() {
+            try {
+                const res = await fetch('/dashboard/latest-tasks');
+                const tasks = await res.json();
+
+                const container = document.getElementById('latest-tasks');
+                container.innerHTML = "";
+
+                if (tasks.length === 0) {
+                    container.innerHTML = "<div class='text-gray-500'>No recent tasks.</div>";
+                    return;
+                }
+
+                const selectedGhost = localStorage.getItem("selectedGhost");
+
+                for (const t of tasks) {
+                    if (selectedGhost && selectedGhost !== "all" && t.job_name !== selectedGhost) continue;
+
+                    const time = new Date(t.timestamp).toLocaleTimeString();
+                    const statusColour = t.status === "success" ? "text-green-600" : "text-red-600";
+                    const line = `
+                        <div class="mb-1">
+                            <span class="font-medium">${t.job_name}</span>:
+                            <span>${t.task}</span>
+                            <span class="${statusColour} ml-2">[${t.status}]</span>
+                            <span class="text-gray-400 ml-2">${time}</span>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', line);
+                }
+            } catch (e) {
+                document.getElementById('latest-tasks').innerHTML = "<div class='text-red-600'>Error loading tasks</div>";
+            }
+        }
+
+        async function loadDurationStats() {
+            try {
+                const res = await fetch("/api/dashboard/job-durations");
+                const data = await res.json();
+                const container = document.getElementById("duration-stats");
+                container.innerHTML = "";
+
+                const entries = Object.entries(data);
+                if (entries.length === 0) {
+                container.innerHTML = "<li class='text-gray-500'>No data yet.</li>";
+                } else {
+                for (const [job, seconds] of entries) {
+                    const li = document.createElement("li");
+                    li.textContent = `${job}: ${seconds}s avg`;
+                    container.appendChild(li);
+                }
+                }
+            } catch (e) {
+                console.error("Failed to load job durations", e);
+            }
+        }
+
+        async function loadDurationStats() {
+            try {
+                const res = await fetch("/api/dashboard/job-durations");
+                const data = await res.json();
+
+                const tile = document.getElementById("durationTile");
+                tile.innerHTML = "";
+
+                const jobs = Object.entries(data)
+                    .sort((a, b) => b[1] - a[1])  // Sort by duration descending
+
+                if (jobs.length === 0) {
+                    tile.innerHTML = "<p>No data yet.</p>";
+                    return;
+                }
+
+                for (const [job, duration] of jobs) {
+                    tile.innerHTML += `<p><strong>${job}:</strong> ${duration}s</p>`;
+                }
+            } catch (e) {
+                console.error("Failed to load durations:", e);
+                document.getElementById("durationTile").innerHTML = "<p>Error loading data.</p>";
+            }
+        }
+
+        async function loadLatestDemoExport() {
+            try {
+                const res = await fetch("/dashboard/latest-demo-export");
+                const data = await res.json();
+                const tile = document.getElementById("latestDemoExportTile");
+
+                if (data.status === "no exports yet" || data.status === "no metadata") {
+                    tile.innerHTML = "<p>No exports available.</p>";
+                    return;
+                }
+
+                tile.innerHTML = `
+                    <p><strong>Folder:</strong> ${data.folder}</p>
+                    <p><strong>Job:</strong> ${data.job_id}</p>
+                    <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+                    <p><strong>Tasks:</strong> ${data.task_count} (${data.success_count}✅ / ${data.failure_count}❌)</p>
+                    <a href="${data.pdf_download_url}" class="inline-block mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+                        Download PDF
+                    </a>
+                `;
+            } catch (e) {
+                console.error("Failed to load latest demo export:", e);
+                document.getElementById("latestDemoExportTile").innerHTML = "<p>Error loading export.</p>";
+            }
+        }
+
+        function loadRecentFailures() {
+            fetch("/dashboard/recent-failures")
+                .then(response => response.json())
+                .then(data => {
+                    const list = document.getElementById("failure-list");
+                    list.innerHTML = "";
+
+                    if (!data.failures || data.failures.length === 0) {
+                        list.innerHTML = "<li class='text-gray-400'>✅ No recent failures</li>";
+                        return;
+                    }
+
+                    const selectedGhost = localStorage.getItem("selectedGhost");
+
+                    data.failures.forEach(f => {
+                        if (selectedGhost && selectedGhost !== "all" && f.job !== selectedGhost) return;
+
+                        const li = document.createElement("li");
+                        li.innerHTML = `
+                            <span class="font-semibold">${f.job}</span> →
+                            <span class="text-red-600">${f.type}</span> to 
+                            <span class="italic">${f.destination}</span> 
+                            <span class="text-xs text-gray-400">(${new Date(f.timestamp).toLocaleString()})</span>
+                        `;
+                        list.appendChild(li);
+                    });
+                })
+                .catch(err => {
+                    console.error("Failed to load recent failures:", err);
+                });
         }
 
         function startRefreshLoop(interval = 10000) {
@@ -445,23 +844,49 @@
         }
        
         window.onload = function () {
+            // Initial one-time loads
+            populateGhostSelector();
             refreshDashboard();
             loadRetryStats();
             loadJobs();
             loadLogs();
+            loadFailureAlerts();
+            loadRecentFailures();
             loadJobStats();
             loadActivityLog();
             loadLatestDemoExport(); 
             loadLatestComplianceExport();
             loadEmailActivity();
-            startRefreshLoop(10000);
             loadEmailTriggeredJobs();
-            setInterval(loadEmailTriggeredJobs, 30000);  // Refresh every 30 seconds
-            fetchEmailActivity();
-            setInterval(fetchEmailActivity, 10000); // refresh every 10 sec
             loadRecentEmailJobs();
+            populateSummaryFilter();
             loadExportSummaries();
+            loadExportVolume();
+            loadLatestTasks();
+            loadDurationStats();
+
+            // 👇 Ghost filter logic
+            const savedGhost = localStorage.getItem("selectedGhost") || "all";
+            const ghostSelector = document.getElementById("ghostSelector");
+            if (ghostSelector) {
+                ghostSelector.value = savedGhost;
+
+                ghostSelector.addEventListener("change", function () {
+                    const selected = this.value;
+                    localStorage.setItem("selectedGhost", selected);
+                    refreshDashboard();  // Re-apply filter
+                });
+            }
+
+            // Periodic updates
+            startRefreshLoop(10000);                      // Refresh general dashboard stats every 10s
+            setInterval(loadEmailTriggeredJobs, 30000);   // Email job history every 30s
+            setInterval(loadEmailActivity, 10000);        // Email activity tile every 10s
+            setInterval(loadLatestTasks, 15000);          // Latest task tile every 15s
+            setInterval(loadRecentFailures, 20000);       // Refresh every 20s
+            setInterval(loadDurationStats, 20000);        // Duration stats refresh
         };
+
 
         document.addEventListener("DOMContentLoaded", () => {
             const jobSelect = document.getElementById("exportFilterJob");
@@ -519,6 +944,17 @@
             <form action="/jobs/retry-failed" method="post">
                 <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Retry Failed Tasks</button>
             </form>
+        </div>
+
+        <div class="mb-4">
+            <label for="ghostSelector" class="block text-sm font-medium text-white mb-1">🧙‍♂️ View Ghost Employee:</label>
+            <select id="ghostSelector" class="bg-zinc-700 text-white px-3 py-2 rounded-md text-sm">
+                <option value="all">👥 All Ghosts</option>
+                <option value="sample_job">SampleJob</option>
+                <option value="compliance_assistant">ComplianceAssistant</option>
+                <option value="demo_job">DemoJob</option>
+                <!-- Add more job names here if needed -->
+            </select>
         </div>
 
         <h2 class="text-xl font-semibold mt-8 mb-2">System Status</h2>
@@ -594,6 +1030,13 @@
             <div id="retryStatsBox">Loading retry stats...</div>
         </div>
 
+        <div class="p-4 bg-white rounded-2xl shadow">
+            <div class="text-lg font-semibold mb-2">📝 Latest Tasks</div>
+                <div id="latest-tasks" class="text-sm max-h-64 overflow-y-auto">
+                    <div class="text-gray-500">Loading...</div>
+                </div>
+        </div>
+
         <!-- Recent Email Jobs Tile -->
         <div class="bg-white rounded shadow p-4 mt-6">
             <h2 class="text-lg font-semibold mb-2">📬 Recent Email Jobs</h2>
@@ -655,12 +1098,70 @@
         </table>
         </div>
 
+        <div class="mb-4">
+            <label for="summaryJobFilter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Job</label>
+            <select id="summaryJobFilter" class="border border-gray-300 rounded px-3 py-2 w-full">
+                <option value="">All Jobs</option>
+            </select>
+        </div>
+
+        <div class="p-4 bg-white rounded-2xl shadow">
+            <h2 class="text-lg font-semibold mb-2">🚨 Recent Failures</h2>
+            <ul id="failure-list" class="text-sm space-y-1">
+                <li class="text-gray-500">Loading...</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 lg:w-1/3">
+            <h2 class="text-lg font-semibold mb-2">⏱️ Avg. Job Duration</h2>
+                <ul id="duration-stats" class="text-sm text-gray-700 space-y-1">
+                    <li>Loading...</li>
+                </ul>
+        </div>
+
+        <!-- 🛑 Failure Alerts -->
+        <div class="bg-white rounded shadow p-4 mt-6 border border-red-300">
+            <h2 class="text-lg font-semibold mb-2 text-red-700">🛑 Job Failure Alerts (24h)</h2>
+            <div id="failure-alerts-box" class="text-sm text-gray-800 space-y-1">
+                <div class="text-gray-500">Loading alert data...</div>
+            </div>
+        </div>
+
+        <!-- 📊 Export Volume Analytics -->
+        <div class="bg-white rounded shadow p-4 mt-6">
+            <h2 class="text-lg font-semibold mb-2">📊 Export Volume (Last 7 Days)</h2>
+            <div id="export-volume-box" class="text-sm text-gray-800 space-y-1">
+                <div class="text-gray-500">Loading volume data...</div>
+            </div>
+        </div>
+
         <!-- 🧠 Export Summaries Tile -->
         <div class="bg-white rounded shadow p-4 mt-6">
             <h2 class="text-lg font-semibold mb-2">🧠 Export Summaries</h2>
             <div id="export-summaries-list" class="space-y-2 text-sm text-gray-800">
                 <div class="text-gray-500">Loading summaries...</div>
             </div>
+        </div>
+
+        <div id="latest-compliance-export" class="p-4 bg-zinc-800 rounded-2xl shadow-md text-white text-sm">
+            <p class="font-bold mb-2">📑 Latest Compliance Export</p>
+            <p class="text-xs text-gray-400">Loading...</p>
+        </div>
+
+        <!-- ⏱️ Avg. Job Duration Tile -->
+        <div class="rounded-2xl shadow p-4 border w-full max-w-sm bg-white">
+            <h2 class="text-lg font-bold mb-2">⏱️ Avg. Job Duration</h2>
+                <div id="durationTile" class="text-sm space-y-1 text-gray-700">
+                    <p>Loading...</p>
+                </div>
+        </div>
+
+        <!-- 📄 Latest Demo PDF Export Tile -->
+        <div class="rounded-2xl shadow p-4 border w-full max-w-sm bg-white">
+            <h2 class="text-lg font-bold mb-2">📄 Latest Demo PDF</h2>
+                <div id="latestDemoExportTile" class="text-sm space-y-2 text-gray-700">
+                    <p>Loading...</p>
+                </div>
         </div>
 
         <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
