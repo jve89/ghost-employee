@@ -25,3 +25,14 @@ class Job(ABC):
     @abstractmethod
     def run(self, config: JobConfig):
         pass
+
+class Plugin(ABC):
+    @abstractmethod
+    def can_handle(self, task: Task) -> bool:
+        """Return True if this plugin is responsible for the task."""
+        pass
+
+    @abstractmethod
+    def handle(self, task: Task) -> dict:
+        """Execute the task and return a structured result dict."""
+        pass

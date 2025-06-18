@@ -36,9 +36,13 @@
 ./backup/performance_notes.txt
 ./config/config_loader.py
 ./config/job_schemas/compliance_assistant.json
+./config/job_schemas/crm_ops_job.json
 ./config/job_schemas/data_entry_specialist.json
 ./data/crm_notes.txt
 ./data/retry_queue.json
+./exports/CRM Ops Job/2025-06-17_140815_GhostRun/export.json
+./exports/CRM Ops Job/2025-06-17_140815_GhostRun/metadata.json
+./exports/CRM Ops Job/2025-06-17_140815_GhostRun/summary.md
 ./exports/Compliance Assistant/2025-06-11_132213_GhostRun/export.json
 ./filetree.txt
 ./infrastructure/auth/decorators.py
@@ -70,6 +74,7 @@
 ./logs/activity_log.json
 ./logs/dummy_crm.json
 ./logs/export_status.json
+./logs/timesheets/CRM Ops Job_timesheet.json
 ./logs/timesheets/Compliance Assistant_timesheet.json
 ./logs/timesheets/Data Entry Specialist_timesheet.json
 ./logs/timesheets/compliance_analyst_timesheet.json
@@ -83,12 +88,7 @@
 ./makefile
 ./memory/compliance_analyst.json
 ./memory/compliance_analyst_contacts.json
-./memory/compliance_assistant_contacts.json
-./memory/crm_001_contacts.json
-./memory/data_entry_specialist_contacts.json
-./memory/demo_job_contacts.json
-./memory/mailgun_	test_example.com.json
-./memory/mailgun_03f092fd-1186-4cf8-8355-a5fb7d251903.json
+./memory/preferences_crm_ops_job.json
 ./memory/sample_job_contacts.json
 ./memory/test_export_job_contacts.json
 ./memory/test_fuzzy_job_01_contacts.json
@@ -118,10 +118,4 @@
 ./watched/notes_old.txt
 ./watched/test_exports/test123.txt
 ./watched/test_exports/test_trigger.txt
-./watched/test_inbox/fuzzy_email_001.txt
-./watched/test_inbox/fuzzy_email_002.txt
-./watched/test_inbox/fuzzy_email_003.txt
-./watched/test_inbox/mailgun_2025-06-12T15-47-19__test_email.txt
-./watched/test_inbox/mailgun_test__crm_ops_job.txt
-./watched/test_inbox/test_email.txt
 ./watched/test_interns.txt

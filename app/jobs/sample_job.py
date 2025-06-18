@@ -31,7 +31,7 @@ class SampleJob:
         job_status.update(config.job_name)
         logger.info(f"Running job: {config.job_name}")
 
-        input_text = override_text or "Client requested a weekly performance report. Deadline is next Friday. Assigned to Lisa."
+        input_text = override_text or "Log project update to Google Sheets: The system is now fully operational. Assigned to Johan. Due next Tuesday."
 
         summary = self.summariser.summarise(
             text=input_text,
@@ -43,8 +43,9 @@ class SampleJob:
 
         # ✅ Manually define a single task
         task = Task(
-            description="Update contact Alice",
-            entity="Alice",
+            description="Create intern onboarding sheet",
+            entity="Lisa",
+            assignee="HR Team",
             job_id=config.job_id,
             source=source,
             summary=summary_text,
@@ -66,7 +67,7 @@ class SampleJob:
             summary=summary_text,
             tasks_executed=len(task_results),
             status="success",
-            duration=duration,
+            duration_seconds=duration,
             tasks=[task.model_dump() for task in task_list]
         )
 

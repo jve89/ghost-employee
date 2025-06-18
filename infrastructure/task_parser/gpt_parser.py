@@ -59,6 +59,11 @@ class GPTTaskParser(TaskParser):
                 entity = item.get("entity") or item.get("contact") or item.get("company") or "Unknown"
                 company = item.get("company") or None
 
+                # 👇 Inject Slack webhook metadata if it's a notification-style task
+                metadata = {}
+                if "notify" in description.lower() or "slack" in description.lower():
+                    metadata["slack_webhook_url"] = os.getenv("SLACK_WEBHOOK_URL", "https://hooks.slack.com/services/your/fallback/url")
+
                 tasks.append(Task(
                     description=description,
                     entity=entity,
@@ -66,7 +71,8 @@ class GPTTaskParser(TaskParser):
                     job_id=job_id,
                     source=summary.source_file,
                     summary=summary.content,
-                    created_at=datetime.utcnow().isoformat()
+                    created_at=datetime.utcnow().isoformat(),
+                    metadata=metadata
                 ))
 
             return tasks

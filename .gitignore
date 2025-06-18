@@ -200,3 +200,6 @@ memory/
 logs/timesheets/
 watched/test_exports/
 logs/export_status.json
+
+# Google Sheets
+/credentials/google_sheets_service_account.json
