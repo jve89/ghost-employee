@@ -113,4 +113,7 @@ def toggle_job(job_id: str):
     with open(job_path, "w") as f:
         json.dump(config, f, indent=2)
 
-    return RedirectResponse(url="/dashboard", status_code=303)
+    return {
+        "job_id": job_id,
+        "paused": not config["active"]
+    }

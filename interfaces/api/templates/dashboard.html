@@ -220,14 +220,30 @@
             loadLogs();
         }
 
+        // ⏯️ Toggle Job (Grey Tile Style)
         async function toggleJob(jobId) {
             try {
-                const res = await fetch(`/jobs/toggle/${jobId}`, { method: "POST" });
+                const res = await fetch(`/toggle/${jobId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                });
+
                 if (!res.ok) throw new Error("Failed to toggle");
 
                 const data = await res.json();
                 showToast(`Job ${data.job_id} is now ${data.paused ? 'paused' : 'resumed'}`, 'success');
-                await loadJobs(); // re-render the tiles
+
+                // 👇 Immediately update tile UI
+                const tiles = document.querySelectorAll("#jobTiles > div");
+                tiles.forEach(tile => {
+                    if (tile.innerHTML.includes(`ID:</strong> ${data.job_id}`)) {
+                        tile.classList.toggle("opacity-50", data.paused);
+                        tile.classList.toggle("grayscale", data.paused);
+                        tile.classList.toggle("cursor-not-allowed", data.paused);
+                    }
+                });
+
+                await loadJobs();  // Ensure full sync
             } catch (err) {
                 showToast(`Failed to toggle job ${jobId}`, 'error');
                 console.error(err);
