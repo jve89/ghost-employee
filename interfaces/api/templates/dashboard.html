@@ -224,9 +224,12 @@
             try {
                 const res = await fetch(`/jobs/toggle/${jobId}`, { method: "POST" });
                 if (!res.ok) throw new Error("Failed to toggle");
+
+                const data = await res.json();
+                showToast(`Job ${data.job_id} is now ${data.paused ? 'paused' : 'resumed'}`, 'success');
                 await loadJobs(); // re-render the tiles
             } catch (err) {
-                alert("Failed to toggle job.");
+                showToast(`Failed to toggle job ${jobId}`, 'error');
                 console.error(err);
             }
         }
@@ -894,6 +897,18 @@
             }
             loop();
         }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.className = `fixed bottom-5 right-5 px-4 py-2 rounded shadow-lg z-50 transition-opacity duration-300 ${
+                type === 'error' ? 'bg-red-600 text-white' : 'bg-green-600 text-white'
+            }`;
+            toast.classList.remove("hidden");
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 3000);
+        }
        
         window.onload = function () {
             // Initial one-time loads
@@ -1226,5 +1241,9 @@
       @apply py-2 px-4 border-b text-left;
     }
   </style>
+
+  <!-- 🔔 Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50 transition-opacity duration-300"></div>
+
 </body>
 </html>
