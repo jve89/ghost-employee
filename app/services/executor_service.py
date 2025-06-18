@@ -4,7 +4,6 @@ from app.core.models import Task
 from app.plugins.file_ops import FileOpsPlugin
 from app.plugins.crm_plugin import CRMPlugin
 from app.plugins.slack_plugin import SlackPlugin
-from app.plugins.sheets_plugin import SheetsPlugin
 from infrastructure.logger.retry_queue import retry_queue
 from datetime import datetime
 
@@ -12,9 +11,8 @@ ALL_PLUGINS = [
     FileOpsPlugin(),
     CRMPlugin(),
     SlackPlugin(),
-    SheetsPlugin(),
+    # ❌ SheetsPlugin removed – now handled via export dispatcher only
 ]
-
 
 def execute_task(task: Task) -> None:
     print(f"[ExecutorService] Executing: {task.description}")

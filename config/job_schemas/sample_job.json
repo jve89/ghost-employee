@@ -11,6 +11,13 @@
     {
       "type": "log",
       "config": {}
+    },
+    {
+      "type": "sheets",
+      "config": {
+        "sheet_id": "1m6WKFC3Zb1RnYCCddzPWFS-YHEzfrBcQH-j4PklLKWg",
+        "range": "Sheet1!A1"
+      }
     }
   ]
 }

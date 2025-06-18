@@ -6,33 +6,26 @@ from app.core.models import Task
 from app.core.interfaces import Plugin
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
-from dotenv import load_dotenv
-
-load_dotenv()
 
 class SheetsPlugin(Plugin):
-    def __init__(self):
-        self.sheet_id = os.getenv("GOOGLE_SHEET_ID")
+    def __init__(self, config: dict, job_id: str = "unknown"):
+        self.sheet_id = config.get("sheet_id") or os.getenv("GOOGLE_SHEET_ID")
+        self.range = config.get("range", "Sheet1!A1")
         self.creds = self.get_google_credentials()
         self.service = build("sheets", "v4", credentials=self.creds)
         self.sheet = self.service.spreadsheets()
 
     def get_google_credentials(self) -> Credentials:
-        path = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
-        if not path:
-            raise RuntimeError("Missing GOOGLE_SERVICE_ACCOUNT_JSON in .env")
-
         try:
-            with open(path, "r") as f:
-                info = json.load(f)
+            with open("./credentials/google_sheets_service_account.json") as f:
+                json_dict = json.load(f)
             return Credentials.from_service_account_info(
-                info, scopes=["https://www.googleapis.com/auth/spreadsheets"]
+                json_dict, scopes=["https://www.googleapis.com/auth/spreadsheets"]
             )
         except Exception as e:
-            raise RuntimeError(f"Failed to load Google credentials from file: {e}")
+            raise RuntimeError(f"Failed to load service account credentials: {e}")
 
     def can_handle(self, task: Task) -> bool:
-        # Example: send any task with "sheet" keyword to Sheets
         return "sheet" in task.description.lower()
 
     def handle(self, task: Task) -> dict:
@@ -47,7 +40,7 @@ class SheetsPlugin(Plugin):
         try:
             self.sheet.values().append(
                 spreadsheetId=self.sheet_id,
-                range="Sheet1!A1",
+                range=self.range,
                 valueInputOption="RAW",
                 body={"values": [row]},
             ).execute()
@@ -55,3 +48,24 @@ class SheetsPlugin(Plugin):
             return {"status": "success", "message": "Task logged to Google Sheets"}
         except Exception as e:
             return {"status": "failed", "message": str(e)}
+    
+    def export(self, data: dict, config: dict) -> None:
+        tasks = data.get("tasks", [])
+        if not tasks:
+            raise ValueError("No tasks to export to Google Sheets")
+
+        for task in tasks:
+            row = [
+                task.get("description", ""),
+                task.get("entity", ""),
+                task.get("assignee", ""),
+                data.get("summary", "")[:100],
+                task.get("created_at", ""),
+            ]
+
+            self.sheet.values().append(
+                spreadsheetId=self.sheet_id,
+                range=self.range,
+                valueInputOption="RAW",
+                body={"values": [row]},
+            ).execute()
