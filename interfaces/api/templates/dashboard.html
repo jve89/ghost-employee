@@ -16,6 +16,10 @@
             const logsEl = document.getElementById("logs");
             const statusEl = document.getElementById("status");
 
+            const jobsRes = await fetch("/jobs");              // ✅ full job configs
+            const jobs = await jobsRes.json();
+            renderJobTiles(jobs);                              // ✅ contains job_id, job_name, active, etc.
+
             if (logsEl) logsEl.innerText = logs.logs.join("\n");
             if (statusEl) statusEl.innerText = JSON.stringify(statuses, null, 2);
 
@@ -39,6 +43,54 @@
             }
 
             loadExportLogs();
+        }
+
+        // ⬇️ Renders the job tiles with toggle buttons
+        function renderJobTiles(jobs) {
+        const container = document.getElementById("jobTiles");
+        container.innerHTML = "";
+        for (const job of jobs) {
+            const tile = document.createElement("div");
+            tile.className = "tile w-full max-w-md bg-white rounded shadow p-4 m-2";
+
+            tile.innerHTML = `
+            <h3 class="text-lg font-bold mb-1">${job.job_name}</h3>
+            <p><strong>ID:</strong> ${job.job_id}</p>
+            <p><strong>Interval:</strong> ${job.run_interval_seconds}s</p>
+            <p><strong>Status:</strong> ${job.active ? "🟢 Active" : "⏸️ Paused"}</p>
+            <button onclick="toggleJobState('${job.job_id}', this)" class="mt-2 px-4 py-1 rounded text-white ${job.active ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}">
+                ${job.active ? 'Pause' : 'Resume'}
+            </button>
+            `;
+
+            container.appendChild(tile);
+        }
+        }
+
+        // ✅ FINAL version to keep — handles UI + error + login
+        async function toggleJobState(jobId, btnElement) {
+            try {
+                const res = await fetch(`/jobs/${jobId}/toggle`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include" // ✅ important for session-based auth
+                });
+
+                const data = await res.json();
+
+                if (data.active !== undefined) {
+                    btnElement.textContent = data.active ? "Pause" : "Resume";
+                    btnElement.className = `mt-2 px-4 py-1 rounded text-white ${
+                        data.active ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"
+                    }`;
+
+                    const statusLine = btnElement.parentElement.querySelector("p:nth-of-type(3)");
+                    statusLine.innerHTML = `<strong>Status:</strong> ${data.active ? "🟢 Active" : "⏸️ Paused"}`;
+                }
+            } catch (err) {
+                console.error("Failed to toggle job state:", err);
+                alert("Something went wrong while toggling the job.");
+            }
         }
 
         async function populateGhostSelector() {
@@ -936,248 +988,243 @@
     </script>
 </head>
 <body class="bg-gray-50 font-sans text-gray-900">
-    <div class="p-6 max-w-screen-xl mx-auto">
-        <h1 class="text-3xl font-bold mb-6">Ghost Employee Dashboard</h1>
+  <div class="p-6 max-w-screen-xl mx-auto space-y-10">
+    <h1 class="text-3xl font-bold">Ghost Employee Dashboard</h1>
 
-        <div class="mb-8">
-            <h2 class="text-xl font-semibold mb-2">Actions</h2>
-            <form action="/jobs/retry-failed" method="post">
-                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Retry Failed Tasks</button>
-            </form>
-        </div>
-
-        <div class="mb-4">
-            <label for="ghostSelector" class="block text-sm font-medium text-white mb-1">🧙‍♂️ View Ghost Employee:</label>
-            <select id="ghostSelector" class="bg-zinc-700 text-white px-3 py-2 rounded-md text-sm">
-                <option value="all">👥 All Ghosts</option>
-                <option value="sample_job">SampleJob</option>
-                <option value="compliance_assistant">ComplianceAssistant</option>
-                <option value="demo_job">DemoJob</option>
-                <!-- Add more job names here if needed -->
-            </select>
-        </div>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">System Status</h2>
-        <pre id="status" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-48">Loading...</pre>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">Jobs</h2>
-        <div id="jobTiles" class="flex flex-wrap"></div>
-
-        <h2>👷 Job Activity Summary</h2>
-        <div id="jobStats">Loading job stats...</div>
-
-        <div id="demo-export-tile" class="bg-white p-4 mt-6 rounded shadow border border-gray-200">
-            <h3 class="text-lg font-semibold mb-2">📄 Latest Demo Report</h3>
-                <p><strong>Job ID:</strong> <span id="job-id">-</span></p>
-                <p><strong>Ran at:</strong> <span id="timestamp">-</span></p>
-                <p><strong>Tasks:</strong> <span id="task-count">0</span></p>
-                <p><strong>✅ Success:</strong> <span id="success-count">0</span></p>
-                <p><strong>❌ Failed:</strong> <span id="failure-count">0</span></p>
-                <p><a id="pdf-download" href="#" class="text-blue-600 underline" target="_blank">⬇️ Download PDF Report</a></p>
-        </div>
-
-        <div id="compliance-export-tile" class="bg-white p-4 mt-6 rounded shadow border border-gray-200">
-            <h3 class="text-lg font-semibold mb-2">📄 Latest Compliance Report</h3>
-            <p><strong>Job:</strong> <span id="compliance-job-id">-</span></p>
-            <p><strong>Summary:</strong> <span id="compliance-summary">-</span></p>
-            <ul id="compliance-tasks" class="list-disc ml-5 text-sm text-gray-800"></ul>
-            <p class="mt-2 text-xs text-gray-500"><strong>Exported at:</strong> <span id="compliance-timestamp">-</span></p>
-        </div>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">Create New Job</h2>
-        <form id="jobForm" class="bg-white p-6 rounded shadow border border-gray-200 mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Job Name</label>
-                    <input name="job_name" class="w-full border border-gray-300 rounded px-3 py-2" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Watch Directory</label>
-                    <input name="watch_dir" class="w-full border border-gray-300 rounded px-3 py-2" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">GPT Model</label>
-                    <select name="gpt_model" class="w-full border border-gray-300 rounded px-3 py-2">
-                        <option value="gpt-4">gpt-4</option>
-                        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Run Interval (seconds)</label>
-                    <input name="run_interval_seconds" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="30">
-                </div>
-            </div>
-            <button type="submit" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>
-            <p id="jobFormMessage" class="text-sm mt-2 text-gray-700"></p>
+    <!-- ⚙️ Global Actions -->
+    <div class="space-y-4">
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Actions</h2>
+        <form action="/jobs/retry-failed" method="post">
+          <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Retry Failed Tasks</button>
         </form>
+      </div>
 
-        <h2 class="text-xl font-semibold mt-8 mb-2">Retry Queue</h2>
-        <table class="min-w-full bg-white border border-gray-200 rounded shadow text-sm">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="py-2 px-4 border-b text-left">Description</th>
-                    <th class="py-2 px-4 border-b text-left">Timestamp</th>
-                    <th class="py-2 px-4 border-b text-left">Retry</th>
-                </tr>
-            </thead>
-            <tbody id="retry-body">
-                <tr><td colspan="3" class="py-2 px-4 text-center text-gray-500">Loading...</td></tr>
-            </tbody>
-        </table>
-
-        <div class="mt-4 p-4 bg-white border border-gray-200 rounded shadow text-sm text-gray-800">
-            <h3 class="font-semibold mb-2">📊 Retry Queue Stats</h3>
-            <div id="retryStatsBox">Loading retry stats...</div>
-        </div>
-
-        <div class="p-4 bg-white rounded-2xl shadow">
-            <div class="text-lg font-semibold mb-2">📝 Latest Tasks</div>
-                <div id="latest-tasks" class="text-sm max-h-64 overflow-y-auto">
-                    <div class="text-gray-500">Loading...</div>
-                </div>
-        </div>
-
-        <!-- Recent Email Jobs Tile -->
-        <div class="bg-white rounded shadow p-4 mt-6">
-            <h2 class="text-lg font-semibold mb-2">📬 Recent Email Jobs</h2>
-                <div id="recent-email-jobs" class="space-y-2">
-                    <div class="text-gray-500">Loading recent email jobs...</div>
-                </div>
-        </div>
-
-        <div class="rounded-2xl shadow p-4 border w-full max-w-md">
-            <h2 class="text-lg font-semibold mb-2">📬 Recent Email Triggers</h2>
-                <ul id="email-activity-list" class="text-sm text-gray-700 space-y-1">
-                    <li>Loading...</li>
-                </ul>
-        </div>
-
-        <div class="mt-6">
-            <h2 class="text-xl font-bold mb-2">Recent Activity</h2>
-            <div id="activityLog" class="bg-gray-100 p-3 rounded shadow text-sm font-mono max-h-80 overflow-y-scroll"></div>
-        </div>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">Live Logs</h2>
-        <pre id="logs" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-64">Loading...</pre>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">Recent Export Logs</h2>
-        <div class="flex gap-4 mb-4 items-center">
-            <div>
-                <label class="block text-sm font-medium mb-1">Filter by Job:</label>
-                <select id="exportFilterJob" class="border border-gray-300 rounded px-3 py-2">
-                    <option value="">All Jobs</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1">Only show failed exports:</label>
-                <input type="checkbox" id="exportFilterFailed" class="ml-2">
-            </div>
-        </div>
-
-        <form method="post" action="/dashboard/retry-failed" style="margin-top: 20px;">
-            <button type="submit">🔁 Retry Failed Tasks</button>
-        </form>
-
-        <h2 class="text-xl font-semibold mt-8 mb-2">📧 Email-Triggered Jobs</h2>
-        <div id="emailActivityLog" class="bg-gray-100 p-3 rounded shadow text-sm font-mono max-h-80 overflow-y-scroll">Loading...</div>
-
-        <div id="email-jobs-tile" class="mt-8">
-        <h2 class="text-xl font-semibold mb-2">📨 Last 5 Email-Triggered Jobs</h2>
-        <table class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
-            <thead class="bg-gray-100">
-            <tr>
-                <th class="py-2 px-4 border-b text-left">Timestamp</th>
-                <th class="py-2 px-4 border-b text-left">Sender</th>
-                <th class="py-2 px-4 border-b text-left">Subject</th>
-                <th class="py-2 px-4 border-b text-left">Status</th>
-            </tr>
-            </thead>
-            <tbody id="email-jobs-list">
-            <tr><td colspan="4" class="text-center text-gray-500 py-3">Loading...</td></tr>
-            </tbody>
-        </table>
-        </div>
-
-        <div class="mb-4">
-            <label for="summaryJobFilter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Job</label>
-            <select id="summaryJobFilter" class="border border-gray-300 rounded px-3 py-2 w-full">
-                <option value="">All Jobs</option>
-            </select>
-        </div>
-
-        <div class="p-4 bg-white rounded-2xl shadow">
-            <h2 class="text-lg font-semibold mb-2">🚨 Recent Failures</h2>
-            <ul id="failure-list" class="text-sm space-y-1">
-                <li class="text-gray-500">Loading...</li>
-            </ul>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 lg:w-1/3">
-            <h2 class="text-lg font-semibold mb-2">⏱️ Avg. Job Duration</h2>
-                <ul id="duration-stats" class="text-sm text-gray-700 space-y-1">
-                    <li>Loading...</li>
-                </ul>
-        </div>
-
-        <!-- 🛑 Failure Alerts -->
-        <div class="bg-white rounded shadow p-4 mt-6 border border-red-300">
-            <h2 class="text-lg font-semibold mb-2 text-red-700">🛑 Job Failure Alerts (24h)</h2>
-            <div id="failure-alerts-box" class="text-sm text-gray-800 space-y-1">
-                <div class="text-gray-500">Loading alert data...</div>
-            </div>
-        </div>
-
-        <!-- 📊 Export Volume Analytics -->
-        <div class="bg-white rounded shadow p-4 mt-6">
-            <h2 class="text-lg font-semibold mb-2">📊 Export Volume (Last 7 Days)</h2>
-            <div id="export-volume-box" class="text-sm text-gray-800 space-y-1">
-                <div class="text-gray-500">Loading volume data...</div>
-            </div>
-        </div>
-
-        <!-- 🧠 Export Summaries Tile -->
-        <div class="bg-white rounded shadow p-4 mt-6">
-            <h2 class="text-lg font-semibold mb-2">🧠 Export Summaries</h2>
-            <div id="export-summaries-list" class="space-y-2 text-sm text-gray-800">
-                <div class="text-gray-500">Loading summaries...</div>
-            </div>
-        </div>
-
-        <div id="latest-compliance-export" class="p-4 bg-zinc-800 rounded-2xl shadow-md text-white text-sm">
-            <p class="font-bold mb-2">📑 Latest Compliance Export</p>
-            <p class="text-xs text-gray-400">Loading...</p>
-        </div>
-
-        <!-- ⏱️ Avg. Job Duration Tile -->
-        <div class="rounded-2xl shadow p-4 border w-full max-w-sm bg-white">
-            <h2 class="text-lg font-bold mb-2">⏱️ Avg. Job Duration</h2>
-                <div id="durationTile" class="text-sm space-y-1 text-gray-700">
-                    <p>Loading...</p>
-                </div>
-        </div>
-
-        <!-- 📄 Latest Demo PDF Export Tile -->
-        <div class="rounded-2xl shadow p-4 border w-full max-w-sm bg-white">
-            <h2 class="text-lg font-bold mb-2">📄 Latest Demo PDF</h2>
-                <div id="latestDemoExportTile" class="text-sm space-y-2 text-gray-700">
-                    <p>Loading...</p>
-                </div>
-        </div>
-
-        <table id="export-log-table" class="min-w-full bg-white border border-gray-300 rounded shadow text-sm">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="py-2 px-4 border-b text-left">Timestamp</th>
-                    <th class="py-2 px-4 border-b text-left">Job</th>
-                    <th class="py-2 px-4 border-b text-left">Destination</th>
-                    <th class="py-2 px-4 border-b text-left">Status</th>
-                    <th class="py-2 px-4 border-b text-left">Retry Count</th>
-                    <th class="py-2 px-4 border-b text-left">Retry Origin</th>
-                    <th class="py-2 px-4 border-b text-left">Details</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+      <div>
+        <label for="ghostSelector" class="block text-sm font-medium text-gray-700 mb-1">🧙‍♂️ View Ghost Employee:</label>
+        <select id="ghostSelector" class="bg-zinc-700 text-white px-3 py-2 rounded-md text-sm">
+          <option value="all">👥 All Ghosts</option>
+          <option value="sample_job">SampleJob</option>
+          <option value="compliance_assistant">ComplianceAssistant</option>
+          <option value="demo_job">DemoJob</option>
+        </select>
+      </div>
     </div>
+
+    <!-- 📈 System Status -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">System Status</h2>
+      <pre id="status" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-48">Loading...</pre>
+    </div>
+
+    <!-- 📋 Jobs Overview -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Jobs</h2>
+      <div id="jobTiles" class="flex flex-wrap gap-4"></div>
+    </div>
+
+    <!-- 📊 Job Stats Summary -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">👷 Job Activity Summary</h2>
+      <div id="jobStats">Loading job stats...</div>
+    </div>
+
+    <!-- 📄 Latest Demo Export -->
+    <div id="demo-export-tile" class="tile">
+      <h3 class="text-lg font-semibold mb-2">📄 Latest Demo Report</h3>
+      <p><strong>Job ID:</strong> <span id="job-id">-</span></p>
+      <p><strong>Ran at:</strong> <span id="timestamp">-</span></p>
+      <p><strong>Tasks:</strong> <span id="task-count">0</span></p>
+      <p><strong>✅ Success:</strong> <span id="success-count">0</span></p>
+      <p><a id="pdf-download" href="#" class="text-blue-600 underline" target="_blank">⬇️ Download PDF Report</a></p>
+    </div>
+
+    <!-- 📄 Latest Compliance Export -->
+    <div id="compliance-export-tile" class="tile">
+      <h3 class="text-lg font-semibold mb-2">📄 Latest Compliance Report</h3>
+      <p><strong>Job:</strong> <span id="compliance-job-id">-</span></p>
+      <p><strong>Summary:</strong> <span id="compliance-summary">-</span></p>
+      <ul id="compliance-tasks" class="list-disc ml-5 text-sm text-gray-800"></ul>
+      <p class="mt-2 text-xs text-gray-500"><strong>Exported at:</strong> <span id="compliance-timestamp">-</span></p>
+    </div>
+
+    <!-- ➕ Create Job Form -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Create New Job</h2>
+      <form id="jobForm" class="tile space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Job Name</label>
+            <input name="job_name" class="w-full border border-gray-300 rounded px-3 py-2" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Watch Directory</label>
+            <input name="watch_dir" class="w-full border border-gray-300 rounded px-3 py-2" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">GPT Model</label>
+            <select name="gpt_model" class="w-full border border-gray-300 rounded px-3 py-2">
+              <option value="gpt-4">gpt-4</option>
+              <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Run Interval (seconds)</label>
+            <input name="run_interval_seconds" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="30">
+          </div>
+        </div>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>
+        <p id="jobFormMessage" class="text-sm text-gray-700"></p>
+      </form>
+    </div>
+
+    <!-- 🔁 Retry Queue Table -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Retry Queue</h2>
+      <table class="tile-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Timestamp</th>
+            <th>Retry</th>
+          </tr>
+        </thead>
+        <tbody id="retry-body">
+          <tr><td colspan="3" class="text-center text-gray-500">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 📊 Retry Stats -->
+    <div class="tile">
+      <h3 class="font-semibold mb-2">📊 Retry Queue Stats</h3>
+      <div id="retryStatsBox">Loading retry stats...</div>
+    </div>
+
+    <!-- 📝 Latest Tasks -->
+    <div class="tile">
+      <h2 class="text-lg font-semibold mb-2">📝 Latest Tasks</h2>
+      <div id="latest-tasks" class="text-sm max-h-64 overflow-y-auto">
+        <div class="text-gray-500">Loading...</div>
+      </div>
+    </div>
+
+    <!-- 📬 Email Jobs Summary -->
+    <div class="tile">
+      <h2 class="text-lg font-semibold mb-2">📬 Recent Email Jobs</h2>
+      <div id="recent-email-jobs" class="space-y-2">
+        <div class="text-gray-500">Loading recent email jobs...</div>
+      </div>
+    </div>
+
+    <!-- 📬 Recent Email Triggers -->
+    <div class="tile max-w-md">
+      <h2 class="text-lg font-semibold mb-2">📬 Recent Email Triggers</h2>
+      <ul id="email-activity-list" class="text-sm text-gray-700 space-y-1">
+        <li>Loading...</li>
+      </ul>
+    </div>
+
+    <!-- 🧠 Export Summaries -->
+    <div class="tile">
+      <h2 class="text-lg font-semibold mb-2">🧠 Export Summaries</h2>
+      <div id="export-summaries-list" class="space-y-2 text-sm text-gray-800">
+        <div class="text-gray-500">Loading summaries...</div>
+      </div>
+    </div>
+
+    <!-- 🚨 Recent Failures -->
+    <div class="tile">
+      <h2 class="text-lg font-semibold mb-2">🚨 Recent Failures</h2>
+      <ul id="failure-list" class="text-sm space-y-1">
+        <li class="text-gray-500">Loading...</li>
+      </ul>
+    </div>
+
+    <!-- ⏱️ Avg Duration -->
+    <div class="tile max-w-md">
+      <h2 class="text-lg font-semibold mb-2">⏱️ Avg. Job Duration</h2>
+      <ul id="duration-stats" class="text-sm text-gray-700 space-y-1">
+        <li>Loading...</li>
+      </ul>
+    </div>
+
+    <!-- 🛑 Failure Alerts -->
+    <div class="tile border border-red-300">
+      <h2 class="text-lg font-semibold mb-2 text-red-700">🛑 Job Failure Alerts (24h)</h2>
+      <div id="failure-alerts-box" class="text-sm text-gray-800 space-y-1">
+        <div class="text-gray-500">Loading alert data...</div>
+      </div>
+    </div>
+
+    <!-- 📊 Export Volume -->
+    <div class="tile">
+      <h2 class="text-lg font-semibold mb-2">📊 Export Volume (Last 7 Days)</h2>
+      <div id="export-volume-box" class="text-sm text-gray-800 space-y-1">
+        <div class="text-gray-500">Loading volume data...</div>
+      </div>
+    </div>
+
+    <!-- 📨 Last Email Jobs -->
+    <div id="email-jobs-tile">
+      <h2 class="text-xl font-semibold mb-2">📨 Last 5 Email-Triggered Jobs</h2>
+      <table class="tile-table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Sender</th>
+            <th>Subject</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="email-jobs-list">
+          <tr><td colspan="4" class="text-center text-gray-500 py-3">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 🧠 Latest Compliance Export (Dark Box) -->
+    <div id="latest-compliance-export" class="p-4 bg-zinc-800 rounded-2xl shadow-md text-white text-sm">
+      <p class="font-bold mb-2">📑 Latest Compliance Export</p>
+      <p class="text-xs text-gray-400">Loading...</p>
+    </div>
+
+    <!-- 📄 Latest Demo PDF Export -->
+    <div class="tile max-w-sm">
+      <h2 class="text-lg font-bold mb-2">📄 Latest Demo PDF</h2>
+      <div id="latestDemoExportTile" class="text-sm space-y-2 text-gray-700">
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <!-- 📋 Export Log Table -->
+    <table id="export-log-table" class="tile-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Job</th>
+          <th>Destination</th>
+          <th>Status</th>
+          <th>Retry Count</th>
+          <th>Retry Origin</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 💅 Tailwind Utility Classes -->
+  <style>
+    .tile {
+      @apply bg-white rounded-2xl shadow p-4 border;
+    }
+    .tile-table {
+      @apply min-w-full bg-white border border-gray-300 rounded shadow text-sm;
+    }
+    .tile-table th, .tile-table td {
+      @apply py-2 px-4 border-b text-left;
+    }
+  </style>
 </body>
 </html>

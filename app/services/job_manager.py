@@ -45,3 +45,16 @@ class JobManager:
             activity_log.record(job_name=config.job_name, trigger="manual", status="completed")
         else:
             print(f"[WARN] Job '{config.job_name}' not found in registry.")
+
+def toggle_job_active(job_id: str) -> bool:
+    from config.config_loader import load_job_config, save_job_config
+
+    try:
+        config = load_job_config(job_id)
+        config.active = not getattr(config, "active", True)
+        save_job_config(config)
+        return config.active
+    except Exception as e:
+        print(f"❌ toggle_job_active failed for {job_id}: {e}")
+        raise
+

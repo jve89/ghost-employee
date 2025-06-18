@@ -36,3 +36,8 @@ def load_all_job_configs(config_dir: str = "config/job_schemas") -> list[JobConf
                 job_config = adapter.validate_python(data)
                 job_configs.append(job_config)
     return job_configs
+
+def save_job_config(job_config: JobConfig):
+    path = f"config/job_schemas/{job_config.job_id}.json"
+    with open(path, "w") as f:
+        json.dump(job_config.model_dump(), f, indent=2)

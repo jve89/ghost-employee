@@ -1,16 +1,12 @@
 {
   "job_name": "Compliance Assistant",
   "job_id": "compliance_assistant",
-  "active": true,
   "watch_dir": "watched/compliance_docs",
-  "file_pattern": "*.txt",
   "gpt_model": "gpt-4",
-  "run_interval_seconds": 60,
   "retry_limit": 2,
-  "job_prompt": {
-    "system": "You are a Compliance Assistant at a mid-sized financial company. Your job is to read internal documents and generate a short, formal summary and extract clearly defined action items.",
-    "user": "Summarise the following compliance update. Identify actionable tasks with assignees or deadlines if mentioned."
-  },
+  "run_interval_seconds": 60,
+  "file_pattern": "*.txt",
+  "active": true,
   "export_destinations": [
     {
       "type": "file",
@@ -25,8 +21,10 @@
     {
       "type": "email",
       "config": {
-        "recipients": ["jovanerkel@gmail.com"],
-        "subject": "🛡️ Compliance Summary",
+        "recipients": [
+          "jovanerkel@gmail.com"
+        ],
+        "subject": "\ud83d\udee1\ufe0f Compliance Summary",
         "message": "Summary:\n\n{{summary}}\n\nTasks:\n{{tasks}}"
       }
     },

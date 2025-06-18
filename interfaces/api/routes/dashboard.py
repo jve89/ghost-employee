@@ -16,6 +16,7 @@ from infrastructure.logger.job_status import get_recent_activity
 from infrastructure.auth.decorators import require_login_json
 from collections import defaultdict
 from infrastructure.logger.job_timesheet import get_timesheet_data
+from app.services.job_manager import toggle_job_active
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -367,3 +368,14 @@ async def get_job_durations():
     }
 
     return JSONResponse(avg_durations)
+
+@router.post("/jobs/{job_id}/toggle")
+@require_login_json
+async def toggle_job_state(request: Request, job_id: str):
+    try:
+        new_state = toggle_job_active(job_id)
+        return {"job_id": job_id, "active": new_state}
+    except Exception as e:
+        print(f"❌ Failed to toggle job {job_id}: {e}")
+        raise HTTPException(status_code=500, detail="Toggle failed")
+
