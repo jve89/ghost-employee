@@ -122,7 +122,7 @@ async def get_recent_exports(request: Request):
         )
 
 @router.get("/dashboard/retry-stats")
-@require_login_json
+#@require_login_json
 async def get_retry_stats(request: Request):
     try:
         queue = retry_queue_store.get_all()

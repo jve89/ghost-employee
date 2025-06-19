@@ -5,7 +5,7 @@ from typing import List
 from datetime import datetime
 from app.core.models import Task
 
-RETRY_QUEUE_FILE = "data/retry_queue.json"
+RETRY_QUEUE_FILE = "logs/retry_queue.json"
 
 class RetryQueueStore:
     def __init__(self):

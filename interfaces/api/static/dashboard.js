@@ -26,7 +26,7 @@ async function refreshDashboard() {
                 retry.retry_queue.forEach(entry => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                        <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.task.description}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.description || entry.task?.description || "No description"}</td>
                         <td class="py-2 px-4 border-b text-sm text-gray-700">${entry.timestamp}</td>
                         <td class="py-2 px-4 border-b text-sm text-gray-700">
                             <button onclick="retryTask('${entry.id}')" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Retry</button>
@@ -407,16 +407,35 @@ async function refreshDashboard() {
 
         async function loadRetryStats() {
             try {
-                const selectedGhost = localStorage.getItem("selectedGhost");
+                const selectedGhost = localStorage.getItem("selectedGhost") || "all";
                 const res = await fetch("/dashboard/retry-stats");
                 const data = await res.json();
 
-                const job = selectedGhost || "all";
-                const stats = data[job];
-
                 const container = document.getElementById("retryStatsBox");
+                if (!container) return;
+
+                if (selectedGhost === "all") {
+                    const total = Object.values(data).reduce((sum, job) => sum + (job.total_tasks || 0), 0);
+                    const latest = Object.values(data)
+                        .map(job => job.last_retry_attempt)
+                        .filter(Boolean)
+                        .sort()
+                        .pop();
+
+                    if (total === 0) {
+                        container.innerHTML = `<div class="text-gray-500">No retry stats for all.</div>`;
+                    } else {
+                        container.innerHTML = `
+                            <b>Total retry tasks:</b> ${total}<br/>
+                            <b>Latest retry:</b> ${latest || "n/a"}
+                        `;
+                    }
+                    return;
+                }
+
+                const stats = data[selectedGhost];
                 if (!stats) {
-                    container.innerHTML = `<div class="text-gray-500">No retry stats for ${job}.</div>`;
+                    container.innerHTML = `<div class="text-gray-500">No retry stats for ${selectedGhost}.</div>`;
                     return;
                 }
 
