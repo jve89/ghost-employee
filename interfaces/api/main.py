@@ -3,6 +3,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
 from interfaces.api.routes.auth import router as auth_router
@@ -21,9 +22,12 @@ import threading
 import time
 from pathlib import Path
 
+
+
 # --- Init FastAPI app ---
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key="supersecretkey123")
+app.mount("/static", StaticFiles(directory="interfaces/api/static"), name="static")
 
 # --- Register routers ---
 app.include_router(auth_router)
