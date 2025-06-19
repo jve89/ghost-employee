@@ -44,7 +44,7 @@
 ./credentials/google_sheets_service_account.json
 ./data/crm_notes.txt
 ./data/retry_queue.json
-./exports/CRM Ops Job/2025-06-17_140815_GhostRun/export.json
+./exports/CRM Ops Job/2025-06-18_164649_GhostRun/export.json
 ./filetree.txt
 ./infrastructure/auth/decorators.py
 ./infrastructure/email/email_watcher.py
@@ -72,6 +72,7 @@
 ./interfaces/api/routes/mailgun_webhook.py
 ./interfaces/api/templates/dashboard.html
 ./interfaces/api/templates/login.html
+./interfaces/api/static/dashboard.js
 ./logs/activity_log.json
 ./logs/dummy_crm.json
 ./logs/export_status.json
@@ -79,16 +80,8 @@
 ./logs/timesheets/Compliance Assistant_timesheet.json
 ./logs/timesheets/Data Entry Specialist_timesheet.json
 ./logs/timesheets/Sample Job_timesheet.json
-./logs/timesheets/compliance_analyst_timesheet.json
-./logs/timesheets/crm_ops_job_timesheet.json
-./logs/timesheets/demo_job_timesheet.json
-./logs/timesheets/prepare_interns_timesheet.json
-./logs/timesheets/sample_job_timesheet.json
-./logs/timesheets/test_export_job_timesheet.json
-./logs/timesheets/test_fuzzy_job_timesheet.json
-./logs/timesheets/test_timesheet.json
+./logs/retry_queue.json
 ./makefile
-./memory/compliance_analyst.json
 ./notion_list_users.py
 ./requirements.txt
 ./retry_failed_tasks.py
@@ -113,7 +106,5 @@
 ./watched/interns_list.txt
 ./watched/list_interns.txt
 ./watched/notes_old.txt
-./watched/test_exports/test123.txt
-./watched/test_exports/test_trigger.txt
 ./watched/test_interns.txt
 ./watched/test_slack_trigger.txt

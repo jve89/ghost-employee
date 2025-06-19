@@ -198,13 +198,17 @@ async function refreshDashboard() {
 
         async function retryTask(taskId) {
             try {
-                const res = await fetch(`/jobs/retry-task/${taskId}`, { method: "POST" });
+                const res = await fetch(`/dashboard/retry-task/${taskId}`, { method: "POST" });
                 const data = await res.json();
-                alert(`Retry ${data.status}`);
+                console.log("Retry response:", data); // 🔍 Log full response for debugging
+
+                if (!data.message) throw new Error("Missing response message");
+                alert(data.message);
+
                 refreshDashboard();
             } catch (err) {
                 console.error("Retry failed", err);
-                alert("Retry failed");
+                alert("❌ Retry failed.");
             }
         }
 

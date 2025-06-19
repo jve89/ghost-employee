@@ -318,7 +318,8 @@ async def retry_single_task(request: Request, task_id: str):
         result = retry_task_by_id(task_id)
         return {"status": "ok", "message": result}
     except Exception as e:
-        return JSONResponse(status_code=500, content={"error": str(e)})
+        print(f"Retry failed: {e}")  # 👈 Add console output for debugging
+        return JSONResponse(status_code=500, content={"status": "error", "message": "❌ Retry failed."})
 
 @router.get("/dashboard/latest-tasks")
 @require_login_json

@@ -1,12 +1,1 @@
-[
-  {
-    "id": "test123",
-    "job_name": "demo_job",
-    "description": "Test export failure",
-    "timestamp": "2025-06-19T10:00:00",
-    "retry_origin": "export_log",
-    "retry_count": 0,
-    "retry_result": "",
-    "result_timestamp": ""
-  }
-]
+[]
