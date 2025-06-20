@@ -987,6 +987,42 @@ async function refreshDashboard() {
             setInterval(loadDurationStats, 20000);        // Duration stats refresh
         };
 
+        // 🆕 Handle Create Job Form Submission
+        document.addEventListener("DOMContentLoaded", () => {
+        const jobForm = document.getElementById("jobForm");
+        const message = document.getElementById("jobFormMessage");
+
+        if (jobForm) {
+            jobForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            message.innerText = "Submitting...";
+
+            const formData = new FormData(jobForm);
+            const payload = Object.fromEntries(formData.entries());
+            payload.run_interval_seconds = parseInt(payload.run_interval_seconds);
+
+            try {
+                const res = await fetch("/dashboard/create-job", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                message.innerText = "✅ Job created successfully.";
+                jobForm.reset();
+                loadJobs();
+                } else {
+                message.innerText = `❌ ${data.error || "Job creation failed."}`;
+                }
+            } catch (err) {
+                console.error("Job creation failed:", err);
+                message.innerText = "❌ Error submitting form.";
+            }
+            });
+        }
+        });
 
         document.addEventListener("DOMContentLoaded", () => {
             const jobSelect = document.getElementById("exportFilterJob");
@@ -995,41 +1031,5 @@ async function refreshDashboard() {
             if (jobSelect && failedCheckbox) {
                 jobSelect.addEventListener("change", loadExportLogs);
                 failedCheckbox.addEventListener("change", loadExportLogs);
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const jobForm = document.getElementById("jobForm");
-            const message = document.getElementById("jobFormMessage");
-
-            if (jobForm) {
-                jobForm.addEventListener("submit", async (e) => {
-                    e.preventDefault();
-                    message.innerText = "Submitting...";
-
-                    const formData = new FormData(jobForm);
-                    const payload = Object.fromEntries(formData.entries());
-                    payload.run_interval_seconds = parseInt(payload.run_interval_seconds);
-
-                    try {
-                        const res = await fetch("/dashboard/create-job", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(payload)
-                        });
-
-                        const data = await res.json();
-                        if (res.ok) {
-                            message.innerText = "✅ Job created successfully.";
-                            jobForm.reset();
-                            loadJobs();
-                        } else {
-                            message.innerText = `❌ ${data.error || "Job creation failed."}`;
-                        }
-                    } catch (err) {
-                        console.error("Job creation failed:", err);
-                        message.innerText = "❌ Error submitting form.";
-                    }
-                });
             }
         });

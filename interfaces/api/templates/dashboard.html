@@ -87,7 +87,29 @@
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Run Interval (seconds)</label>
-            <input name="run_interval_seconds" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="30">
+            <input name="run_interval_seconds" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="60">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Retry Limit</label>
+            <input name="retry_limit" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="2">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">File Pattern</label>
+            <input name="file_pattern" class="w-full border border-gray-300 rounded px-3 py-2" value="*">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Export Destinations</label>
+            <select name="export_destinations" multiple class="w-full border border-gray-300 rounded px-3 py-2">
+              <option value="file">File</option>
+              <option value="log">Log</option>
+              <option value="email">Email</option>
+              <option value="notion">Notion</option>
+              <option value="sheets">Sheets</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 mt-6">
+            <input name="active" type="checkbox" checked class="h-4 w-4 text-green-600 border-gray-300 rounded">
+            <label class="text-sm font-medium">Active</label>
           </div>
         </div>
         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>

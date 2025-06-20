@@ -5,7 +5,7 @@ from fastapi.responses import RedirectResponse
 from fastapi import HTTPException
 from app.jobs.job_registry import job_registry
 from app.services.job_manager import JobManager
-from config.config_loader import load_job_configs
+from config.config_loader import load_all_job_configs as load_job_configs
 from app.core.models import JobConfig
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.job_status import job_status
@@ -100,20 +100,22 @@ def retry_single_task(task_id: str):
 
 @router.post("/toggle/{job_id}")
 def toggle_job(job_id: str):
-    job_path = Path(f"config/job_schemas/{job_id}.json")
-    if not job_path.exists():
-        raise HTTPException(status_code=404, detail="Job config not found")
+    # Search for the job file in clients/*/jobs/
+    for client_dir in Path("clients").iterdir():
+        job_path = client_dir / "jobs" / f"{job_id}.json"
+        if job_path.exists():
+            with open(job_path, "r") as f:
+                config = json.load(f)
 
-    with open(job_path, "r") as f:
-        config = json.load(f)
+            current_state = config.get("active", True)
+            config["active"] = not current_state
 
-    current_state = config.get("active", True)
-    config["active"] = not current_state
+            with open(job_path, "w") as f:
+                json.dump(config, f, indent=2)
 
-    with open(job_path, "w") as f:
-        json.dump(config, f, indent=2)
+            return {
+                "job_id": job_id,
+                "paused": not config["active"]
+            }
 
-    return {
-        "job_id": job_id,
-        "paused": not config["active"]
-    }
+    raise HTTPException(status_code=404, detail="Job config not found")

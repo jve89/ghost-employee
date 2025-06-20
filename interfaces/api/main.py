@@ -13,7 +13,6 @@ from interfaces.api.routes.dashboard import router as dashboard_router
 
 from app.jobs.job_registry import job_registry
 from app.jobs.sample_job import SampleJob
-from config.config_loader import load_job_config
 from config.config_loader import load_all_job_configs
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.activity_log import activity_log

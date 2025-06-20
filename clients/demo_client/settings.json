@@ -1,0 +1,7 @@
+{
+  "company_name": "Demo Client Inc.",
+  "email_domain": "demo.com",
+  "primary_contact": "admin@demo.com",
+  "timezone": "Europe/Tallinn",
+  "mailgun_route_prefix": "democlient"
+}

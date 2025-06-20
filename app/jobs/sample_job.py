@@ -19,7 +19,7 @@ from infrastructure.logger.job_status import job_status
 from infrastructure.logger.job_timesheet import log_job_run
 from app.services.export_dispatcher import dispatch_exports
 from app.services.demo_report_generator import generate_demo_report
-from config.config_loader import load_job_config
+
 
 
 class SampleJob:

@@ -1,0 +1,18 @@
+{
+  "job_id": "demo_client_example_job",
+  "job_name": "Example Job for Demo Client",
+  "watch_dir": "watched/demo_client/example_job",
+  "gpt_model": "gpt-4",
+  "retry_limit": 3,
+  "run_interval_seconds": 60,
+  "active": true,
+  "file_pattern": "*.txt",
+  "export_destinations": [
+    {
+      "type": "file",
+      "config": {
+        "directory": "./exports/demo_client/example_job/"
+      }
+    }
+  ]
+}

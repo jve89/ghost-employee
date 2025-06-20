@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 from infrastructure.logger.memory_logger import logger
 from infrastructure.retry.retry_queue_store import retry_queue_store
 from infrastructure.logger.job_status import job_status
-from config.config_loader import load_job_configs
+from config.config_loader import load_all_job_configs as load_job_configs
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.job_status import get_recent_activity
 from infrastructure.auth.decorators import require_login_json
@@ -205,6 +205,7 @@ def download_demo_export_file(folder: str, filename: str):
 @require_login_json
 async def create_job(request: Request, data: JobCreateRequest):
     new_config = {
+        "job_id": data.job_name,
         "job_name": data.job_name,
         "watch_dir": data.watch_dir,
         "run_interval_seconds": data.run_interval_seconds,
