@@ -41,24 +41,40 @@ async function refreshDashboard() {
 
         // ⬇️ Renders the job tiles with toggle buttons
         function renderJobTiles(jobs) {
-        const container = document.getElementById("jobTiles");
-        container.innerHTML = "";
-        for (const job of jobs) {
-            const tile = document.createElement("div");
-            tile.className = "tile w-full max-w-md bg-white rounded shadow p-4 m-2";
+            const container = document.getElementById("jobTiles");
 
-            tile.innerHTML = `
-            <h3 class="text-lg font-bold mb-1">${job.job_name}</h3>
-            <p><strong>ID:</strong> ${job.job_id}</p>
-            <p><strong>Interval:</strong> ${job.run_interval_seconds}s</p>
-            <p><strong>Status:</strong> ${job.active ? "🟢 Active" : "⏸️ Paused"}</p>
-            <button onclick="toggleJobState('${job.job_id}', this)" class="mt-2 px-4 py-1 rounded text-white ${job.active ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}">
-                ${job.active ? 'Pause' : 'Resume'}
-            </button>
-            `;
+            // ✅ Track existing tiles by job_id
+            const existingTiles = new Map();
+            container.querySelectorAll("[data-job-id]").forEach(tile => {
+                existingTiles.set(tile.dataset.jobId, tile);
+            });
 
-            container.appendChild(tile);
-        }
+            for (const job of jobs) {
+                let tile = existingTiles.get(job.job_id);
+
+                const tileHTML = `
+                    <h3 class="text-lg font-bold mb-1">${job.job_name}</h3>
+                    <p><strong>ID:</strong> ${job.job_id}</p>
+                    <p><strong>Interval:</strong> ${job.run_interval_seconds}s</p>
+                    <p class="status"><strong>Status:</strong> ${job.active ? "🟢 Active" : "⏸️ Paused"}</p>
+                    <button onclick="toggleJobState('${job.job_id}', this)" class="mt-2 px-4 py-1 rounded text-white ${job.active ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}">
+                        ${job.active ? 'Pause' : 'Resume'}
+                    </button>
+                `;
+
+                if (tile) {
+                    // 🟡 Update tile in-place
+                    tile.innerHTML = tileHTML;
+                    tile.classList.toggle("opacity-50", !job.active);
+                } else {
+                    // 🟢 Create tile only if it doesn't already exist
+                    tile = document.createElement("div");
+                    tile.className = "tile w-full max-w-md bg-white rounded shadow p-4 m-2";
+                    tile.dataset.jobId = job.job_id;
+                    tile.innerHTML = tileHTML;
+                    container.appendChild(tile);
+                }
+            }
         }
 
         // ✅ FINAL version to keep — handles UI + error + login
@@ -262,7 +278,8 @@ async function refreshDashboard() {
 
             jobs.forEach(job => {
                 const tile = document.createElement("div");
-                tile.className = "border border-gray-300 p-4 m-2 rounded shadow bg-white w-full max-w-xl";
+                tile.dataset.jobId = job.job_id;  // ✅ Add this line
+                tile.className = "border border-gray-300 p-4 m-2 rounded shadow bg-white w-full max-w-xl"; 
 
                 const lastRun = statuses[job.job_name] || "never";
 

@@ -1,0 +1,5 @@
+Hello Ghost Employee!
+
+Please generate a test report and make sure everything is logged correctly.
+
+This message is intended to test the Base Demo Job.

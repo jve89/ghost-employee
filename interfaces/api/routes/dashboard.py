@@ -4,7 +4,7 @@ import glob
 from datetime import datetime
 from pydantic import BaseModel
 from pathlib import Path
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from infrastructure.logger.memory_logger import logger

@@ -1,5 +1,0 @@
-Name: Ella Harper
-Role: Data Analyst
-Start Date: July 1, 2025
-Manager: Rachel Sims
-Office: Amsterdam

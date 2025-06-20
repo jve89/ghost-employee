@@ -6,12 +6,13 @@ from app.plugins.crm_plugin import CRMPlugin
 from app.plugins.slack_plugin import SlackPlugin
 from infrastructure.logger.retry_queue import retry_queue
 from datetime import datetime
+from app.plugins.demo_plugin import DemoPlugin
 
 ALL_PLUGINS = [
     FileOpsPlugin(),
     CRMPlugin(),
     SlackPlugin(),
-    # ❌ SheetsPlugin removed – now handled via export dispatcher only
+    DemoPlugin(),
 ]
 
 def execute_task(task: Task) -> None:
@@ -23,7 +24,7 @@ def execute_task(task: Task) -> None:
             if plugin.can_handle(task):
                 result = plugin.handle(task)
                 task.status = "success" if result else "failed"
-                print(f"[ExecutorService] ✅ Plugin handled task. Success: {result}")
+                print(f"[ExecutorService] ✅ {plugin.__class__.__name__} handled task. Success: {result}")
                 return
 
         task.status = "skipped"

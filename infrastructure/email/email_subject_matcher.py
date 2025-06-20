@@ -5,10 +5,7 @@ from typing import Optional
 
 # 📌 Define subject patterns per job_id
 JOB_SUBJECT_PATTERNS = {
-    "compliance_assistant": [r"\bcompliance\b", r"🛡️"],
-    "hr_onboarding_assistant": [r"\bonboarding\b", r"intern"],
-    "crm_ops_job": [r"\bclient\b", r"\bsync\b", r"\bCRM\b"],
-    "example_job": [r"\bdemo\b", r"\bsample\b"],
+    "base_demo": [r"\bdemo\b", r"\bsample\b", r"\bonboarding\b", r"\bcompliance\b", r"\bclient\b", r"🛡️"],
 }
 
 def match_job_id(subject: str) -> Optional[str]:

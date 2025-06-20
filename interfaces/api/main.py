@@ -12,7 +12,7 @@ from interfaces.api.routes.jobs import router as jobs_router
 from interfaces.api.routes.dashboard import router as dashboard_router
 
 from app.jobs.job_registry import job_registry
-from app.jobs.sample_job import SampleJob
+from app.jobs.base_demo_job import BaseDemoJob
 from config.config_loader import load_all_job_configs
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.activity_log import activity_log
@@ -66,7 +66,7 @@ def start_background_jobs():
     logger.info(f"✅ Started {len(job_configs)} background job threads.")
 
 def job_loop(config):
-    job = SampleJob()
+    job = BaseDemoJob()
     interval = config.run_interval_seconds or 60
     while True:
         try:

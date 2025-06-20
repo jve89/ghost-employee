@@ -40,15 +40,22 @@
 ./backup/performance_notes.txt
 ./clients/demo_client/jobs/example_job.json
 ./clients/demo_client/jobs/hr_onboarding_assistant.json
+./clients/demo_client/jobs/compliance_assistant.json
 ./clients/demo_client/settings.json
 ./config/config_loader.py
 ./credentials/google_sheets_service_account.json
 ./data/crm_notes.txt
 ./data/retry_queue.json
 ./exports/CRM Ops Job/2025-06-18_164649_GhostRun/export.json
+./exports/CRM Ops Job/2025-06-18_164649_GhostRun/metadata.json
+./exports/CRM Ops Job/2025-06-18_164649_GhostRun/summary.md
+./exports/CRM Ops Job/2025-06-18_164752_GhostRun/export.json
+./exports/CRM Ops Job/2025-06-18_164752_GhostRun/metadata.json
+./exports/CRM Ops Job/2025-06-18_164752_GhostRun/summary.md
 ./filetree.txt
 ./infrastructure/auth/decorators.py
 ./infrastructure/email/email_watcher.py
+./infrastructure/email/email_subject_matcher.py
 ./infrastructure/executor/task_executor.py
 ./infrastructure/exporters/file_exporter.py
 ./infrastructure/exporters/log_exporter.py
@@ -85,7 +92,17 @@
 ./logs/timesheets/Example Job for Demo Client_timesheet.json
 ./logs/timesheets/Sample Job_timesheet.json
 ./logs/timesheets/test_dashboard_job_timesheet.json
+./logs/timesheets/HR Onboarding Assistant_timesheet.json
 ./makefile
+./memory/Compliance Assistant.json
+./memory/mailgun_2363a976-e740-4c23-a1f8-435a6c8777be.json
+./memory/mailgun_edb20760-0ad3-4240-9e14-5b9c8edc247f.json
+./memory/mailgun_86136b20-2b01-4536-8218-3107b318f10e.json
+./memory/mailgun_f2a8fbec-87e5-4e27-97c7-3148a0198da2.json
+./memory/mailgun_9d3d0055-9ccc-4a69-ac5d-4ed33192382f.json
+./memory/mailgun_d16a6977-e21a-4d55-85ac-25bbe4e98980.json
+./memory/mailgun_77aedd95-573a-486e-a211-2137f5dd78f4.json
+./memory/mailgun_f1770969-93fb-43fb-bfbb-7cda978bd332.json
 ./notion_list_users.py
 ./requirements.txt
 ./retry_failed_tasks.py

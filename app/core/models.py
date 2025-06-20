@@ -23,6 +23,8 @@ class Task(BaseModel):
     status: Optional[str] = "pending"
     executed_at: Optional[datetime] = None
     entity: Optional[str] = None
+    action: Optional[str] = None
+    payload: Optional[Dict[str, Any]] = None
 
 class ExportResult(BaseModel):
     task_description: str

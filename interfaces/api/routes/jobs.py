@@ -119,3 +119,8 @@ def toggle_job(job_id: str):
             }
 
     raise HTTPException(status_code=404, detail="Job config not found")
+
+@router.post("/jobs/{job_id}/resume")
+async def resume_job(job_id: str):
+    result = job_manager.resume_job(job_id)
+    return {"status": result}
