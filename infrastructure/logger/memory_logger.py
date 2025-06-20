@@ -1,3 +1,5 @@
+# infrastructure/logger/memory_logger.py
+
 import logging
 
 logger = logging.getLogger("GhostLogger")
@@ -8,3 +10,5 @@ if not logger.handlers:
     formatter = logging.Formatter("[%(asctime)s] %(levelname)s - %(message)s")
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+
+memory_logger = logger  # ✅ Export this so other files can import it

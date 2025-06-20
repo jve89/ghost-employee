@@ -1,0 +1,22 @@
+{
+  "job_name": "HR Assistant",
+  "job_id": "hr_assistant",
+  "watch_dir": "watched/hr_docs",
+  "gpt_model": "gpt-4",
+  "retry_limit": 2,
+  "run_interval_seconds": 60,
+  "file_pattern": "*.txt",
+  "active": true,
+  "export_destinations": [
+    {
+      "type": "file",
+      "config": {
+        "directory": "./exports/hr_assistant/"
+      }
+    },
+    {
+      "type": "log",
+      "config": {}
+    }
+  ]
+}

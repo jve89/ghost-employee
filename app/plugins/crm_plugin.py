@@ -104,3 +104,14 @@ class CRMPlugin:
 
         except Exception as e:
             return {"status": "error", "message": str(e)}
+
+def handle_crm_task(description: str) -> tuple[bool, str]:
+    """
+    Attempt to handle a CRM task based on the description.
+    Returns (success: bool, message: str)
+    """
+    # TODO: Expand with real CRM logic if needed
+    if "client" in description or "crm" in description:
+        return True, f"[CRMPlugin] ✅ Handled CRM task: {description}"
+
+    return False, "[CRMPlugin] ❌ No match in CRM plugin."

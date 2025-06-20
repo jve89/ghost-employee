@@ -10,19 +10,15 @@
 ./app/core/job_memory.py
 ./app/core/models.py
 ./app/core/registry.py
-./app/jobs/compliance_assistant.py
-./app/jobs/crm_ops_job.py
-./app/jobs/data_entry_specialist.py
-./app/jobs/demo_job.py
-./app/jobs/job_registry.py
-./app/jobs/sample_job.py
-./app/jobs/hr_onboarding_assistant.py
+./app/jobs/base_demo_job.py
 ./app/jobs/base_job.py
+./app/jobs/job_registry.py
 ./app/plugins/__init__.py
 ./app/plugins/crm_plugin.py
 ./app/plugins/file_ops.py
 ./app/plugins/sheets_plugin.py
 ./app/plugins/slack_plugin.py
+./app/plugins/demo_plugin.py
 ./app/services/demo_report_generator.py
 ./app/services/email_template_service.py
 ./app/services/executor_service.py
@@ -38,10 +34,9 @@
 ./app/services/watch_dir_dispatcher.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
-./clients/demo_client/jobs/example_job.json
-./clients/demo_client/jobs/hr_onboarding_assistant.json
-./clients/demo_client/jobs/compliance_assistant.json
+./clients/demo_client/jobs/base_demo.json
 ./clients/demo_client/settings.json
+./clients/default/jobs/base_demo.json
 ./config/config_loader.py
 ./credentials/google_sheets_service_account.json
 ./data/crm_notes.txt
@@ -49,9 +44,6 @@
 ./exports/CRM Ops Job/2025-06-18_164649_GhostRun/export.json
 ./exports/CRM Ops Job/2025-06-18_164649_GhostRun/metadata.json
 ./exports/CRM Ops Job/2025-06-18_164649_GhostRun/summary.md
-./exports/CRM Ops Job/2025-06-18_164752_GhostRun/export.json
-./exports/CRM Ops Job/2025-06-18_164752_GhostRun/metadata.json
-./exports/CRM Ops Job/2025-06-18_164752_GhostRun/summary.md
 ./filetree.txt
 ./infrastructure/auth/decorators.py
 ./infrastructure/email/email_watcher.py
@@ -85,48 +77,12 @@
 ./logs/dummy_crm.json
 ./logs/export_status.json
 ./logs/retry_queue.json
-./logs/timesheets/CRM Ops Job_timesheet.json
-./logs/timesheets/Compliance Assistant_timesheet.json
-./logs/timesheets/Data Entry Specialist_timesheet.json
-./logs/timesheets/Demo Job_timesheet.json
-./logs/timesheets/Example Job for Demo Client_timesheet.json
-./logs/timesheets/Sample Job_timesheet.json
-./logs/timesheets/test_dashboard_job_timesheet.json
-./logs/timesheets/HR Onboarding Assistant_timesheet.json
 ./makefile
-./memory/Compliance Assistant.json
-./memory/mailgun_2363a976-e740-4c23-a1f8-435a6c8777be.json
-./memory/mailgun_edb20760-0ad3-4240-9e14-5b9c8edc247f.json
-./memory/mailgun_86136b20-2b01-4536-8218-3107b318f10e.json
-./memory/mailgun_f2a8fbec-87e5-4e27-97c7-3148a0198da2.json
-./memory/mailgun_9d3d0055-9ccc-4a69-ac5d-4ed33192382f.json
-./memory/mailgun_d16a6977-e21a-4d55-85ac-25bbe4e98980.json
-./memory/mailgun_77aedd95-573a-486e-a211-2137f5dd78f4.json
-./memory/mailgun_f1770969-93fb-43fb-bfbb-7cda978bd332.json
 ./notion_list_users.py
 ./requirements.txt
 ./retry_failed_tasks.py
 ./run.py
-./run_compliance_job.py
 ./run_job_scheduler.py
-./run_sample_job.py
 ./run_watchers.py
-./test_email_pipeline.py
-./test_mailgun.py
-./test_notion_export_multiple.py
-./test_plugin_crm_patterns.py
-./test_plugin_exec.py
-./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (1).pdf
-./watched/compliance/AltMoC+Triggers+for+Enhanced+Containment (1) (2).pdf
-./watched/compliance/file_monitor_notes.txt
-./watched/compliance/performance_notes.txt
-./watched/compliance/weekly_compliance_2025-06-05.txt
-./watched/compliance_docs/notion_test_001.txt
-./watched/compliance_docs/test_compliance_assistant.txt
-./watched/compliance_docs/test_compliance_assistant_2.txt
-./watched/interns_list.txt
-./watched/list_interns.txt
-./watched/notes_old.txt
-./watched/test_interns.txt
-./watched/test_slack_trigger.txt
-./watched/hr_docs/ella_harper_onboarding.txt
+./watched/demo_inputs/test_demo_job.txt
+./run_base_demo.py
