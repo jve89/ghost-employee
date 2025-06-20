@@ -1,124 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ghost Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <title>Ghost Employee Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900">
+<body class="bg-gray-50 text-gray-900 font-sans">
   <div class="p-6 max-w-screen-xl mx-auto space-y-10">
     <h1 class="text-3xl font-bold">Ghost Employee Dashboard</h1>
 
-    <!-- ⚙️ Global Actions -->
-    <div class="space-y-4">
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Actions</h2>
-        <form action="/jobs/retry-failed" method="post">
-          <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Retry Failed Tasks</button>
-        </form>
-      </div>
-
-      <div>
-        <label for="ghostSelector" class="block text-sm font-medium text-gray-700 mb-1">🧙‍♂️ View Ghost Employee:</label>
-        <select id="ghostSelector" class="bg-zinc-700 text-white px-3 py-2 rounded-md text-sm">
-          <option value="all">👥 All Ghosts</option>
-          <option value="sample_job">SampleJob</option>
-          <option value="compliance_assistant">ComplianceAssistant</option>
-          <option value="demo_job">DemoJob</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 📈 System Status -->
-    <div>
-      <h2 class="text-xl font-semibold mb-2">System Status</h2>
-      <pre id="status" class="bg-white border border-gray-200 rounded p-4 text-sm text-gray-700 overflow-auto max-h-48">Loading...</pre>
-    </div>
-
-    <!-- 📋 Jobs Overview -->
-    <div>
+    <!-- 📋 Jobs -->
+    <section>
       <h2 class="text-xl font-semibold mb-2">Jobs</h2>
       <div id="jobTiles" class="flex flex-wrap gap-4"></div>
-    </div>
+    </section>
 
-    <!-- 📊 Job Stats Summary -->
-    <div>
-      <h2 class="text-xl font-semibold mb-2">👷 Job Activity Summary</h2>
-      <div id="jobStats">Loading job stats...</div>
-    </div>
+    <!-- 🧠 Latest Tasks -->
+    <section class="tile">
+      <h2 class="text-lg font-semibold mb-2">🧠 Latest Tasks</h2>
+      <div id="latest-tasks" class="text-sm max-h-64 overflow-y-auto text-gray-700">Loading...</div>
+    </section>
 
-    <!-- 📄 Latest Demo Export -->
-    <div id="demo-export-tile" class="tile">
-      <h3 class="text-lg font-semibold mb-2">📄 Latest Demo Report</h3>
-      <p><strong>Job ID:</strong> <span id="job-id">-</span></p>
-      <p><strong>Ran at:</strong> <span id="timestamp">-</span></p>
-      <p><strong>Tasks:</strong> <span id="task-count">0</span></p>
-      <p><strong>✅ Success:</strong> <span id="success-count">0</span></p>
-      <p><a id="pdf-download" href="#" class="text-blue-600 underline" target="_blank">⬇️ Download PDF Report</a></p>
-    </div>
+    <!-- 📄 Latest Export Summary -->
+    <section class="tile max-w-lg">
+      <h2 class="text-lg font-semibold mb-2">📄 Latest Export</h2>
+      <div id="latestDemoExportTile" class="text-sm text-gray-800 space-y-2">Loading...</div>
+    </section>
 
-    <!-- 📄 Latest Compliance Export -->
-    <div id="compliance-export-tile" class="tile">
-      <h3 class="text-lg font-semibold mb-2">📄 Latest Compliance Report</h3>
-      <p><strong>Job:</strong> <span id="compliance-job-id">-</span></p>
-      <p><strong>Summary:</strong> <span id="compliance-summary">-</span></p>
-      <ul id="compliance-tasks" class="list-disc ml-5 text-sm text-gray-800"></ul>
-      <p class="mt-2 text-xs text-gray-500"><strong>Exported at:</strong> <span id="compliance-timestamp">-</span></p>
-    </div>
-
-    <!-- ➕ Create Job Form -->
-    <div>
-      <h2 class="text-xl font-semibold mb-2">Create New Job</h2>
-      <form id="jobForm" class="tile space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium mb-1">Job Name</label>
-            <input name="job_name" class="w-full border border-gray-300 rounded px-3 py-2" required>
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Watch Directory</label>
-            <input name="watch_dir" class="w-full border border-gray-300 rounded px-3 py-2" required>
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">GPT Model</label>
-            <select name="gpt_model" class="w-full border border-gray-300 rounded px-3 py-2">
-              <option value="gpt-4">gpt-4</option>
-              <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Run Interval (seconds)</label>
-            <input name="run_interval_seconds" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="60">
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Retry Limit</label>
-            <input name="retry_limit" type="number" class="w-full border border-gray-300 rounded px-3 py-2" value="2">
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">File Pattern</label>
-            <input name="file_pattern" class="w-full border border-gray-300 rounded px-3 py-2" value="*">
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Export Destinations</label>
-            <select name="export_destinations" multiple class="w-full border border-gray-300 rounded px-3 py-2">
-              <option value="file">File</option>
-              <option value="log">Log</option>
-              <option value="email">Email</option>
-              <option value="notion">Notion</option>
-              <option value="sheets">Sheets</option>
-            </select>
-          </div>
-          <div class="flex items-center gap-2 mt-6">
-            <input name="active" type="checkbox" checked class="h-4 w-4 text-green-600 border-gray-300 rounded">
-            <label class="text-sm font-medium">Active</label>
-          </div>
-        </div>
-        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>
-        <p id="jobFormMessage" class="text-sm text-gray-700"></p>
-      </form>
-    </div>
-
-    <!-- 🔁 Retry Queue Table -->
-    <div>
+    <!-- 🔁 Retry Queue -->
+    <section>
       <h2 class="text-xl font-semibold mb-2">Retry Queue</h2>
       <table class="tile-table">
         <thead>
@@ -129,147 +38,92 @@
           </tr>
         </thead>
         <tbody id="retry-body">
-          <tr><td colspan="3" class="text-center text-gray-500">Loading...</td></tr>
+          <tr><td colspan="3" class="text-center text-gray-500 py-2">Loading...</td></tr>
         </tbody>
       </table>
-    </div>
+    </section>
 
-    <!-- 📊 Retry Stats -->
-    <div class="tile">
-      <h3 class="font-semibold mb-2">📊 Retry Queue Stats</h3>
-      <div id="retryStatsBox">Loading retry stats...</div>
-    </div>
+    <!-- ➕ Create New Job -->
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Create Job</h2>
+      <form id="jobForm" class="tile space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm mb-1">Job Name</label>
+            <input name="job_name" required class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Watch Directory</label>
+            <input name="watch_dir" required class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">GPT Model</label>
+            <select name="gpt_model" class="w-full border rounded px-3 py-2">
+              <option value="gpt-4">gpt-4</option>
+              <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Interval (s)</label>
+            <input name="run_interval_seconds" type="number" value="60" class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Retry Limit</label>
+            <input name="retry_limit" type="number" value="2" class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">File Pattern</label>
+            <input name="file_pattern" value="*" class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Export Destinations</label>
+            <select name="export_destinations" multiple class="w-full border rounded px-3 py-2">
+              <option value="file">File</option>
+              <option value="log">Log</option>
+              <option value="email">Email</option>
+              <option value="notion">Notion</option>
+              <option value="sheets">Sheets</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 mt-6">
+            <input name="active" type="checkbox" checked class="h-4 w-4 border-gray-300 rounded">
+            <label class="text-sm font-medium">Active</label>
+          </div>
+        </div>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>
+        <p id="jobFormMessage" class="text-sm text-gray-700"></p>
+      </form>
+    </section>
 
-    <!-- 📝 Latest Tasks -->
-    <div class="tile">
-      <h2 class="text-lg font-semibold mb-2">📝 Latest Tasks</h2>
-      <div id="latest-tasks" class="text-sm max-h-64 overflow-y-auto">
-        <div class="text-gray-500">Loading...</div>
+    <!-- ⚙️ Debug Panel (collapsible) -->
+    <details class="tile mt-10 text-sm">
+      <summary class="cursor-pointer font-semibold mb-2">⚙️ Debug Panel</summary>
+      <div class="space-y-4 mt-2">
+        <pre id="status" class="bg-white border rounded p-4 overflow-auto max-h-48">Loading...</pre>
+        <div id="jobStats" class="text-xs text-gray-600">Loading job stats...</div>
+        <div id="retryStatsBox" class="text-xs text-gray-600">Loading retry stats...</div>
+        <div id="failure-alerts-box" class="text-xs text-red-600">Loading failure alerts...</div>
       </div>
-    </div>
-
-    <!-- 📬 Email Jobs Summary -->
-    <div class="tile">
-      <h2 class="text-lg font-semibold mb-2">📬 Recent Email Jobs</h2>
-      <div id="recent-email-jobs" class="space-y-2">
-        <div class="text-gray-500">Loading recent email jobs...</div>
-      </div>
-    </div>
-
-    <!-- 📬 Recent Email Triggers -->
-    <div class="tile max-w-md">
-      <h2 class="text-lg font-semibold mb-2">📬 Recent Email Triggers</h2>
-      <ul id="email-activity-list" class="text-sm text-gray-700 space-y-1">
-        <li>Loading...</li>
-      </ul>
-    </div>
-
-    <!-- 🧠 Export Summaries -->
-    <div class="tile">
-      <h2 class="text-lg font-semibold mb-2">🧠 Export Summaries</h2>
-      <div id="export-summaries-list" class="space-y-2 text-sm text-gray-800">
-        <div class="text-gray-500">Loading summaries...</div>
-      </div>
-    </div>
-
-    <!-- 🚨 Recent Failures -->
-    <div class="tile">
-      <h2 class="text-lg font-semibold mb-2">🚨 Recent Failures</h2>
-      <ul id="failure-list" class="text-sm space-y-1">
-        <li class="text-gray-500">Loading...</li>
-      </ul>
-    </div>
-
-    <!-- ⏱️ Avg Duration -->
-    <div class="tile max-w-md">
-      <h2 class="text-lg font-semibold mb-2">⏱️ Avg. Job Duration</h2>
-      <ul id="duration-stats" class="text-sm text-gray-700 space-y-1">
-        <li>Loading...</li>
-      </ul>
-    </div>
-
-    <!-- 🛑 Failure Alerts -->
-    <div class="tile border border-red-300">
-      <h2 class="text-lg font-semibold mb-2 text-red-700">🛑 Job Failure Alerts (24h)</h2>
-      <div id="failure-alerts-box" class="text-sm text-gray-800 space-y-1">
-        <div class="text-gray-500">Loading alert data...</div>
-      </div>
-    </div>
-
-    <!-- 📊 Export Volume -->
-    <div class="tile">
-      <h2 class="text-lg font-semibold mb-2">📊 Export Volume (Last 7 Days)</h2>
-      <div id="export-volume-box" class="text-sm text-gray-800 space-y-1">
-        <div class="text-gray-500">Loading volume data...</div>
-      </div>
-    </div>
-
-    <!-- 📨 Last Email Jobs -->
-    <div id="email-jobs-tile">
-      <h2 class="text-xl font-semibold mb-2">📨 Last 5 Email-Triggered Jobs</h2>
-      <table class="tile-table">
-        <thead>
-          <tr>
-            <th>Timestamp</th>
-            <th>Sender</th>
-            <th>Subject</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="email-jobs-list">
-          <tr><td colspan="4" class="text-center text-gray-500 py-3">Loading...</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 🧠 Latest Compliance Export (Dark Box) -->
-    <div id="latest-compliance-export" class="p-4 bg-zinc-800 rounded-2xl shadow-md text-white text-sm">
-      <p class="font-bold mb-2">📑 Latest Compliance Export</p>
-      <p class="text-xs text-gray-400">Loading...</p>
-    </div>
-
-    <!-- 📄 Latest Demo PDF Export -->
-    <div class="tile max-w-sm">
-      <h2 class="text-lg font-bold mb-2">📄 Latest Demo PDF</h2>
-      <div id="latestDemoExportTile" class="text-sm space-y-2 text-gray-700">
-        <p>Loading...</p>
-      </div>
-    </div>
-
-    <!-- 📋 Export Log Table -->
-    <table id="export-log-table" class="tile-table">
-      <thead>
-        <tr>
-          <th>Timestamp</th>
-          <th>Job</th>
-          <th>Destination</th>
-          <th>Status</th>
-          <th>Retry Count</th>
-          <th>Retry Origin</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    </details>
   </div>
 
-  <!-- 💅 Tailwind Utility Classes -->
+  <!-- 🔔 Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50 transition-opacity duration-300"></div>
+
+  <!-- 💅 Tailwind Classes -->
   <style>
     .tile {
       @apply bg-white rounded-2xl shadow p-4 border;
     }
     .tile-table {
-      @apply min-w-full bg-white border border-gray-300 rounded shadow text-sm;
+      @apply w-full bg-white border border-gray-300 rounded shadow text-sm;
     }
     .tile-table th, .tile-table td {
       @apply py-2 px-4 border-b text-left;
     }
   </style>
 
-  <!-- 🔔 Toast Notification -->
-  <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50 transition-opacity duration-300"></div>
-
-
+  <!-- 📜 Script -->
   <script src="/static/dashboard.js?v=1.0.0" defer></script>
 </body>
 </html>

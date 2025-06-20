@@ -77,7 +77,6 @@ async function refreshDashboard() {
             }
         }
 
-        // ✅ FINAL version to keep — handles UI + error + login
         async function toggleJobState(jobId, btnElement) {
             try {
                 const res = await fetch(`/jobs/${jobId}/toggle`, {
@@ -89,17 +88,24 @@ async function refreshDashboard() {
                 const data = await res.json();
 
                 if (data.active !== undefined) {
+                    // Update button label + styling
                     btnElement.textContent = data.active ? "Pause" : "Resume";
                     btnElement.className = `mt-2 px-4 py-1 rounded text-white ${
                         data.active ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"
                     }`;
 
+                    // Update status line
                     const statusLine = btnElement.parentElement.querySelector("p:nth-of-type(3)");
                     statusLine.innerHTML = `<strong>Status:</strong> ${data.active ? "🟢 Active" : "⏸️ Paused"}`;
+
+                    // ✅ Show toast
+                    showToast(data.active ? "Job resumed" : "Job paused", "success");
+                } else {
+                    showToast("Unexpected response", "error");
                 }
             } catch (err) {
                 console.error("Failed to toggle job state:", err);
-                alert("Something went wrong while toggling the job.");
+                showToast("Something went wrong while toggling the job.", "error");
             }
         }
 
@@ -674,6 +680,36 @@ async function refreshDashboard() {
             }
         }
 
+        async function loadRetryQueue() {
+            try {
+                const res = await fetch("/jobs/retry-queue");
+                const data = await res.json();
+
+                const retry = document.getElementById("retry-body");
+                if (!retry) return;
+
+                const queue = data.retry_queue;
+
+                if (!queue || !queue.length) {
+                    retry.innerHTML = `<tr><td colspan="3" class="text-center text-gray-500 py-2">No retry tasks</td></tr>`;
+                    return;
+                }
+
+                retry.innerHTML = queue.map(entry => `
+                    <tr>
+                        <td>${entry.task.description || "No description"}</td>
+                        <td>${new Date(entry.timestamp).toLocaleString()}</td>
+                        <td>
+                            <button onclick="retryTask('${entry.id}')" class="text-blue-600 hover:underline">Retry</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error("Failed to load retry queue:", err);
+                showToast("Error loading retry queue", "error");
+            }
+        }
+
         async function loadExportVolume() {
             try {
                 const res = await fetch("/dashboard/exports");
@@ -811,7 +847,7 @@ async function refreshDashboard() {
 
                 const selectedGhost = localStorage.getItem("selectedGhost");
 
-                for (const t of tasks) {
+                for (const t of tasks.slice(-10)) {
                     if (selectedGhost && selectedGhost !== "all" && t.job_name !== selectedGhost) continue;
 
                     const time = new Date(t.timestamp).toLocaleTimeString();
@@ -904,6 +940,32 @@ async function refreshDashboard() {
             }
         }
 
+        function showToast(message, type = "info") {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.className = `fixed bottom-5 right-5 px-4 py-2 rounded shadow-lg z-50 transition-opacity duration-300 ${
+                type === "success" ? "bg-green-600" :
+                type === "error" ? "bg-red-600" : "bg-gray-800"
+            }`;
+            toast.classList.remove("hidden");
+            setTimeout(() => toast.classList.add("hidden"), 3000);
+        }
+
+        async function retryTask(id) {
+            try {
+                const res = await fetch(`/retry-task/${id}`, { method: "POST" });
+                if (res.ok) {
+                showToast("Retry triggered", "success");
+                loadRetryQueue(); // Make sure this is defined!
+                } else {
+                showToast("Retry failed", "error");
+                }
+            } catch (e) {
+                console.error("Retry error:", e);
+                showToast("Retry failed", "error");
+            }
+        }
+
         function loadRecentFailures() {
             fetch("/dashboard/recent-failures")
                 .then(response => response.json())
@@ -967,6 +1029,7 @@ async function refreshDashboard() {
             loadRetryStats();
             loadJobs();
             loadLogs();
+            loadRetryQueue();
             loadFailureAlerts();
             loadRecentFailures();
             loadJobStats();
