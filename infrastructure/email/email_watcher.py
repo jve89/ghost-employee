@@ -8,6 +8,7 @@ from email.header import decode_header
 from dotenv import load_dotenv
 from config.config_loader import load_all_job_configs
 from app.core.email_pipeline import process_email_content
+from infrastructure.email.email_subject_matcher import match_job_id
 
 load_dotenv()
 
@@ -30,10 +31,7 @@ def get_job_for_recipient(to_email, configs):
     for config in configs:
         if to_email.lower().startswith(config.job_name.lower()):
             return config
-    if to_email.lower() == "jovanerkel@gmail.com":
-        for config in configs:
-            if config.job_name == "compliance_analyst":
-                return config
+            
     return None
 
 def process_attachments(msg, job_config):
@@ -127,16 +125,23 @@ class EmailWatcher(Thread):
                     continue
 
                 job_config = get_job_for_recipient(to_email, configs)
-                if job_config:
-                    process_attachments(msg, job_config)  # Optional, keep saving files
 
-                    job_config = job_config.dict()  # Convert to a plain dict
+                if not job_config:
+                    # Try subject-based matching as fallback
+                    matched_job_id = match_job_id(subject)
+                    print(f"[Matcher] Subject match result: {matched_job_id}", flush=True)
+                    job_config = next((cfg for cfg in configs if cfg.job_id == matched_job_id), None)
+
+                if job_config:
+                    process_attachments(msg, job_config)
+
+                    job_config = job_config.dict()
                     job_config["sender"] = from_email
 
                     process_email_content(subject, body, job_config)
 
                 else:
-                    print(f"[EmailWatcher] No matching job for: {to_email} / Subject: {subject}", flush=True)
-        
+                    print(f"[EmailWatcher] No matching job for: {from_email} / Subject: {subject}", flush=True)
+
         finally:
             mail.logout()
