@@ -36,3 +36,12 @@ class ActivityLog:
         return self.entries[-count:]
 
 activity_log = ActivityLog()
+
+def log_event(message: str):
+    # Minimal shim to keep legacy jobs compatible
+    activity_log.record(
+        job_name="system",
+        trigger="manual",
+        file=None,
+        status=message
+    )

@@ -6,7 +6,7 @@ import socket
 from threading import Thread
 from email.header import decode_header
 from dotenv import load_dotenv
-from config.config_loader import load_job_configs
+from config.config_loader import load_all_job_configs
 from app.core.email_pipeline import process_email_content
 
 load_dotenv()
@@ -92,7 +92,7 @@ class EmailWatcher(Thread):
                 print(f"[EmailWatcher] ❌ Error during polling: {e}", flush=True)
 
     def check_inbox(self):
-        configs = load_job_configs()
+        configs = load_all_job_configs()
         mail = safe_connect()
         if not mail:
             return

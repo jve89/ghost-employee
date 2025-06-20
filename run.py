@@ -1,6 +1,6 @@
 import time
 from threading import Thread
-from config.config_loader import load_job_configs
+from config.config_loader import load_all_job_configs
 from infrastructure.file_watchers.folder_watcher import start_watchers
 from app.services.job_manager import JobManager
 #from infrastructure.email.email_watcher import poll_email_inbox
@@ -8,7 +8,7 @@ from app.services.job_manager import JobManager
 #Thread(target=poll_email_inbox, daemon=True).start()
 
 def main():
-    configs = load_job_configs()
+    configs = load_all_job_configs()
     manager = JobManager(configs)
     manager.start_scheduled_jobs()
 

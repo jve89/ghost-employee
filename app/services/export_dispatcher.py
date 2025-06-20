@@ -96,3 +96,14 @@ def export_results(
             exporter.export_all(summary, tasks, execution_results)
         except Exception as e:
             print(f"[ExportDispatcher] ❌ Export via {exporter.__class__.__name__} failed: {e}")
+
+def export_data(summary, tasks, job_id, export_destinations):
+    output_data = {
+        "summary": summary,
+        "tasks": tasks,
+    }
+    dispatch_exports(
+        output_data=output_data,
+        destination_configs=export_destinations,
+        job_name=job_id
+    )

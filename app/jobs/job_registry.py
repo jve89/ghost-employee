@@ -2,6 +2,7 @@ from app.jobs.demo_job import DemoJob
 from app.jobs.data_entry_specialist import DataEntrySpecialistJob
 from app.jobs.crm_ops_job import CRMOperationsJob
 from app.jobs.compliance_assistant import ComplianceAssistantJob
+from app.jobs.hr_onboarding_assistant import HROnboardingAssistantJob
 
 # ✅ Use class references (not instances)
 JOB_REGISTRY = {
@@ -9,6 +10,7 @@ JOB_REGISTRY = {
     "data_entry_specialist": DataEntrySpecialistJob,
     "crm_ops_job": CRMOperationsJob,
     "compliance_assistant": ComplianceAssistantJob,
+    "hr_onboarding_assistant": HROnboardingAssistantJob,
 }
 
 def get_job_class(job_id: str):

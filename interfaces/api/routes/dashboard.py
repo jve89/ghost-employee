@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 from infrastructure.logger.memory_logger import logger
 from infrastructure.retry.retry_queue_store import retry_queue_store
 from infrastructure.logger.job_status import job_status
-from config.config_loader import load_all_job_configs as load_job_configs
+from config.config_loader import load_all_job_configs
 from infrastructure.logger.export_log import export_log
 from infrastructure.logger.job_status import get_recent_activity
 from infrastructure.auth.decorators import require_login_json
@@ -50,7 +50,7 @@ async def get_retry_queue_api():
 
 @router.get("/jobs")
 async def get_jobs():
-    jobs = load_job_configs()
+    jobs = load_all_job_configs()
     return JSONResponse(content=jobs)
 
 @router.get("/jobs/exports")

@@ -5,7 +5,7 @@ from fastapi.responses import RedirectResponse
 from fastapi import HTTPException
 from app.jobs.job_registry import job_registry
 from app.services.job_manager import JobManager
-from config.config_loader import load_all_job_configs as load_job_configs
+from config.config_loader import load_all_job_configs
 from app.core.models import JobConfig
 from infrastructure.logger.memory_logger import logger
 from infrastructure.logger.job_status import job_status
@@ -18,11 +18,11 @@ router = APIRouter()
 
 @router.get("", response_model=list[JobConfig])  # no trailing slash
 def list_jobs():
-    return load_job_configs()
+    return load_all_job_configs()
 
 @router.post("/run/{job_name}")
 def run_job(job_name: str):
-    config_list = load_job_configs()
+    config_list = load_all_job_configs()
     config = next((c for c in config_list if c.job_name == job_name), None)
 
     if not config:

@@ -16,6 +16,8 @@
 ./app/jobs/demo_job.py
 ./app/jobs/job_registry.py
 ./app/jobs/sample_job.py
+./app/jobs/hr_onboarding_assistant.py
+./app/jobs/base_job.py
 ./app/plugins/__init__.py
 ./app/plugins/crm_plugin.py
 ./app/plugins/file_ops.py
@@ -36,11 +38,10 @@
 ./app/services/watch_dir_dispatcher.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
+./clients/demo_client/jobs/example_job.json
+./clients/demo_client/jobs/hr_onboarding_assistant.json
+./clients/demo_client/settings.json
 ./config/config_loader.py
-./config/job_schemas/compliance_assistant.json
-./config/job_schemas/crm_ops_job.json
-./config/job_schemas/data_entry_specialist.json
-./config/job_schemas/sample_job.json
 ./credentials/google_sheets_service_account.json
 ./data/crm_notes.txt
 ./data/retry_queue.json
@@ -70,17 +71,20 @@
 ./interfaces/api/routes/dashboard.py
 ./interfaces/api/routes/jobs.py
 ./interfaces/api/routes/mailgun_webhook.py
+./interfaces/api/static/dashboard.js
 ./interfaces/api/templates/dashboard.html
 ./interfaces/api/templates/login.html
-./interfaces/api/static/dashboard.js
 ./logs/activity_log.json
 ./logs/dummy_crm.json
 ./logs/export_status.json
+./logs/retry_queue.json
 ./logs/timesheets/CRM Ops Job_timesheet.json
 ./logs/timesheets/Compliance Assistant_timesheet.json
 ./logs/timesheets/Data Entry Specialist_timesheet.json
+./logs/timesheets/Demo Job_timesheet.json
+./logs/timesheets/Example Job for Demo Client_timesheet.json
 ./logs/timesheets/Sample Job_timesheet.json
-./logs/retry_queue.json
+./logs/timesheets/test_dashboard_job_timesheet.json
 ./makefile
 ./notion_list_users.py
 ./requirements.txt
@@ -108,3 +112,4 @@
 ./watched/notes_old.txt
 ./watched/test_interns.txt
 ./watched/test_slack_trigger.txt
+./watched/hr_docs/ella_harper_onboarding.txt

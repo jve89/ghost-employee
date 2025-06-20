@@ -4,7 +4,7 @@ import threading
 from fnmatch import fnmatch
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from config.config_loader import load_job_configs
+from config.config_loader import load_all_job_configs
 from app.jobs.job_registry import job_registry
 from app.core.models import JobConfig
 
@@ -51,7 +51,7 @@ class JobTriggerHandler(FileSystemEventHandler):
         job.run(self.job_config)
 
 def start_watchers():
-    configs = load_job_configs()
+    configs = load_all_job_configs()
     observers = []
 
     for config in configs:

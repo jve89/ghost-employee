@@ -2,7 +2,7 @@ import os
 import time
 from threading import Thread
 from app.jobs.job_registry import job_registry
-from config.config_loader import load_job_configs
+from config.config_loader import load_all_job_configs
 from infrastructure.logger.activity_log import activity_log
 
 WATCH_INTERVAL = 5  # seconds
@@ -61,6 +61,6 @@ class FolderWatcher(Thread):
             time.sleep(WATCH_INTERVAL)
 
 def start_watchers():
-    for config in load_job_configs():
+    for config in load_all_job_configs():
         watcher = FolderWatcher(config)
         watcher.start()
