@@ -201,5 +201,5 @@ logs/timesheets/
 watched/test_exports/
 logs/export_status.json
 
-# Google Sheets
-/credentials/google_sheets_service_account.json
+# Google Sheets credentials
+config/credentials/ghost_employee_sheets_key.json

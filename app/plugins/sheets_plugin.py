@@ -16,11 +16,18 @@ class SheetsPlugin(Plugin):
         self.sheet = self.service.spreadsheets()
 
     def get_google_credentials(self) -> Credentials:
+        json_path = os.getenv("GOOGLE_SERVICE_ACCOUNT_PATH", "config/credentials/ghost_employee_sheets_key.json")
+
+        if not os.path.exists(json_path):
+            raise RuntimeError(f"Google Sheets credential file not found at {json_path}")
+
         try:
-            with open("./credentials/google_sheets_service_account.json") as f:
+            with open(json_path, "r") as f:
                 json_dict = json.load(f)
+
             return Credentials.from_service_account_info(
-                json_dict, scopes=["https://www.googleapis.com/auth/spreadsheets"]
+                json_dict,
+                scopes=["https://www.googleapis.com/auth/spreadsheets"]
             )
         except Exception as e:
             raise RuntimeError(f"Failed to load service account credentials: {e}")
