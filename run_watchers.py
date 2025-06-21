@@ -1,5 +1,6 @@
 import time
 import subprocess
+from threading import Thread
 from app.services.watch_dir_dispatcher import start_watchers
 from infrastructure.email.email_watcher import EmailWatcher
 
@@ -7,9 +8,6 @@ def main():
     print("[Runner] 🚀 Starting Ghost Employee...")
 
     try:
-        # EmailWatcher runs in main thread (Gitpod-safe)
-        email_watcher = EmailWatcher()
-
         # Start FastAPI webhook server in background
         subprocess.Popen([
             "uvicorn",
@@ -19,14 +17,13 @@ def main():
         ])
         print("[Runner] 🌐 FastAPI webhook server started on port 8000")
 
+        # ✅ Start file watchers in a background thread
+        Thread(target=start_watchers, daemon=True).start()
+        print("[Runner] 📁 File watchers launched.")
+
+        # ✅ Start EmailWatcher in main thread (safe in Gitpod)
+        email_watcher = EmailWatcher()
         email_watcher.start_in_main_thread()
-
-        # File watchers run in background
-        start_watchers()
-
-        print("[Runner] ✅ All watchers running.")
-        while True:
-            time.sleep(60)
 
     except KeyboardInterrupt:
         print("\n[Runner] 🛑 Shutdown requested by user.")

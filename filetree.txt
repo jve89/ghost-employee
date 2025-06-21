@@ -12,13 +12,15 @@
 ./app/core/registry.py
 ./app/jobs/base_demo_job.py
 ./app/jobs/base_job.py
+./app/jobs/hr_assistant.py
 ./app/jobs/job_registry.py
 ./app/plugins/__init__.py
 ./app/plugins/crm_plugin.py
+./app/plugins/demo_plugin.py
 ./app/plugins/file_ops.py
+./app/plugins/hr_plugin.py
 ./app/plugins/sheets_plugin.py
 ./app/plugins/slack_plugin.py
-./app/plugins/demo_plugin.py
 ./app/services/demo_report_generator.py
 ./app/services/email_template_service.py
 ./app/services/executor_service.py
@@ -30,14 +32,17 @@
 ./app/services/simple_executor.py
 ./app/services/summary_service.py
 ./app/services/task_parser.py
+./app/services/task_router.py
 ./app/services/task_service.py
 ./app/services/watch_dir_dispatcher.py
 ./archive/performance_notes.txt
 ./backup/performance_notes.txt
-./clients/demo_client/jobs/base_demo.json
-./clients/demo_client/settings.json
 ./clients/default/jobs/base_demo.json
+./clients/demo_client/jobs/base_demo.json
+./clients/demo_client/jobs/hr_assistant.json
+./clients/demo_client/settings.json
 ./config/config_loader.py
+./config/job_schemas/hr_assistant.json
 ./credentials/google_sheets_service_account.json
 ./data/crm_notes.txt
 ./data/retry_queue.json
@@ -46,8 +51,8 @@
 ./exports/CRM Ops Job/2025-06-18_164649_GhostRun/summary.md
 ./filetree.txt
 ./infrastructure/auth/decorators.py
-./infrastructure/email/email_watcher.py
 ./infrastructure/email/email_subject_matcher.py
+./infrastructure/email/email_watcher.py
 ./infrastructure/executor/task_executor.py
 ./infrastructure/exporters/file_exporter.py
 ./infrastructure/exporters/log_exporter.py
@@ -78,11 +83,16 @@
 ./logs/export_status.json
 ./logs/retry_queue.json
 ./makefile
+./memory/Base Demo Job.json
+./memory/mailgun_1022ceb7-851d-4459-b87f-9602f33a76f7.json
 ./notion_list_users.py
 ./requirements.txt
 ./retry_failed_tasks.py
 ./run.py
+./run_base_demo.py
 ./run_job_scheduler.py
 ./run_watchers.py
 ./watched/demo_inputs/test_demo_job.txt
-./run_base_demo.py
+./watched/hr_docs/dsv_hr_email.txt
+./watched/hr_docs/test_hr_task.txt
+./watched/hr_docs/staffing_q3.txt

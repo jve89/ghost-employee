@@ -670,5 +670,19 @@
     "file": "alice@example.com | Test CRM",
     "status": "completed",
     "timestamp": "2025-06-09T18:52:17.237525"
+  },
+  {
+    "job_name": "system",
+    "trigger": "manual",
+    "file": null,
+    "status": "Running job: HR Assistant",
+    "timestamp": "2025-06-21T17:16:28.520538"
+  },
+  {
+    "job_name": "system",
+    "trigger": "manual",
+    "file": null,
+    "status": "\u274c Job 'HR Assistant' failed: 'JobConfig' object has no attribute 'preprocess_input'",
+    "timestamp": "2025-06-21T17:16:28.522229"
   }
 ]

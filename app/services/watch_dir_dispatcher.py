@@ -23,7 +23,7 @@ class JobTriggerHandler(FileSystemEventHandler):
                 print(f"[⏭️ Skipped] {file_name} does not match pattern: {self.job_config.file_pattern}")
                 return
 
-            self.trigger_job()
+            self.trigger_job(event.src_path)
 
     def on_created(self, event):
         if not event.is_directory:
@@ -34,21 +34,21 @@ class JobTriggerHandler(FileSystemEventHandler):
                 print(f"[⏭️ Skipped] {file_name} does not match pattern: {self.job_config.file_pattern}")
                 return
 
-            self.trigger_job()
+            self.trigger_job(event.src_path)
 
-    def trigger_job(self):
+    def trigger_job(self, file_path=None):
         now = time.time()
         if now - self.last_trigger_time < self.debounce_interval:
-            print(f"[⏳ Debounce] Ignoring duplicate trigger for '{self.job_config.job_name}'")
+            print(f"[⏳ Debounce] Ignoring duplicate trigger for '{self.job_config.job_id}'")
             return
 
         self.last_trigger_time = now
-        job = job_registry.get(self.job_config.job_name)
+        job = job_registry.get(self.job_config.job_id)
         if not job:
-            print(f"[⚠️ Watcher] Job '{self.job_config.job_name}' not found in registry.")
+            print(f"[⚠️ Watcher] Job '{self.job_config.job_id}' not found in registry.")
             return
-        print(f"[📁 Watcher] Triggering job: {self.job_config.job_name}")
-        job.run(self.job_config)
+        print(f"[📁 Watcher] Triggering job: {self.job_config.job_id} on file: {file_path}")
+        job.run(self.job_config, file_path)
 
 def start_watchers():
     configs = load_all_job_configs()
