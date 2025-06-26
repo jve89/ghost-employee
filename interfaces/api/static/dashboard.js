@@ -177,6 +177,32 @@ async function loadLatestExport() {
   }
 }
 
+// 📁 Recent Export Files
+
+async function loadRecentExportFiles() {
+  try {
+    const res = await fetch("/dashboard/recent-export-files");
+    const data = await res.json();
+    const files = data.files || [];
+
+    const container = document.getElementById("recent-export-files");
+    container.innerHTML = "";
+
+    if (files.length === 0) {
+      container.innerHTML = "<li class='text-gray-500'>No export files found.</li>";
+      return;
+    }
+
+    files.forEach(file => {
+      const li = document.createElement("li");
+      li.textContent = `• ${file}`;
+      container.appendChild(li);
+    });
+  } catch (err) {
+    console.error("❌ Failed to load recent export files", err);
+  }
+}
+
 // ==========================
 // 📊 Insights Tab
 // ==========================
@@ -242,5 +268,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   await loadLatestExport();
   await loadRetryStats();
   handleUpload();
+  loadRecentExportFiles();
 });
 

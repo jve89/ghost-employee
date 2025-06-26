@@ -5,10 +5,10 @@ from datetime import datetime
 import os, shutil
 
 from app.logs.input_log import load_input_log, append_input_log
-from infrastructure.logger.export_log_summary import export_log
 from infrastructure.retry.retry_queue_store import retry_queue_store
 from app.jobs.job_registry import list_registered_jobs
-from infrastructure.logger.task_log_summary import load_task_log
+from infrastructure.logger.task_log_summary import load_recent_tasks
+from infrastructure.logger.export_log_summary import get_latest_export
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -101,16 +101,8 @@ async def get_active_jobs():
 
 @router.get("/dashboard/latest-compliance-export")
 async def get_latest_compliance_export():
-    logs = export_log.get_logs()
-    compliance_exports = [
-        log for log in logs
-        if log.get("job_id") == "compliance_assistant" and "summary" in log
-    ]
-    if not compliance_exports:
-        return JSONResponse(content={"summary": "No compliance exports yet."})
-
-    latest = sorted(compliance_exports, key=lambda x: x["timestamp"], reverse=True)[0]
-    return JSONResponse(content={"summary": latest["summary"]})
+    result = get_latest_export(job_id="compliance_assistant")
+    return JSONResponse(content=result)
 
 # -- 📊 Retry Stats Summary --
 
@@ -129,3 +121,22 @@ async def get_retry_stats():
         })
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+# -- 📤 Recent Export Files --
+
+@router.get("/dashboard/recent-export-files")
+async def get_recent_export_files():
+    try:
+        export_dir = "./exports/compliance_assistant/"
+        if not os.path.exists(export_dir):
+            return JSONResponse(content={"files": []})
+
+        files = [
+            f for f in os.listdir(export_dir)
+            if os.path.isfile(os.path.join(export_dir, f))
+        ]
+        files.sort(reverse=True)
+        return JSONResponse(content={"files": files[:10]})
+    except Exception as e:
+        print(f"[Dashboard] ❌ Failed to load export files: {e}")
+        return JSONResponse(content={"files": []})

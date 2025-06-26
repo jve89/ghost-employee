@@ -1,3 +1,5 @@
+# app/jobs/compliance_assistant.py
+
 class ComplianceAssistantJob:
     job_name = "Compliance Assistant"
 
@@ -16,3 +18,9 @@ class ComplianceAssistantJob:
             line.strip() for line in lines
             if any(kw in line.lower() for kw in keywords)
         ]
+
+    def execute(self, task: str):
+        """
+        Simulate execution of a compliance task.
+        """
+        print(f"[ComplianceAssistantJob] ✅ Executing: {task}")
