@@ -140,3 +140,10 @@ async def get_recent_export_files():
     except Exception as e:
         print(f"[Dashboard] ❌ Failed to load export files: {e}")
         return JSONResponse(content={"files": []})
+
+# -- 🤖 Get Available Ghost Jobs --
+
+@router.get("/jobs")
+async def list_jobs():
+    from app.jobs.job_registry import list_registered_jobs
+    return JSONResponse(content={"jobs": list_registered_jobs()})

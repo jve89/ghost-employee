@@ -4,31 +4,51 @@
 // 📥 Input Tab
 // ==========================
 
-async function loadGhostEmployeeSelector() {
+
+// 🤖 Ghost Employee Selector
+
+async function loadGhostEmployeeSelector(jobId = null) {
   try {
-    const res = await fetch("/dashboard/jobs");
-    const data = await res.json();
-    const jobs = data.jobs || [];
+    const res = await fetch("/jobs"); // Returns list of registered job IDs
+    const jobList = await res.json();
 
-    const ghostSelect = document.getElementById("ghostSelector");
-    const uploadSelect = document.getElementById("uploadJobSelect");
+    const selector = document.getElementById("ghost-selector");
+    selector.innerHTML = ""; // Clear previous options
 
-    ghostSelect.innerHTML = "";
-    uploadSelect.innerHTML = "";
-
-    jobs.forEach(job => {
-      const opt = document.createElement("option");
-      opt.value = job.job_id;
-      opt.textContent = job.job_name;
-      ghostSelect.appendChild(opt);
-      uploadSelect.appendChild(opt.cloneNode(true));
+    jobList.forEach(jobId => {
+      const option = document.createElement("option");
+      option.value = jobId;
+      option.textContent = jobId.replace(/_/g, " ");
+      selector.appendChild(option);
     });
+
+    // Optional: Store selected job in localStorage
+    selector.addEventListener("change", () => {
+      localStorage.setItem("selectedJob", selector.value);
+      refreshDashboardForJob(selector.value);
+    });
+
+    // Restore last selected job
+    const saved = localStorage.getItem("selectedJob");
+    if (saved && jobList.includes(saved)) {
+      selector.value = saved;
+      refreshDashboardForJob(saved);
+    } else {
+      selector.value = jobList[0];
+      refreshDashboardForJob(jobList[0]);
+    }
+
   } catch (err) {
-    console.error("❌ Failed to load job list", err);
+    console.error("❌ Failed to load ghost employee list", err);
   }
 }
 
-async function loadInputLog() {
+function getSelectedJobId() {
+  const selector = document.getElementById("ghost-selector");
+  return selector?.value || null;
+}
+
+async function loadInputLog(jobId = null) {
   try {
     const res = await fetch("/dashboard/input-log");
     const data = await res.json();
@@ -87,7 +107,7 @@ function handleUpload() {
 // ⚙️ Processing Tab
 // ==========================
 
-async function loadActiveJobs() {
+async function loadActiveJobs(jobId = null) {
   try {
     const res = await fetch("/dashboard/active-jobs");
     const data = await res.json();
@@ -104,7 +124,7 @@ async function loadActiveJobs() {
   }
 }
 
-async function loadRetryQueue() {
+async function loadRetryQueue(jobId = null) {
   try {
     const res = await fetch("/dashboard/retry-queue");
     const data = await res.json();
@@ -116,7 +136,7 @@ async function loadRetryQueue() {
     queue.forEach(entry => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${entry.description || "(no description)"}</td>
+        <td><code>${entry.description || "(no description)"}</code></td>
         <td>${entry.timestamp || "-"}</td>
         <td><button onclick="retryTask('${entry.id}')">Retry</button></td>
       `;
@@ -127,7 +147,7 @@ async function loadRetryQueue() {
   }
 }
 
-async function loadLatestTasks() {
+async function loadLatestTasks(jobId = null) {
   const res = await fetch("/dashboard/latest-tasks");
   const data = await res.json();
   const container = document.getElementById("latest-tasks-processing");
@@ -146,13 +166,11 @@ async function loadLatestTasks() {
     const item = `
       <div class="mb-1">
         <span class="${color}">[${task.job_id}]</span>
-        <span class="ml-2">${task.description}</span>
+        <span class="ml-2"><code>${task.description}</code></span>
       </div>`;
     container.innerHTML += item;
   });
 }
-
-document.addEventListener("DOMContentLoaded", loadLatestTasks);
 
 async function retryTask(id) {
   alert("Retry not implemented in minimal v1.0.0");
@@ -162,7 +180,7 @@ async function retryTask(id) {
 // 📤 Output Tab
 // ==========================
 
-async function loadLatestExport() {
+async function loadLatestExport(jobId = null) {
   try {
     const res = await fetch("/dashboard/latest-compliance-export");
     const data = await res.json();
@@ -179,7 +197,7 @@ async function loadLatestExport() {
 
 // 📁 Recent Export Files
 
-async function loadRecentExportFiles() {
+async function loadRecentExportFiles(jobId = null) {
   try {
     const res = await fetch("/dashboard/recent-export-files");
     const data = await res.json();
@@ -207,7 +225,7 @@ async function loadRecentExportFiles() {
 // 📊 Insights Tab
 // ==========================
 
-async function loadRetryStats() {
+async function loadRetryStats(jobId = null) {
   try {
     const res = await fetch("/dashboard/retry-stats");
     const stats = await res.json();
@@ -220,7 +238,7 @@ async function loadRetryStats() {
       <div><strong>Failed:</strong> ${stats.failed}</div>
       <div class="mt-2"><strong>Recent Entries:</strong></div>
       <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
-        ${stats.recent.map(e => `<li>${e.description || "(no description)"} — ${e.result_timestamp || "-"}</li>`).join("")}
+        ${stats.recent.map(e => `<li><code>${e.description || "(no description)"}</code> — ${e.result_timestamp || "-"}</li>`).join("")}
       </ul>
     `;
   } catch (err) {
@@ -252,6 +270,18 @@ function setupTabs() {
   });
 }
 
+function refreshDashboardForJob(jobId) {
+  console.log("🔁 Switched to ghost employee:", jobId);
+
+  loadInputLog(jobId);
+  loadRetryQueue(jobId);
+  loadLatestTasks(jobId);
+  loadLatestExport(jobId);
+  loadRetryStats(jobId);
+  loadRecentExportFiles(jobId);
+}
+
+
 // ==========================
 // 🚀 Init Everything
 // ==========================
@@ -261,13 +291,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("tab-input").click();
 
   await loadGhostEmployeeSelector();
-  await loadInputLog();
-  await loadActiveJobs();
-  await loadRetryQueue();
-  await loadLatestTasks();
-  await loadLatestExport();
-  await loadRetryStats();
+  await loadActiveJobs(); // Must be loaded first
+  const jobId = getSelectedJobId();
+  refreshDashboardForJob(jobId); // This now triggers all tile loads
   handleUpload();
-  loadRecentExportFiles();
 });
 
