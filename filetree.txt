@@ -1,80 +1,107 @@
 .
-├── app
-│   ├── core
-│   │   ├── __init__.py
-│   │   └── placeholder.txt
-│   ├── executor
-│   │   └── __init__.py
-│   ├── exports
-│   │   └── __init__.py
-│   ├── __init__.py
-│   ├── input_log
-│   │   └── __init__.py
-│   ├── jobs
-│   │   └── __init__.py
-│   ├── logs
-│   │   └── __init__.py
-│   ├── parser
-│   │   └── __init__.py
-│   ├── plugins
-│   │   └── __init__.py
-│   ├── retry
-│   │   └── __init__.py
-│   └── watchers
-│       └── __init__.py
-├── config
-│   ├── __init__.py
-│   ├── job_schemas
-│   │   └── __init__.py
-│   ├── placeholder.txt
-│   └── secrets
-│       └── __init__.py
-├── CONTRIBUTING.md
-├── .env.example
-├── filetree.txt
-├── .gitignore
-├── .gitpod.yml
-├── infrastructure
-│   ├── db
-│   │   └── __init__.py
-│   ├── email
-│   │   └── __init__.py
-│   ├── __init__.py
-│   ├── placeholder.txt
-│   ├── scheduler
-│   │   └── __init__.py
-│   └── utils
-│       └── __init__.py
-├── __init__.py
-├── interfaces
-│   ├── api
-│   │   ├── __init__.py
-│   │   ├── routes
-│   │   │   ├── __init__.py
-│   │   │   └── placeholder.txt
-│   │   ├── static
-│   │   │   └── placeholder.txt
-│   │   └── templates
-│   │       └── placeholder.txt
-│   ├── cli
-│   │   └── __init__.py
-│   └── __init__.py
-├── LICENSE
-├── makefile
-├── README.md
-├── requirements.txt
-├── run
-│   ├── __init__.py
-│   └── placeholder.txt
-├── scripts
-│   ├── __init__.py
-│   ├── placeholder.txt
-│   ├── run_server.py
-│   └── run_watchers.py
-├── starter-checklist.md
-├── TEMPLATE_COMPLETE.md
-└── tests
-    ├── __init__.py
-    └── placeholder.txt
-
-29 directories, 49 files
+  .git
+  .env.example
+  .gitignore
+  .gitpod.yml
+  CONTRIBUTING.md
+  LICENSE
+  README.md
+  TEMPLATE_COMPLETE.md
+  app
+    __init__.py
+    core
+      placeholder.txt
+      __init__.py
+      __pycache__
+    jobs
+      __init__.py
+      job_registry.py
+      compliance_assistant.py
+      __pycache__
+    executor
+      __init__.py
+      task_executor.py
+      __pycache__
+    parser
+      __init__.py
+      rule_parser.py
+      __pycache__
+    watchers
+      __init__.py
+      file_watcher.py
+      __pycache__
+    exports
+      __init__.py
+    input_log
+      __init__.py
+    retry
+      __init__.py
+    logs
+      __init__.py
+      input_log.py
+    plugins
+      __init__.py
+    __pycache__
+  config
+    placeholder.txt
+    job_schemas
+      __init__.py
+      compliance_assistant.json
+    secrets
+      __init__.py
+    __init__.py
+    app_config.py
+    __pycache__
+  filetree.txt
+  infrastructure
+    placeholder.txt
+    scheduler
+      __init__.py
+    email
+      __init__.py
+    db
+      __init__.py
+    utils
+      __init__.py
+    __init__.py
+  interfaces
+    api
+      routes
+        placeholder.txt
+        __init__.py
+        dashboard.py
+      static
+        placeholder.txt
+        dashboard.js
+      templates
+        placeholder.txt
+        dashboard.html
+      __init__.py
+    cli
+      __init__.py
+    __init__.py
+  makefile
+  requirements.txt
+  run
+    placeholder.txt
+    __init__.py
+  scripts
+    placeholder.txt
+    __init__.py
+    run_watchers.py
+    run_server.py
+  starter-checklist.md
+  tests
+    __init__.py
+    placeholder.txt
+  __init__.py
+  watched
+    compliance_docs
+      .gitkeep
+      test_audit.txt
+      test_action.txt
+    .gitkeep
+  exports
+    .gitkeep
+  logs
+    .gitkeep

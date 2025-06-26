@@ -1,0 +1,17 @@
+{
+  "job_name": "Compliance Assistant",
+  "job_id": "compliance_assistant",
+  "watch_dir": "watched/compliance_docs",
+  "file_pattern": "*.txt",
+  "run_interval_seconds": 60,
+  "retry_limit": 2,
+  "active": true,
+  "export_destinations": [
+    {
+      "type": "file",
+      "config": {
+        "directory": "./exports/compliance_assistant/"
+      }
+    }
+  ]
+}

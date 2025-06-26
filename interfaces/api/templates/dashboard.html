@@ -1,0 +1,181 @@
+<!-- dashboard.html v1.0.0  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ghost Employee Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+  <div class="p-6 max-w-screen-xl mx-auto space-y-10">
+    <h1 class="text-3xl font-bold mb-6">👻 Ghost Employee Dashboard</h1>
+
+    <!-- 🧑‍💼 Ghost Selector -->
+    <div class="mb-4">
+      <label for="ghostSelector" class="block mb-1 text-sm font-medium">👻 Select Ghost Employee</label>
+      <select id="ghostSelector" class="w-full p-2 border rounded bg-white">
+        <option value="">Loading...</option>
+      </select>
+    </div>
+
+    <!-- 🔁 Tab Buttons -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      <button id="tab-input" class="tab-button">📥 Input</button>
+      <button id="tab-processing" class="tab-button">⚙️ Processing</button>
+      <button id="tab-output" class="tab-button">📤 Output</button>
+      <button id="tab-insights" class="tab-button">📊 Insights</button>
+      <button id="tab-settings" class="tab-button">🛠️ Settings</button>
+    </div>
+
+    <!-- 📥 Tab: Input -->
+    <div id="content-input" class="tab-content hidden">
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📎 Manual File Upload</h2>
+        <form id="uploadForm" enctype="multipart/form-data" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium">Select file:</label>
+            <input type="file" name="file" accept=".txt,.csv,.docx,.pdf" required class="mt-1" />
+            <p class="text-xs text-gray-500 mt-1">Supported formats: .txt, .csv, .docx, .pdf</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Select Job:</label>
+            <select name="job_id" id="uploadJobSelect" class="w-full p-2 border rounded"></select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Instructions:</label>
+            <textarea name="instruction" rows="2" class="w-full p-2 border rounded" placeholder="Describe what should happen with this file..."></textarea>
+          </div>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Upload File</button>
+          <p id="uploadStatus" class="text-sm text-gray-600"></p>
+        </form>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📧 Email Instructions</h2>
+        <p class="text-sm text-gray-700">
+          You can also send tasks by email. Attach a file and include instructions in the email body.<br />
+          <strong>Send to:</strong> <code>compliance@ghostemployee.ai</code><br />
+          <strong>Subject:</strong> Job ID (e.g. <code>compliance_assistant</code>)
+        </p>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📥 Recent Input Activity</h2>
+        <ul id="input-log-list" class="text-sm space-y-1">
+          <li>Loading...</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- ⚙️ Tab: Processing -->
+    <div id="content-processing" class="tab-content hidden">
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">⚙️ Active Jobs</h2>
+        <ul id="active-jobs-list" class="text-sm text-gray-800 space-y-1">
+          <li>Loading...</li>
+        </ul>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">🔁 Retry Queue</h2>
+        <table class="tile-table">
+          <thead>
+            <tr><th>Description</th><th>Timestamp</th><th>Retry</th></tr>
+          </thead>
+          <tbody id="retry-body">
+            <tr><td colspan="3" class="text-center text-gray-500 py-2">Loading...</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">🧠 Latest Tasks</h2>
+        <div id="latest-tasks" class="text-sm max-h-64 overflow-y-auto text-gray-700">Loading...</div>
+      </section>
+    </div>
+
+    <!-- 📤 Tab: Output -->
+    <div id="content-output" class="tab-content hidden">
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📄 Latest Export Summary</h2>
+        <div id="latestDemoExportTile" class="text-sm text-gray-800 space-y-2">Loading...</div>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📁 Recent Export Files</h2>
+        <ul id="recent-export-files" class="text-sm text-gray-800 space-y-1">
+          <li>Coming soon...</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- 📊 Tab: Insights -->
+    <div id="content-insights" class="tab-content hidden">
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📈 Task Completion Over Time</h2>
+        <div class="text-sm text-gray-700">Graph placeholder for task throughput</div>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">📊 Job Execution Stats</h2>
+        <div class="text-sm text-gray-700">Coming soon: job durations, task types, retry frequency</div>
+      </section>
+    </div>
+
+    <!-- 🛠 Tab: Settings -->
+    <div id="content-settings" class="tab-content hidden">
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">🛠️ Global Job Settings</h2>
+        <p class="text-sm text-gray-600">Soon: Enable/disable jobs, change GPT models, retry limits, etc.</p>
+      </section>
+      <section class="tile">
+        <h2 class="text-lg font-semibold mb-2">➕ Create New Job</h2>
+        <form id="jobForm" class="space-y-4 mt-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="text" name="job_name" placeholder="Job Name" class="p-2 border rounded" />
+            <input type="text" name="job_id" placeholder="Job ID" class="p-2 border rounded" />
+          </div>
+          <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Job</button>
+          <p id="jobFormMessage" class="text-sm text-gray-700"></p>
+        </form>
+      </section>
+    </div>
+
+    <!-- ⚙️ Debug Panel -->
+    <details class="tile text-sm mt-10">
+      <summary class="cursor-pointer font-semibold mb-2">⚙️ Debug Panel</summary>
+      <div class="space-y-4 mt-2">
+        <pre id="status" class="bg-white border rounded p-4 overflow-auto max-h-48">Loading...</pre>
+        <div id="jobStats" class="text-xs text-gray-600">Loading job stats...</div>
+        <div id="retryStatsBox" class="text-xs text-gray-600">Loading retry stats...</div>
+        <div id="failure-alerts-box" class="text-xs text-red-600">Loading failure alerts...</div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 🔔 Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50 transition-opacity duration-300"></div>
+
+  <!-- 💅 Tailwind Styles -->
+  <style>
+    .tile {
+      @apply bg-white rounded-2xl shadow-md p-6 border border-gray-300;
+    }
+    .tile-table {
+      @apply w-full bg-white border border-gray-300 rounded shadow text-sm;
+    }
+    .tile-table th, .tile-table td {
+      @apply py-2 px-4 border-b text-left;
+    }
+    .tab-button {
+      @apply px-4 py-2 bg-gray-200 rounded text-sm font-medium;
+    }
+    .tab-button:hover {
+      @apply bg-gray-300;
+    }
+    .tab-button.bg-blue-600 {
+      @apply text-white;
+    }
+    .tab-content {
+      @apply space-y-8;
+    }
+  </style>
+
+  <!-- 📜 Dashboard Logic -->
+  <script src="/static/dashboard.js?v=1.0.0" defer></script>
+</body>
+</html>
