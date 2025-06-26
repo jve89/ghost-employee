@@ -1,36 +1,80 @@
 .
-  .git
-  .gitignore
-  app
-    core
-      placeholder.txt
-    __init__.py
-  config
-    placeholder.txt
-  infrastructure
-    placeholder.txt
-  interfaces
-    api
-      routes
-        placeholder.txt
-      templates
-        placeholder.txt
-      static
-        placeholder.txt
-  tests
-    placeholder.txt
-    __init__.py
-  filetree.txt
-  .gitpod.yml
-  starter-checklist.md
-  README.md
-  LICENSE
-  requirements.txt
-  makefile
-  scripts
-    placeholder.txt
-  run
-    placeholder.txt
-  CONTRIBUTING.md
-  .env.example
-  TEMPLATE_COMPLETE.md
+├── app
+│   ├── core
+│   │   ├── __init__.py
+│   │   └── placeholder.txt
+│   ├── executor
+│   │   └── __init__.py
+│   ├── exports
+│   │   └── __init__.py
+│   ├── __init__.py
+│   ├── input_log
+│   │   └── __init__.py
+│   ├── jobs
+│   │   └── __init__.py
+│   ├── logs
+│   │   └── __init__.py
+│   ├── parser
+│   │   └── __init__.py
+│   ├── plugins
+│   │   └── __init__.py
+│   ├── retry
+│   │   └── __init__.py
+│   └── watchers
+│       └── __init__.py
+├── config
+│   ├── __init__.py
+│   ├── job_schemas
+│   │   └── __init__.py
+│   ├── placeholder.txt
+│   └── secrets
+│       └── __init__.py
+├── CONTRIBUTING.md
+├── .env.example
+├── filetree.txt
+├── .gitignore
+├── .gitpod.yml
+├── infrastructure
+│   ├── db
+│   │   └── __init__.py
+│   ├── email
+│   │   └── __init__.py
+│   ├── __init__.py
+│   ├── placeholder.txt
+│   ├── scheduler
+│   │   └── __init__.py
+│   └── utils
+│       └── __init__.py
+├── __init__.py
+├── interfaces
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── routes
+│   │   │   ├── __init__.py
+│   │   │   └── placeholder.txt
+│   │   ├── static
+│   │   │   └── placeholder.txt
+│   │   └── templates
+│   │       └── placeholder.txt
+│   ├── cli
+│   │   └── __init__.py
+│   └── __init__.py
+├── LICENSE
+├── makefile
+├── README.md
+├── requirements.txt
+├── run
+│   ├── __init__.py
+│   └── placeholder.txt
+├── scripts
+│   ├── __init__.py
+│   ├── placeholder.txt
+│   ├── run_server.py
+│   └── run_watchers.py
+├── starter-checklist.md
+├── TEMPLATE_COMPLETE.md
+└── tests
+    ├── __init__.py
+    └── placeholder.txt
+
+29 directories, 49 files
