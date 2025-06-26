@@ -1,0 +1,9 @@
+tasks:
+  - name: Setup
+    init: |
+      pip install -r requirements.txt || true
+      echo "✅ Ready for development"
+
+ports:
+  - port: 8000
+    onOpen: open-preview

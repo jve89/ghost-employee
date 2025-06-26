@@ -1,0 +1,17 @@
+# Starter dependencies — extend per project type
+
+# Common
+fastapi
+uvicorn[standard]
+
+# Optional for AI apps (commented out)
+# openai
+# transformers
+# pydantic
+# langchain
+# sentence-transformers
+# tiktoken
+
+# Optional for frontend/API interaction
+# jinja2
+# requests
