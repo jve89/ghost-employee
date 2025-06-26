@@ -5,6 +5,7 @@ from typing import List
 from app.jobs.job_registry import get_job_class
 from app.logs.task_log_store import append_task_log
 from app.core.task_model import Task
+from app.exports.export_dispatcher import dispatch_export
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,11 @@ class TaskExecutor:
             self.job_class.execute(task.description)
             print(f"[{self.job_id}] ✅ Executed: {task.description}")
             append_task_log(self.job_id, task.description, success=True)
+
+            # ✅ Dispatch to exporters after successful execution
+            dispatch_export(task, self.job_id)
+
         except Exception as e:
             print(f"[{self.job_id}] ❌ Failed to execute '{task.description}': {e}")
             append_task_log(self.job_id, task.description, success=False)
+

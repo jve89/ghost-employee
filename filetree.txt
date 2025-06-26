@@ -31,6 +31,7 @@
       job_registry.py
     logs
       __init__.py
+      __pycache__
       input_log.py
       task_log_store.py
     parser
@@ -64,17 +65,19 @@
       __init__.py
     email
       __init__.py
+    logger
+      __init__.py
+      export_log_summary.py
+      input_log_summary.py
+      retry_log_summary.py
+      task_log_summary.py
     placeholder.txt
     scheduler
       __init__.py
     utils
       __init__.py
-    logger
-      task_log_summary.py
-      export_log_summary.py
-      input_log_summary.py
-      retry_log_summary.py
-      __init__.py
+    parser
+      gpt_parser.py
   interfaces
     __init__.py
     api
@@ -93,6 +96,7 @@
       __init__.py
   logs
     .gitkeep
+    task_log.json
   makefile
   requirements.txt
   run
@@ -113,3 +117,5 @@
       .gitkeep
       test_action.txt
       test_audit.txt
+      test_full_pipeline.txt
+  .env
