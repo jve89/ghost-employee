@@ -1,107 +1,115 @@
 .
-  .git
   .env.example
+  .git
   .gitignore
   .gitpod.yml
   CONTRIBUTING.md
   LICENSE
   README.md
   TEMPLATE_COMPLETE.md
+  __init__.py
   app
     __init__.py
+    __pycache__
     core
+      __init__.py
+      __pycache__
       placeholder.txt
-      __init__.py
-      __pycache__
-    jobs
-      __init__.py
-      job_registry.py
-      compliance_assistant.py
-      __pycache__
+      task_model.py
     executor
       __init__.py
+      __pycache__
       task_executor.py
-      __pycache__
-    parser
-      __init__.py
-      rule_parser.py
-      __pycache__
-    watchers
-      __init__.py
-      file_watcher.py
-      __pycache__
     exports
       __init__.py
     input_log
       __init__.py
-    retry
+    jobs
       __init__.py
+      __pycache__
+      compliance_assistant.py
+      job_registry.py
     logs
       __init__.py
       input_log.py
+      task_log_store.py
+    parser
+      __init__.py
+      __pycache__
+      rule_parser.py
     plugins
       __init__.py
-    __pycache__
+    retry
+      __init__.py
+    watchers
+      __init__.py
+      __pycache__
+      file_watcher.py
   config
-    placeholder.txt
+    __init__.py
+    __pycache__
+    app_config.py
     job_schemas
       __init__.py
       compliance_assistant.json
+    placeholder.txt
     secrets
       __init__.py
-    __init__.py
-    app_config.py
-    __pycache__
+  exports
+    .gitkeep
   filetree.txt
   infrastructure
-    placeholder.txt
-    scheduler
+    __init__.py
+    db
       __init__.py
     email
       __init__.py
-    db
+    placeholder.txt
+    scheduler
       __init__.py
     utils
       __init__.py
-    __init__.py
+    logger
+      task_log_summary.py
+      export_log_summary.py
+      input_log_summary.py
+      retry_log_summary.py
+      __init__.py
   interfaces
+    __init__.py
     api
+      __init__.py
       routes
-        placeholder.txt
         __init__.py
         dashboard.py
+        placeholder.txt
       static
-        placeholder.txt
         dashboard.js
-      templates
         placeholder.txt
+      templates
         dashboard.html
-      __init__.py
+        placeholder.txt
     cli
       __init__.py
-    __init__.py
+  logs
+    .gitkeep
   makefile
   requirements.txt
   run
-    placeholder.txt
     __init__.py
+    placeholder.txt
   scripts
-    placeholder.txt
     __init__.py
-    run_watchers.py
+    placeholder.txt
     run_server.py
+    run_watchers.py
   starter-checklist.md
   tests
     __init__.py
     placeholder.txt
-  __init__.py
   watched
+    .gitkeep
     compliance_docs
       .gitkeep
-      test_audit.txt
       test_action.txt
-    .gitkeep
-  exports
-    .gitkeep
-  logs
-    .gitkeep
+      test_audit.txt

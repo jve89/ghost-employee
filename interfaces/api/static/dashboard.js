@@ -128,23 +128,31 @@ async function loadRetryQueue() {
 }
 
 async function loadLatestTasks() {
-  try {
-    const res = await fetch("/dashboard/latest-tasks");
-    const data = await res.json();
-    const tasks = data.tasks || [];
+  const res = await fetch("/dashboard/latest-tasks");
+  const data = await res.json();
+  const container = document.getElementById("latest-tasks-processing");
 
-    const container = document.getElementById("latest-tasks");
-    container.innerHTML = "";
+  if (!container) return;
 
-    tasks.forEach(task => {
-      const div = document.createElement("div");
-      div.textContent = `• ${task.description}`;
-      container.appendChild(div);
-    });
-  } catch (err) {
-    console.error("❌ Failed to load latest tasks", err);
+  container.innerHTML = "";
+
+  if (data.tasks.length === 0) {
+    container.innerHTML = "<p class='text-gray-500'>No tasks logged yet.</p>";
+    return;
   }
+
+  data.tasks.forEach(task => {
+    const color = task.success ? "text-green-600" : "text-red-600";
+    const item = `
+      <div class="mb-1">
+        <span class="${color}">[${task.job_id}]</span>
+        <span class="ml-2">${task.description}</span>
+      </div>`;
+    container.innerHTML += item;
+  });
 }
+
+document.addEventListener("DOMContentLoaded", loadLatestTasks);
 
 async function retryTask(id) {
   alert("Retry not implemented in minimal v1.0.0");
@@ -166,6 +174,31 @@ async function loadLatestExport() {
     `;
   } catch (err) {
     console.warn("⚠️ Failed to load export summary", err.message);
+  }
+}
+
+// ==========================
+// 📊 Insights Tab
+// ==========================
+
+async function loadRetryStats() {
+  try {
+    const res = await fetch("/dashboard/retry-stats");
+    const stats = await res.json();
+
+    const box = document.getElementById("retryStatsBox");
+    if (!box) return;
+
+    box.innerHTML = `
+      <div><strong>Total Retries:</strong> ${stats.total}</div>
+      <div><strong>Failed:</strong> ${stats.failed}</div>
+      <div class="mt-2"><strong>Recent Entries:</strong></div>
+      <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+        ${stats.recent.map(e => `<li>${e.description || "(no description)"} — ${e.result_timestamp || "-"}</li>`).join("")}
+      </ul>
+    `;
+  } catch (err) {
+    console.error("❌ Failed to load retry stats", err);
   }
 }
 
@@ -207,5 +240,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   await loadRetryQueue();
   await loadLatestTasks();
   await loadLatestExport();
+  await loadRetryStats();
   handleUpload();
 });
+

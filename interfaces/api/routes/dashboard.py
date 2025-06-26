@@ -5,9 +5,10 @@ from datetime import datetime
 import os, shutil
 
 from app.logs.input_log import load_input_log, append_input_log
-from infrastructure.logger.export_log import export_log
+from infrastructure.logger.export_log_summary import export_log
 from infrastructure.retry.retry_queue_store import retry_queue_store
 from app.jobs.job_registry import list_registered_jobs
+from infrastructure.logger.task_log_summary import load_task_log
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -82,10 +83,11 @@ async def get_retry_queue():
 
 @router.get("/dashboard/latest-tasks")
 async def get_latest_tasks():
-    from infrastructure.logger.job_timesheet import get_recent_tasks
-    tasks = get_recent_tasks(limit=10)
-    return JSONResponse(content={"tasks": tasks})
-
+    try:
+        tasks = load_task_log()
+        return {"tasks": tasks[:10]}  # newest first
+    except Exception as e:
+        return {"error": str(e), "tasks": []}
 
 # -- ⚙️ Active Jobs List --
 
@@ -109,3 +111,21 @@ async def get_latest_compliance_export():
 
     latest = sorted(compliance_exports, key=lambda x: x["timestamp"], reverse=True)[0]
     return JSONResponse(content={"summary": latest["summary"]})
+
+# -- 📊 Retry Stats Summary --
+
+@router.get("/dashboard/retry-stats")
+async def get_retry_stats():
+    try:
+        queue = retry_queue_store.get_all()
+        total = len(queue)
+        failed = sum(1 for t in queue if not t.get("retry_result"))
+        recent = sorted(queue, key=lambda x: x.get("result_timestamp", ""), reverse=True)[:5]
+
+        return JSONResponse(content={
+            "total": total,
+            "failed": failed,
+            "recent": recent
+        })
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
