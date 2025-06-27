@@ -24,3 +24,18 @@ class ComplianceAssistantJob:
         Simulate execution of a compliance task.
         """
         print(f"[ComplianceAssistantJob] ✅ Executing: {task}")
+    
+    def trigger_from_email(self, email_data: dict):
+        """
+        Handles inbound email, triggers pipeline.
+        """
+        print(f"[ComplianceAssistantJob] 📩 Email received from {email_data['sender']} with subject: {email_data['subject']}")
+
+        # Simulate pipeline trigger
+        from app.pipeline.entrypoint import handle_input  # adjust path if needed
+        handle_input(
+            source="email_input",
+            job_id="compliance_assistant",
+            text=email_data["body"],
+            files=email_data["attachments"]
+        )

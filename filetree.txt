@@ -1,4 +1,5 @@
 .
+  .env
   .env.example
   .git
   .gitignore
@@ -22,6 +23,8 @@
       task_executor.py
     exports
       __init__.py
+      __pycache__
+      export_dispatcher.py
     input_log
       __init__.py
     jobs
@@ -71,13 +74,13 @@
       input_log_summary.py
       retry_log_summary.py
       task_log_summary.py
+    parser
+      gpt_parser.py
     placeholder.txt
     scheduler
       __init__.py
     utils
       __init__.py
-    parser
-      gpt_parser.py
   interfaces
     __init__.py
     api
@@ -86,6 +89,7 @@
         __init__.py
         dashboard.py
         placeholder.txt
+        email_input.py
       static
         dashboard.js
         placeholder.txt
@@ -118,4 +122,3 @@
       test_action.txt
       test_audit.txt
       test_full_pipeline.txt
-  .env

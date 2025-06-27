@@ -5,10 +5,10 @@ from datetime import datetime
 import os, shutil
 
 from app.logs.input_log import load_input_log, append_input_log
-from infrastructure.retry.retry_queue_store import retry_queue_store
+from infrastructure.retry import retry_queue_store
 from app.jobs.job_registry import list_registered_jobs
 from infrastructure.logger.task_log_summary import load_recent_tasks
-from infrastructure.logger.export_log_summary import get_latest_export
+from infrastructure.logger.export_log_summary import get_latest_exports
 
 router = APIRouter()
 templates = Jinja2Templates(directory="interfaces/api/templates")
@@ -84,25 +84,17 @@ async def get_retry_queue():
 @router.get("/dashboard/latest-tasks")
 async def get_latest_tasks():
     try:
-        tasks = load_task_log()
+        tasks = load_recent_tasks()
         return {"tasks": tasks[:10]}  # newest first
     except Exception as e:
         return {"error": str(e), "tasks": []}
 
 # -- ⚙️ Active Jobs List --
 
-@router.get("/dashboard/active-jobs")
-async def get_active_jobs():
-    from infrastructure.logger.job_status import job_status
-    return JSONResponse(content=job_status.get_all())
-
-
-# -- 📄 Latest Export Summary --
-
-@router.get("/dashboard/latest-compliance-export")
-async def get_latest_compliance_export():
-    result = get_latest_export(job_id="compliance_assistant")
-    return JSONResponse(content=result)
+#@router.get("/dashboard/active-jobs")
+#async def get_active_jobs():
+#    from infrastructure.logger.job_status import job_status
+#    return JSONResponse(content=job_status.get_all())
 
 # -- 📊 Retry Stats Summary --
 
@@ -122,7 +114,7 @@ async def get_retry_stats():
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-# -- 📤 Recent Export Files --
+# -- 📤 Export Log Summary (Tile Source) --
 
 @router.get("/dashboard/recent-export-files")
 async def get_recent_export_files():
@@ -141,9 +133,13 @@ async def get_recent_export_files():
         print(f"[Dashboard] ❌ Failed to load export files: {e}")
         return JSONResponse(content={"files": []})
 
+@router.get("/dashboard/latest-exports")
+async def latest_exports(request: Request):
+    exports = get_latest_exports(limit=5)
+    return JSONResponse(content={"exports": exports})
+
 # -- 🤖 Get Available Ghost Jobs --
 
 @router.get("/jobs")
 async def list_jobs():
-    from app.jobs.job_registry import list_registered_jobs
     return JSONResponse(content={"jobs": list_registered_jobs()})

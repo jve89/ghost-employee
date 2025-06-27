@@ -221,6 +221,33 @@ async function loadRecentExportFiles(jobId = null) {
   }
 }
 
+// 📤 Export Logs
+async function loadExportLog() {
+  const list = document.getElementById("export-log-list");
+  list.innerHTML = "<li>Loading...</li>";
+
+  try {
+    const res = await fetch("/dashboard/latest-exports");
+    const data = await res.json();
+    const logs = data.exports;
+
+    if (logs.length === 0) {
+      list.innerHTML = "<li>No exports yet.</li>";
+      return;
+    }
+
+    list.innerHTML = "";
+    logs.forEach(log => {
+      const li = document.createElement("li");
+      const ts = new Date(log.timestamp).toLocaleString();
+      li.textContent = `[${ts}] ${log.destination || "Unknown"} — ${log.task_description || "No description"}`;
+      list.appendChild(li);
+    });
+  } catch (err) {
+    list.innerHTML = `<li class="text-red-600">⚠️ Failed to load export logs</li>`;
+  }
+}
+
 // ==========================
 // 📊 Insights Tab
 // ==========================
@@ -276,9 +303,10 @@ function refreshDashboardForJob(jobId) {
   loadInputLog(jobId);
   loadRetryQueue(jobId);
   loadLatestTasks(jobId);
-  loadLatestExport(jobId);
+  //loadLatestExport(jobId);
   loadRetryStats(jobId);
   loadRecentExportFiles(jobId);
+  loadExportLog();
 }
 
 
@@ -291,7 +319,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("tab-input").click();
 
   await loadGhostEmployeeSelector();
-  await loadActiveJobs(); // Must be loaded first
+  // await loadActiveJobs(); // Must be loaded first
   const jobId = getSelectedJobId();
   refreshDashboardForJob(jobId); // This now triggers all tile loads
   handleUpload();
