@@ -1,8 +1,11 @@
+# .gitpod.yml
+
 tasks:
-  - name: Setup
+  - name: Setup Environment
     init: |
+      echo "✅ Installing Python dependencies..."
       pip install -r requirements.txt || true
-      echo "✅ Ready for development"
+      echo "✅ Environment ready."
 
 ports:
   - port: 8000

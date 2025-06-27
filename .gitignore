@@ -197,3 +197,6 @@ cython_debug/
 watched/
 exports/
 logs/
+
+# Ignore Google service account credentials
+config/secrets/ghost_employee_service_account.json
