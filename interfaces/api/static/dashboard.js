@@ -9,33 +9,33 @@
 
 async function loadGhostEmployeeSelector(jobId = null) {
   try {
-    const res = await fetch("/jobs"); // Returns list of registered job IDs
-    const jobList = await res.json();
+    const res = await fetch("/jobs");
+    const data = await res.json();
+    const jobList = data.jobs;
 
     const selector = document.getElementById("ghost-selector");
-    selector.innerHTML = ""; // Clear previous options
+    selector.innerHTML = "";
 
-    jobList.forEach(jobId => {
+    jobList.forEach(job => {
       const option = document.createElement("option");
-      option.value = jobId;
-      option.textContent = jobId.replace(/_/g, " ");
+      option.value = job.job_id;
+      option.textContent = job.job_name;
       selector.appendChild(option);
     });
 
-    // Optional: Store selected job in localStorage
     selector.addEventListener("change", () => {
       localStorage.setItem("selectedJob", selector.value);
       refreshDashboardForJob(selector.value);
     });
 
-    // Restore last selected job
     const saved = localStorage.getItem("selectedJob");
-    if (saved && jobList.includes(saved)) {
+    const jobIds = jobList.map(job => job.job_id);
+    if (saved && jobIds.includes(saved)) {
       selector.value = saved;
       refreshDashboardForJob(saved);
     } else {
-      selector.value = jobList[0];
-      refreshDashboardForJob(jobList[0]);
+      selector.value = jobIds[0];
+      refreshDashboardForJob(jobIds[0]);
     }
 
   } catch (err) {

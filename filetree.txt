@@ -23,9 +23,12 @@
       __init__.py
       compliance_assistant.py
       job_registry.py
+      __pycache__
     logs
       __init__.py
       __pycache__
+      input_log.py
+      task_log_store.py
     parser
       __init__.py
       rule_parser.py
@@ -61,16 +64,19 @@
       input_log_summary.py
       retry_log_summary.py
       task_log_summary.py
+      __pycache__
     parser
       gpt_parser.py
     placeholder.txt
     retry
       retry_queue_store.py
+      __pycache__
     scheduler
       __init__.py
     utils
       __init__.py
       google_sheets_exporter.py
+    __pycache__
   interfaces
     __init__.py
     api
@@ -81,6 +87,7 @@
         placeholder.txt
         __pycache__
         dashboard.py
+        mailgun_inbound.py
       static
         dashboard.js
         placeholder.txt
@@ -115,3 +122,7 @@
   .gitpod.yml
   __init__.py
   filetree.txt
+  logs
+    retry_queue.json
+    task_log.json
+    input_log.json
