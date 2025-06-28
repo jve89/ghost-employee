@@ -1,60 +1,46 @@
 .
-  .env
-  .env.example
   .git
+  .env.example
   .gitignore
-  .gitpod.yml
   CONTRIBUTING.md
   LICENSE
   README.md
   TEMPLATE_COMPLETE.md
-  __init__.py
   app
     __init__.py
-    __pycache__
     core
       __init__.py
-      __pycache__
       placeholder.txt
       task_model.py
     executor
       __init__.py
-      __pycache__
       task_executor.py
     exports
       __init__.py
-      __pycache__
-      export_dispatcher.py
     input_log
       __init__.py
     jobs
       __init__.py
-      __pycache__
       compliance_assistant.py
       job_registry.py
     logs
       __init__.py
       __pycache__
-      input_log.py
-      task_log_store.py
     parser
       __init__.py
-      __pycache__
       rule_parser.py
+    pipeline
+      entrypoint.py
     plugins
       __init__.py
     retry
       __init__.py
     watchers
       __init__.py
-      __pycache__
       file_watcher.py
-    pipeline
-      entrypoint.py
-      __pycache__
+    __pycache__
   config
     __init__.py
-    __pycache__
     app_config.py
     job_schemas
       __init__.py
@@ -62,19 +48,15 @@
     placeholder.txt
     secrets
       __init__.py
-  exports
-    .gitkeep
-  filetree.txt
+      ghost_employee_service_account.json
   infrastructure
     __init__.py
-    __pycache__
     db
       __init__.py
     email
       __init__.py
     logger
       __init__.py
-      __pycache__
       export_log_summary.py
       input_log_summary.py
       retry_log_summary.py
@@ -83,36 +65,32 @@
       gpt_parser.py
     placeholder.txt
     retry
-      __pycache__
       retry_queue_store.py
     scheduler
       __init__.py
     utils
       __init__.py
+      google_sheets_exporter.py
   interfaces
     __init__.py
-    __pycache__
     api
       __init__.py
-      __pycache__
       routes
         __init__.py
-        __pycache__
-        dashboard.py
         email_input.py
         placeholder.txt
+        __pycache__
+        dashboard.py
       static
         dashboard.js
         placeholder.txt
       templates
         dashboard.html
         placeholder.txt
+      __pycache__
     cli
       __init__.py
-  logs
-    .gitkeep
-    retry_queue.json
-    task_log.json
+    __pycache__
   makefile
   requirements.txt
   run
@@ -120,18 +98,20 @@
     placeholder.txt
   scripts
     __init__.py
-    __pycache__
+    list_worksheets.py
     placeholder.txt
-    run_server.py
     run_watchers.py
+    test_gspread.py
+    test_gspread_diagnostics.py
+    test_gspread_direct.py
+    test_gspread_direct_minimal.py
+    run_server.py
+    __pycache__
   starter-checklist.md
   tests
     __init__.py
     placeholder.txt
-  watched
-    .gitkeep
-    compliance_docs
-      .gitkeep
-      test_action.txt
-      test_audit.txt
-      test_full_pipeline.txt
+  .env
+  .gitpod.yml
+  __init__.py
+  filetree.txt
